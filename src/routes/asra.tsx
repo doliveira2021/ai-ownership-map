@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ASRA_DOMAINS } from "@/lib/asra-question-data";
 import { QUESTION_CONFIG_BY_ID } from "@/lib/asra-config";
+import { maturityDescriptionsFor } from "@/lib/asra-maturity-data";
 import { isQuestionApplicable, type MaturityValue } from "@/lib/asra-scoring";
 import { assessmentActions, useAssessment } from "@/lib/assessment-store";
 import { cn } from "@/lib/utils";
@@ -90,6 +91,44 @@ function ApplicabilityToggle({
   );
 }
 
+function MaturityOption({
+  level,
+  description,
+  selected,
+  onSelect,
+}: {
+  level: MaturityValue;
+  description: string;
+  selected: boolean;
+  onSelect: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      className={cn(
+        "flex gap-3 rounded border p-3 text-left transition-colors",
+        selected
+          ? "border-primary bg-primary/10"
+          : "border-border hover:border-primary/40 hover:bg-secondary/60",
+      )}
+    >
+      <span
+        className={cn(
+          "grid size-7 shrink-0 place-items-center rounded font-mono text-xs",
+          selected ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground",
+        )}
+      >
+        {level}
+      </span>
+      <span className="text-sm">
+        <span className="font-medium">{maturityLabels[level]}</span>
+        <span className="mt-0.5 block text-muted-foreground">{description}</span>
+      </span>
+    </button>
+  );
+}
+
 function AsraAssessmentPage() {
   const state = useAssessment();
   const applicableQuestions = ASRA_DOMAINS.flatMap((domain) => domain.questions).filter((question) =>
@@ -109,8 +148,9 @@ function AsraAssessmentPage() {
           <p className="label-mono">ASRA v2</p>
           <h1 className="mt-2 text-3xl font-semibold">AI Security & Resilience Assessment</h1>
           <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-            Assess the current operating state of AI security across ten domains. Do not enter
-            confidential or sensitive company information.
+            Assess the current operating state of AI security across ten domains. Select the maturity
+            description that most closely reflects the assessed scope. Do not enter confidential or
+            sensitive company information.
           </p>
         </div>
         <Button variant="ghost" size="sm" onClick={() => assessmentActions.resetAsra()}>
@@ -200,6 +240,7 @@ function AsraAssessmentPage() {
               {questions.map((question) => {
                 const answer = state.asraAnswers[question.id];
                 const config = QUESTION_CONFIG_BY_ID[question.id];
+                const descriptions = maturityDescriptionsFor(question.id);
                 return (
                   <article key={question.id} className="panel p-5">
                     <div className="flex flex-wrap items-start justify-between gap-3">
@@ -222,23 +263,19 @@ function AsraAssessmentPage() {
                       )}
                     </div>
 
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-4 grid gap-2 lg:grid-cols-2">
                       {([0, 1, 2, 3, 4, 5] as MaturityValue[]).map((level) => (
-                        <button
+                        <MaturityOption
                           key={level}
-                          type="button"
-                          onClick={() => assessmentActions.setAsraAnswer(question.id, level)}
-                          className={cn(
-                            "rounded border px-3 py-2 text-left text-xs transition-colors",
-                            answer === level
-                              ? "border-primary bg-primary/10 text-primary"
-                              : "border-border text-muted-foreground hover:bg-secondary",
-                          )}
-                        >
-                          <span className="font-mono">{level}</span>
-                          <span className="ml-2">{maturityLabels[level]}</span>
-                        </button>
+                          level={level}
+                          description={descriptions[level]}
+                          selected={answer === level}
+                          onSelect={() => assessmentActions.setAsraAnswer(question.id, level)}
+                        />
                       ))}
+                    </div>
+
+                    <div className="mt-3 border-t border-border pt-3">
                       <button
                         type="button"
                         onClick={() => assessmentActions.setAsraAnswer(question.id, null)}
@@ -249,7 +286,7 @@ function AsraAssessmentPage() {
                             : "border-border text-muted-foreground hover:bg-secondary",
                         )}
                       >
-                        N/A
+                        Not applicable to this assessed scope
                       </button>
                     </div>
                   </article>
