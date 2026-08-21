@@ -77,11 +77,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AI Accountability & Responsibility Assessment" },
+      { title: "AI Security & Resilience Assessment (ASRA)" },
       {
         name: "description",
         content:
-          "Assess AI ownership, decision rights, agent sponsorship and incident authority across the AI lifecycle.",
+          "A vendor-agnostic maturity assessment for securing the AI-powered enterprise across governance, exposure, autonomy and business resilience.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
