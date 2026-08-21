@@ -28,6 +28,9 @@ jobs:
       - name: Test ASRA scoring scenarios
         run: bun scripts/test-asra-scoring.ts
 
+      - name: Run ASRA pilot profiles
+        run: bun scripts/pilot-asra-scenarios.ts
+
       - name: Build
         run: bun run build
 
