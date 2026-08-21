@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, RotateCcw } from "lucide-react";
+import { ArrowRight, FlaskConical, RotateCcw, X } from "lucide-react";
 import { Shell } from "@/components/shell";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ASRA_DOMAINS } from "@/lib/asra-question-data";
 import { QUESTION_CONFIG_BY_ID } from "@/lib/asra-config";
 import { maturityDescriptionsFor } from "@/lib/asra-maturity-data";
+import { ASRA_PILOT_BY_ID, ASRA_PILOT_SCENARIOS } from "@/lib/asra-pilot-data";
+import { ASRA_DOMAINS } from "@/lib/asra-question-data";
 import { isQuestionApplicable, type MaturityValue } from "@/lib/asra-scoring";
 import { assessmentActions, useAssessment } from "@/lib/assessment-store";
 import { cn } from "@/lib/utils";
@@ -129,6 +130,75 @@ function MaturityOption({
   );
 }
 
+function PilotSelector() {
+  const state = useAssessment();
+  const activeScenario = state.activePilotScenario
+    ? ASRA_PILOT_BY_ID[state.activePilotScenario]
+    : undefined;
+
+  return (
+    <section className="panel mt-8 border-dashed p-5">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <div className="flex items-center gap-2">
+            <FlaskConical className="size-4 text-primary" />
+            <p className="label-mono">Demo / Pilot mode</p>
+          </div>
+          <h2 className="mt-1 text-lg font-semibold">Load a synthetic organization profile</h2>
+          <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
+            Use these scenarios to review scoring, priorities and the results experience. Synthetic
+            profiles are test fixtures, not benchmarks or recommended target scores.
+          </p>
+        </div>
+        {state.asraMode === "demo" && (
+          <Button variant="ghost" size="sm" onClick={() => assessmentActions.exitDemoMode()}>
+            <X className="size-4" /> Exit demo
+          </Button>
+        )}
+      </div>
+
+      {activeScenario && (
+        <div className="mt-4 rounded border border-primary/40 bg-primary/10 p-4">
+          <p className="font-mono text-xs text-primary">DEMO DATA ACTIVE</p>
+          <p className="mt-1 font-medium">{activeScenario.name}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{activeScenario.description}</p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Editing any answer or risk-context value automatically converts this into a normal assessment.
+          </p>
+        </div>
+      )}
+
+      <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        {ASRA_PILOT_SCENARIOS.map((scenario) => {
+          const selected = state.asraMode === "demo" && state.activePilotScenario === scenario.id;
+          return (
+            <button
+              key={scenario.id}
+              type="button"
+              onClick={() => assessmentActions.loadPilotScenario(scenario.id)}
+              className={cn(
+                "rounded border p-4 text-left transition-colors",
+                selected
+                  ? "border-primary bg-primary/10"
+                  : "border-border bg-card hover:border-primary/40 hover:bg-secondary/60",
+              )}
+            >
+              <p className="font-display font-semibold">{scenario.shortName}</p>
+              <p className="mt-2 line-clamp-3 text-xs text-muted-foreground">{scenario.description}</p>
+              <div className="mt-3 grid grid-cols-2 gap-1 font-mono text-[10px] text-muted-foreground">
+                <span>Exposure {scenario.context.exposure}</span>
+                <span>Autonomy {scenario.context.autonomy}</span>
+                <span>Impact {scenario.context.businessImpact}</span>
+                <span>Dependency {scenario.context.resilienceDependency}</span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function AsraAssessmentPage() {
   const state = useAssessment();
   const applicableQuestions = ASRA_DOMAINS.flatMap((domain) => domain.questions).filter((question) =>
@@ -157,6 +227,8 @@ function AsraAssessmentPage() {
           <RotateCcw className="size-4" /> Reset ASRA
         </Button>
       </div>
+
+      <PilotSelector />
 
       <section className="mt-8">
         <p className="label-mono">Risk context</p>
@@ -217,6 +289,11 @@ function AsraAssessmentPage() {
           </div>
           <Progress value={percent} className="mt-2 h-1.5" />
         </div>
+        {state.asraMode === "demo" && (
+          <span className="rounded border border-primary/40 bg-primary/10 px-2 py-1 font-mono text-[10px] text-primary">
+            DEMO
+          </span>
+        )}
         <Button asChild>
           <Link to="/asra-results">
             Results <ArrowRight className="size-4" />
