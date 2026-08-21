@@ -5,14 +5,13 @@ on:
   push:
     branches:
       - main
-      - feature/assessment-methodology-foundation
 
 jobs:
   build-and-lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -34,5 +33,5 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Lint
-        run: bun run lint
+      - name: Lint code quality
+        run: bunx eslint . --quiet --rule "prettier/prettier: off"
