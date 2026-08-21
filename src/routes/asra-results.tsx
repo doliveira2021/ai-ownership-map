@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, FileText, Map, ShieldCheck } from "lucide-react";
+import { ArrowLeft, FileText, Info, Map, ShieldCheck } from "lucide-react";
 import { Shell, ScoreRing } from "@/components/shell";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
+import { validateAssessmentConfiguration } from "@/lib/asra-config";
 import { ASRA_DOMAINS } from "@/lib/asra-question-data";
 import { generateAsraRecommendations, generateAsraRoadmap } from "@/lib/asra-recommendations";
 import {
@@ -36,6 +37,7 @@ function AsraResultsPage() {
   const recommendations = generateAsraRecommendations(state.asraAnswers, state.context);
   const roadmap = generateAsraRoadmap(state.asraAnswers, state.context);
   const quadrant = riskQuadrant(scores.maturity, scores.exposure);
+  const configValidation = validateAssessmentConfiguration();
 
   if (scores.answered === 0) {
     return (
@@ -102,6 +104,60 @@ function AsraResultsPage() {
           </p>
         </div>
       </div>
+
+      <details className="panel mt-4 p-5">
+        <summary className="flex cursor-pointer list-none items-center gap-2 font-display font-semibold">
+          <Info className="size-4 text-primary" /> How was this calculated?
+        </summary>
+        <div className="mt-4 grid gap-4 text-sm text-muted-foreground lg:grid-cols-2">
+          <div>
+            <p className="font-medium text-foreground">AI Security Maturity</p>
+            <p className="mt-1">
+              Each applicable 0–5 response is normalized to 0–100, weighted inside its domain, then
+              combined using the ten domain weights. Unanswered and Not Applicable questions are
+              excluded from the denominator rather than scored as zero.
+            </p>
+          </div>
+          <div>
+            <p className="font-medium text-foreground">AI Exposure</p>
+            <p className="mt-1">
+              The headline exposure score is the current enterprise exposure context (0–100). It is
+              kept separate from maturity so a mature organization can still operate a highly exposed
+              AI estate.
+            </p>
+          </div>
+          <div>
+            <p className="font-medium text-foreground">AI Autonomy</p>
+            <p className="mt-1">
+              Autonomy is an independent 0–5 context index ranging from no AI through generative and
+              advisory use to autonomous operations. It increases priority for controls whose failure
+              becomes more consequential as AI gains authority.
+            </p>
+          </div>
+          <div>
+            <p className="font-medium text-foreground">Business Resilience</p>
+            <p className="mt-1">
+              Resilience uses maturity in the Incident Response & Business Resilience domain and then
+              raises the required standard when business dependency on AI is high.
+            </p>
+          </div>
+          <div className="lg:col-span-2">
+            <p className="font-medium text-foreground">Recommendation priority</p>
+            <p className="mt-1 font-mono text-xs">
+              control gap × question weight × exposure factor × autonomy factor × business-impact
+              factor × resilience factor
+            </p>
+            <p className="mt-2">
+              This means the lowest maturity answer is not automatically the top recommendation. A
+              moderate gap can rank higher when it sits in a highly exposed, privileged, autonomous or
+              business-critical context.
+            </p>
+          </div>
+          <div className="lg:col-span-2 border-t border-border pt-3 font-mono text-xs">
+            Configuration integrity: {configValidation.questionCount} questions · {configValidation.uniqueQuestionCount} unique IDs · domain weights {(configValidation.domainWeightTotal * 100).toFixed(0)}% · {configValidation.validQuestionCount && configValidation.validDomainWeights ? "valid" : "check configuration"}.
+          </div>
+        </div>
+      </details>
 
       <section className="mt-10">
         <p className="label-mono">Domain maturity</p>
