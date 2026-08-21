@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from "react";
 import type { CoverageStatus, MaturityLevel } from "./assessment-data";
+import { ASRA_PILOT_BY_ID, type AsraPilotScenarioId } from "./asra-pilot-data";
 import type { AssessmentContext, AsraAnswers, MaturityValue } from "./asra-scoring";
 
 export type AssessmentState = {
@@ -14,6 +15,8 @@ export type AssessmentState = {
   // ASRA v2 state.
   asraAnswers: AsraAnswers;
   context: AssessmentContext;
+  asraMode: "assessment" | "demo";
+  activePilotScenario?: AsraPilotScenarioId;
 };
 
 const STORAGE_KEY = "ai-accountability-assessment-v1";
@@ -34,6 +37,8 @@ const emptyState: AssessmentState = {
   decisionRights: {},
   asraAnswers: {},
   context: defaultAssessmentContext,
+  asraMode: "assessment",
+  activePilotScenario: undefined,
 };
 
 let state: AssessmentState = emptyState;
@@ -54,6 +59,7 @@ function load(): AssessmentState {
       ...parsed,
       context: { ...defaultAssessmentContext, ...parsed.context },
       asraAnswers: parsed.asraAnswers ?? {},
+      asraMode: parsed.asraMode ?? "assessment",
     };
   } catch {
     return emptyState;
@@ -99,6 +105,12 @@ function update(next: Partial<AssessmentState>) {
   emit();
 }
 
+function markAsRealAssessment() {
+  if (state.asraMode === "demo") {
+    update({ asraMode: "assessment", activePilotScenario: undefined });
+  }
+}
+
 export const assessmentActions = {
   setOrgName(orgName: string) {
     update({ orgName });
@@ -113,13 +125,37 @@ export const assessmentActions = {
     update({ decisionRights: { ...state.decisionRights, [id]: status } });
   },
   setAsraAnswer(questionId: string, level: MaturityValue | null) {
+    markAsRealAssessment();
     update({ asraAnswers: { ...state.asraAnswers, [questionId]: level } });
   },
   setContext(next: Partial<AssessmentContext>) {
+    markAsRealAssessment();
     update({ context: { ...state.context, ...next } });
   },
+  loadPilotScenario(id: AsraPilotScenarioId) {
+    const scenario = ASRA_PILOT_BY_ID[id];
+    update({
+      asraAnswers: { ...scenario.answers },
+      context: { ...scenario.context },
+      asraMode: "demo",
+      activePilotScenario: id,
+    });
+  },
+  exitDemoMode() {
+    update({
+      asraAnswers: {},
+      context: defaultAssessmentContext,
+      asraMode: "assessment",
+      activePilotScenario: undefined,
+    });
+  },
   resetAsra() {
-    update({ asraAnswers: {}, context: defaultAssessmentContext });
+    update({
+      asraAnswers: {},
+      context: defaultAssessmentContext,
+      asraMode: "assessment",
+      activePilotScenario: undefined,
+    });
   },
   reset() {
     state = emptyState;
