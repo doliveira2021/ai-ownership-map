@@ -54,3 +54,4 @@ console.log(`Unique IDs: ${config.uniqueQuestionCount}`);
 console.log(`Maturity description sets: ${maturityIds.length}`);
 console.log(`Framework traceability sets: ${frameworkIds.length}`);
 console.log(`Domain weights: ${(config.domainWeightTotal * 100).toFixed(0)}%`);
+console.log("Question, maturity and framework coverage: complete");
