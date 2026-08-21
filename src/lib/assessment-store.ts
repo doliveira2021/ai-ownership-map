@@ -1,20 +1,39 @@
 import { useSyncExternalStore } from "react";
 import type { CoverageStatus, MaturityLevel } from "./assessment-data";
+import type { AssessmentContext, AsraAnswers, MaturityValue } from "./asra-scoring";
 
 export type AssessmentState = {
   orgName: string;
+
+  // Legacy accountability assessment state. Kept during migration so existing
+  // browser sessions and the current UI remain functional.
   answers: Record<string, MaturityLevel>;
   coverage: Record<string, CoverageStatus>;
   decisionRights: Record<string, CoverageStatus>;
+
+  // ASRA v2 state.
+  asraAnswers: AsraAnswers;
+  context: AssessmentContext;
 };
 
 const STORAGE_KEY = "ai-accountability-assessment-v1";
+
+export const defaultAssessmentContext: AssessmentContext = {
+  exposure: 50,
+  autonomy: 2,
+  businessImpact: 50,
+  resilienceDependency: 50,
+  usesAgents: true,
+  usesGenAI: true,
+};
 
 const emptyState: AssessmentState = {
   orgName: "",
   answers: {},
   coverage: {},
   decisionRights: {},
+  asraAnswers: {},
+  context: defaultAssessmentContext,
 };
 
 let state: AssessmentState = emptyState;
@@ -30,7 +49,12 @@ function load(): AssessmentState {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return emptyState;
     const parsed = JSON.parse(raw) as Partial<AssessmentState>;
-    return { ...emptyState, ...parsed };
+    return {
+      ...emptyState,
+      ...parsed,
+      context: { ...defaultAssessmentContext, ...parsed.context },
+      asraAnswers: parsed.asraAnswers ?? {},
+    };
   } catch {
     return emptyState;
   }
@@ -87,6 +111,15 @@ export const assessmentActions = {
   },
   setDecisionRight(id: string, status: CoverageStatus) {
     update({ decisionRights: { ...state.decisionRights, [id]: status } });
+  },
+  setAsraAnswer(questionId: string, level: MaturityValue | null) {
+    update({ asraAnswers: { ...state.asraAnswers, [questionId]: level } });
+  },
+  setContext(next: Partial<AssessmentContext>) {
+    update({ context: { ...state.context, ...next } });
+  },
+  resetAsra() {
+    update({ asraAnswers: {}, context: defaultAssessmentContext });
   },
   reset() {
     state = emptyState;
