@@ -5,6 +5,7 @@ import {
   allQuestions,
   type CoverageStatus,
   type Domain,
+  type MaturityLevel,
 } from "./assessment-data";
 import type { AssessmentState } from "./assessment-store";
 
@@ -20,7 +21,7 @@ export function domainScores(state: AssessmentState): DomainScore[] {
   return domains.map((domain) => {
     const values = domain.questions
       .map((q) => state.answers[q.id])
-      .filter((v): v is number => v !== undefined) as number[];
+      .filter((v): v is MaturityLevel => v !== undefined);
     const average = values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
     return {
       domain,
@@ -35,7 +36,7 @@ export function domainScores(state: AssessmentState): DomainScore[] {
 export function maturityScore(state: AssessmentState) {
   const values = allQuestions
     .map((q) => state.answers[q.id])
-    .filter((v): v is number => v !== undefined) as number[];
+    .filter((v): v is MaturityLevel => v !== undefined);
   const average = values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
   return {
     average,
