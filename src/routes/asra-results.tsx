@@ -4,7 +4,9 @@ import { Shell, ScoreRing } from "@/components/shell";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { validateAssessmentConfiguration } from "@/lib/asra-config";
-import { ASRA_DOMAINS } from "@/lib/asra-question-data";
+import { frameworkTraceFor } from "@/lib/asra-framework-data";
+import { maturityDescriptionsFor } from "@/lib/asra-maturity-data";
+import { ASRA_DOMAINS, ASRA_QUESTION_BY_ID } from "@/lib/asra-question-data";
 import { generateAsraRecommendations, generateAsraRoadmap } from "@/lib/asra-recommendations";
 import {
   autonomyLevel,
@@ -30,6 +32,7 @@ export const Route = createFileRoute("/asra-results")({
 });
 
 const domainName = Object.fromEntries(ASRA_DOMAINS.map((domain) => [domain.id, domain.name]));
+const maturityLabels = ["Not Established", "Reactive", "Emerging", "Defined", "Managed", "Adaptive"];
 
 function AsraResultsPage() {
   const state = useAssessment();
@@ -38,6 +41,7 @@ function AsraResultsPage() {
   const roadmap = generateAsraRoadmap(state.asraAnswers, state.context);
   const quadrant = riskQuadrant(scores.maturity, scores.exposure);
   const configValidation = validateAssessmentConfiguration();
+  const topQuestionRisks = scores.questionScores.filter((score) => score.controlGap > 0).slice(0, 12);
 
   if (scores.answered === 0) {
     return (
@@ -163,18 +167,117 @@ function AsraResultsPage() {
         <p className="label-mono">Domain maturity</p>
         <h2 className="mt-1 text-xl font-semibold">Where maturity is strong — and where it is not</h2>
         <div className="mt-5 grid gap-3 md:grid-cols-2">
-          {scores.domainScores.map((domain) => (
-            <div key={domain.domain} className="panel p-4">
-              <div className="flex justify-between gap-3 text-sm">
-                <span>{domainName[domain.domain]}</span>
-                <span className="font-mono text-muted-foreground">{domain.score} / 100</span>
-              </div>
-              <Progress value={domain.score} className="mt-2 h-1.5" />
-              <p className="mt-2 text-xs text-muted-foreground">
-                {domain.answered} of {domain.applicable} applicable questions answered
-              </p>
-            </div>
-          ))}
+          {scores.domainScores.map((domain) => {
+            const domainRisks = scores.questionScores
+              .filter((score) => score.domain === domain.domain && score.controlGap > 0)
+              .slice(0, 3);
+            return (
+              <details key={domain.domain} className="panel p-4">
+                <summary className="cursor-pointer list-none">
+                  <div className="flex justify-between gap-3 text-sm">
+                    <span>{domainName[domain.domain]}</span>
+                    <span className="font-mono text-muted-foreground">{domain.score} / 100</span>
+                  </div>
+                  <Progress value={domain.score} className="mt-2 h-1.5" />
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    {domain.answered} of {domain.applicable} applicable questions answered · click to inspect drivers
+                  </p>
+                </summary>
+                <div className="mt-4 space-y-3 border-t border-border pt-4">
+                  {domainRisks.length ? domainRisks.map((risk) => {
+                    const question = ASRA_QUESTION_BY_ID[risk.questionId];
+                    return (
+                      <div key={risk.questionId} className="rounded border border-border p-3">
+                        <div className="flex flex-wrap justify-between gap-2">
+                          <div>
+                            <p className="font-mono text-[11px] text-primary">{risk.questionId}</p>
+                            <p className="mt-1 text-sm font-medium">{question?.title ?? risk.questionId}</p>
+                          </div>
+                          <p className="font-mono text-xs text-muted-foreground">Priority {risk.priorityScore}</p>
+                        </div>
+                        <p className="mt-2 text-xs text-muted-foreground">
+                          Current maturity: {risk.maturity} — {maturityLabels[risk.maturity]}
+                        </p>
+                      </div>
+                    );
+                  }) : (
+                    <p className="text-sm text-muted-foreground">No assessed control gaps in this domain.</p>
+                  )}
+                </div>
+              </details>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="mt-10">
+        <p className="label-mono">Risk drill-down</p>
+        <h2 className="mt-1 text-xl font-semibold">What is driving the priority order?</h2>
+        <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
+          These are the highest-ranked answered control gaps after applying exposure, autonomy,
+          business-impact and resilience modifiers. Expand an item to see the selected maturity
+          description and framework traceability.
+        </p>
+        <div className="mt-5 space-y-3">
+          {topQuestionRisks.map((risk, index) => {
+            const question = ASRA_QUESTION_BY_ID[risk.questionId];
+            const maturityText = maturityDescriptionsFor(risk.questionId)[risk.maturity];
+            const traces = frameworkTraceFor(risk.questionId);
+            const recommendation = recommendations.find((item) => item.triggeredBy.includes(risk.questionId));
+            return (
+              <details key={risk.questionId} className="panel p-5">
+                <summary className="cursor-pointer list-none">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="font-mono text-[11px] text-primary">#{index + 1} · {risk.questionId} · {domainName[risk.domain]}</p>
+                      <h3 className="mt-1 font-display font-semibold">{question?.title ?? risk.questionId}</h3>
+                      <p className="mt-1 max-w-3xl text-sm text-muted-foreground">{question?.prompt}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-mono text-sm text-primary">{risk.priorityScore}</p>
+                      <p className="text-xs text-muted-foreground">priority score</p>
+                    </div>
+                  </div>
+                </summary>
+                <div className="mt-4 grid gap-4 border-t border-border pt-4 lg:grid-cols-2">
+                  <div>
+                    <p className="label-mono">Current assessment</p>
+                    <p className="mt-2 text-sm font-medium">{risk.maturity} — {maturityLabels[risk.maturity]}</p>
+                    <p className="mt-1 text-sm text-muted-foreground">{maturityText}</p>
+                    <p className="mt-3 font-mono text-xs text-muted-foreground">
+                      Control gap {(risk.controlGap * 100).toFixed(0)}% · weighted gap {risk.weightedGap.toFixed(2)} · default horizon {risk.horizon}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="label-mono">Recommended action</p>
+                    {recommendation ? (
+                      <>
+                        <p className="mt-2 text-sm font-medium">{recommendation.title}</p>
+                        <p className="mt-1 text-sm text-muted-foreground">{recommendation.action}</p>
+                        <p className="mt-3 text-xs text-muted-foreground">
+                          Suggested owners: {recommendation.suggestedOwners.join(" · ")}
+                        </p>
+                      </>
+                    ) : (
+                      <p className="mt-2 text-sm text-muted-foreground">No grouped recommendation is currently triggered by this question.</p>
+                    )}
+                  </div>
+                  <div className="lg:col-span-2">
+                    <p className="label-mono">Framework traceability</p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {traces.length ? traces.map((trace) => (
+                        <span key={`${trace.framework}-${trace.refs.join("-")}`} className="rounded border border-border px-2 py-1 text-xs text-muted-foreground">
+                          <span className="text-foreground">{trace.framework}</span> · {trace.refs.join(", ")} · {trace.confidence}
+                        </span>
+                      )) : (
+                        <span className="text-sm text-muted-foreground">No structured framework mapping recorded.</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </details>
+            );
+          })}
         </div>
       </section>
 
