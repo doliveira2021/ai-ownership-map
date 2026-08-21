@@ -25,6 +25,9 @@ jobs:
       - name: Validate ASRA configuration
         run: bun scripts/validate-asra.ts
 
+      - name: Test ASRA scoring scenarios
+        run: bun scripts/test-asra-scoring.ts
+
       - name: Build
         run: bun run build
 
