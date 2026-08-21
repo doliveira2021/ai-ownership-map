@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { ShieldCheck } from "lucide-react";
+import { FlaskConical, ShieldCheck } from "lucide-react";
+import { ASRA_PILOT_BY_ID } from "@/lib/asra-pilot-data";
+import { useAssessment } from "@/lib/assessment-store";
 
 const nav = [
   { to: "/", label: "Overview" },
@@ -10,6 +12,11 @@ const nav = [
 ] as const;
 
 export function Shell({ children }: { children: ReactNode }) {
+  const state = useAssessment();
+  const activeScenario = state.activePilotScenario
+    ? ASRA_PILOT_BY_ID[state.activePilotScenario]
+    : undefined;
+
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
@@ -37,6 +44,19 @@ export function Shell({ children }: { children: ReactNode }) {
             ))}
           </nav>
         </div>
+        {state.asraMode === "demo" && activeScenario && (
+          <div className="border-t border-primary/30 bg-primary/10">
+            <div className="mx-auto flex max-w-6xl items-center gap-2 px-5 py-2 text-xs">
+              <FlaskConical className="size-3.5 text-primary" />
+              <span className="font-mono text-primary">DEMO DATA</span>
+              <span className="text-muted-foreground">·</span>
+              <span className="font-medium">{activeScenario.shortName}</span>
+              <span className="hidden text-muted-foreground md:inline">
+                · Synthetic pilot profile — not a real organization assessment or benchmark.
+              </span>
+            </div>
+          </div>
+        )}
       </header>
       <main className="mx-auto max-w-6xl px-5 py-10">{children}</main>
       <footer className="mx-auto max-w-6xl px-5 pb-10 label-mono">
