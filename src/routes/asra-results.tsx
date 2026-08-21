@@ -216,7 +216,7 @@ function AsraResultsPage() {
         <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
           These are the highest-ranked answered control gaps after applying exposure, autonomy,
           business-impact and resilience modifiers. Expand an item to see the selected maturity
-          description and framework traceability.
+          description and supporting framework traceability.
         </p>
         <div className="mt-5 space-y-3">
           {topQuestionRisks.map((risk, index) => {
@@ -264,6 +264,9 @@ function AsraResultsPage() {
                   </div>
                   <div className="lg:col-span-2">
                     <p className="label-mono">Framework traceability</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      Supporting alignment only; references do not represent certification, compliance or an audit conclusion.
+                    </p>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {traces.length ? traces.map((trace) => (
                         <span key={`${trace.framework}-${trace.refs.join("-")}`} className="rounded border border-border px-2 py-1 text-xs text-muted-foreground">
