@@ -22,7 +22,7 @@ export function domainScores(state: AssessmentState): DomainScore[] {
     const values = domain.questions
       .map((q) => state.answers[q.id])
       .filter((v): v is MaturityLevel => v !== undefined);
-    const average = values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+    const average = values.length ? values.reduce<number>((a, b) => a + b, 0) / values.length : 0;
     return {
       domain,
       answered: values.length,
@@ -37,7 +37,7 @@ export function maturityScore(state: AssessmentState) {
   const values = allQuestions
     .map((q) => state.answers[q.id])
     .filter((v): v is MaturityLevel => v !== undefined);
-  const average = values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
+  const average = values.length ? values.reduce<number>((a, b) => a + b, 0) / values.length : 0;
   return {
     average,
     score: Math.round((average / 5) * 100),
