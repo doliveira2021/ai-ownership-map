@@ -4,8 +4,9 @@ import { ShieldCheck } from "lucide-react";
 
 const nav = [
   { to: "/", label: "Overview" },
-  { to: "/assessment", label: "Assessment" },
-  { to: "/results", label: "Results" },
+  { to: "/asra", label: "ASRA Assessment" },
+  { to: "/asra-results", label: "ASRA Results" },
+  { to: "/assessment", label: "Accountability" },
 ] as const;
 
 export function Shell({ children }: { children: ReactNode }) {
@@ -18,11 +19,11 @@ export function Shell({ children }: { children: ReactNode }) {
               <ShieldCheck className="size-4" />
             </span>
             <span className="font-display text-sm font-semibold tracking-tight">
-              AI Security Maturity
-              <span className="ml-2 label-mono">accountability edition</span>
+              AI Security & Resilience
+              <span className="ml-2 label-mono">ASRA</span>
             </span>
           </Link>
-          <nav className="flex items-center gap-1">
+          <nav className="flex flex-wrap items-center justify-end gap-1">
             {nav.map((item) => (
               <Link
                 key={item.to}
@@ -39,7 +40,7 @@ export function Shell({ children }: { children: ReactNode }) {
       </header>
       <main className="mx-auto max-w-6xl px-5 py-10">{children}</main>
       <footer className="mx-auto max-w-6xl px-5 pb-10 label-mono">
-        Assessment data stays in this browser. No individual employee names are collected.
+        Assessment data stays in this browser. Do not enter confidential or sensitive company information.
       </footer>
     </div>
   );
