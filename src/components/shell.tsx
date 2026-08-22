@@ -8,7 +8,6 @@ const nav = [
   { to: "/", label: "Overview" },
   { to: "/asra", label: "ASRA Assessment" },
   { to: "/asra-results", label: "ASRA Results" },
-  { to: "/assessment", label: "Accountability" },
 ] as const;
 
 export function Shell({ children }: { children: ReactNode }) {
