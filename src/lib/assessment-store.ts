@@ -16,7 +16,7 @@ export type AssessmentState = {
   asraAnswers: AsraAnswers;
   context: AssessmentContext;
   asraMode: "assessment" | "demo";
-  activePilotScenario?: AsraPilotScenarioId;
+  activePilotScenario?: AsraPilotScenarioId | undefined;
 };
 
 const STORAGE_KEY = "ai-accountability-assessment-v1";
