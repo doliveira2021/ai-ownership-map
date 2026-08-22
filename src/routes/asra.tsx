@@ -318,6 +318,8 @@ function AsraAssessmentPage() {
                 const answer = state.asraAnswers[question.id];
                 const config = QUESTION_CONFIG_BY_ID[question.id];
                 const descriptions = maturityDescriptionsFor(question.id);
+                const agentOnly = config?.agentOnly;
+                const genAiOnly = config?.genAiOnly;
                 return (
                   <article key={question.id} className="panel p-5">
                     <div className="flex flex-wrap items-start justify-between gap-3">
@@ -325,11 +327,11 @@ function AsraAssessmentPage() {
                         <p className="font-mono text-[11px] text-primary">{question.id}</p>
                         <h3 className="mt-1 font-display font-semibold">{question.title}</h3>
                         <p className="mt-1 text-sm text-muted-foreground">{question.prompt}</p>
-                        {(config.agentOnly || config.genAiOnly) && (
+                        {(agentOnly || genAiOnly) && (
                           <p className="mt-2 text-xs text-primary/90">
-                            {config.agentOnly ? "Agent-specific" : ""}
-                            {config.agentOnly && config.genAiOnly ? " · " : ""}
-                            {config.genAiOnly ? "GenAI-specific" : ""}
+                            {agentOnly ? "Agent-specific" : ""}
+                            {agentOnly && genAiOnly ? " · " : ""}
+                            {genAiOnly ? "GenAI-specific" : ""}
                           </p>
                         )}
                       </div>

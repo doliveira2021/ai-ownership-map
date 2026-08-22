@@ -176,9 +176,13 @@ function AsraResultsPage() {
                 <summary className="cursor-pointer list-none">
                   <div className="flex justify-between gap-3 text-sm">
                     <span>{domainName[domain.domain]}</span>
-                    <span className="font-mono text-muted-foreground">{domain.score} / 100</span>
+                    {domain.answered === 0 ? (
+                      <span className="text-muted-foreground">Not assessed</span>
+                    ) : (
+                      <span className="font-mono text-muted-foreground">{domain.score} / 100</span>
+                    )}
                   </div>
-                  <Progress value={domain.score} className="mt-2 h-1.5" />
+                  {domain.answered > 0 && <Progress value={domain.score} className="mt-2 h-1.5" />}
                   <p className="mt-2 text-xs text-muted-foreground">
                     {domain.answered} of {domain.applicable} applicable questions answered · click to inspect drivers
                   </p>

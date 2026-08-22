@@ -58,8 +58,8 @@ const q = (
     businessImpact: modifiers.businessImpact ?? 1,
     resilience: modifiers.resilience ?? 1,
   },
-  agentOnly: options.agentOnly,
-  genAiOnly: options.genAiOnly,
+  ...(options.agentOnly !== undefined ? { agentOnly: options.agentOnly } : {}),
+  ...(options.genAiOnly !== undefined ? { genAiOnly: options.genAiOnly } : {}),
 });
 
 /**

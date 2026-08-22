@@ -123,12 +123,14 @@ export function calculateDomainScores(
 
     const numerator = answered.reduce((sum, item) => {
       const config = QUESTION_CONFIG_BY_ID[item.id];
+      if (!config) return sum;
       return sum + (item.value / 5) * config.weight;
     }, 0);
-    const denominator = answered.reduce(
-      (sum, item) => sum + QUESTION_CONFIG_BY_ID[item.id].weight,
-      0,
-    );
+    const denominator = answered.reduce((sum, item) => {
+      const config = QUESTION_CONFIG_BY_ID[item.id];
+      if (!config) return sum;
+      return sum + config.weight;
+    }, 0);
 
     return {
       domain,
@@ -182,7 +184,11 @@ export function calculateResilienceScore(
 
   if (!answered.length) return 0;
 
-  const readiness = answered.reduce((sum, value) => sum + value / 5, 0) / answered.length;
+  let readiness = 0;
+  for (const value of answered) {
+    readiness += value / 5;
+  }
+  readiness /= answered.length;
   const dependency = normalizedContext(context.resilienceDependency, 100);
 
   // Higher dependency raises the standard required for a strong resilience score.
