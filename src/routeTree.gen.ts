@@ -10,12 +10,24 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AsraRouteImport } from './routes/asra'
+import { Route as AsraResultsRouteImport } from './routes/asra-results'
 import { Route as AssessmentRouteImport } from './routes/assessment'
 import { Route as ResultsRouteImport } from './routes/results'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AsraRoute = AsraRouteImport.update({
+  id: '/asra',
+  path: '/asra',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AsraResultsRoute = AsraResultsRouteImport.update({
+  id: '/asra-results',
+  path: '/asra-results',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AssessmentRoute = AssessmentRouteImport.update({
@@ -31,30 +43,38 @@ const ResultsRoute = ResultsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/asra': typeof AsraRoute
+  '/asra-results': typeof AsraResultsRoute
   '/assessment': typeof AssessmentRoute
   '/results': typeof ResultsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/asra': typeof AsraRoute
+  '/asra-results': typeof AsraResultsRoute
   '/assessment': typeof AssessmentRoute
   '/results': typeof ResultsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/asra': typeof AsraRoute
+  '/asra-results': typeof AsraResultsRoute
   '/assessment': typeof AssessmentRoute
   '/results': typeof ResultsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/assessment' | '/results'
+  fullPaths: '/' | '/asra' | '/asra-results' | '/assessment' | '/results'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/assessment' | '/results'
-  id: '__root__' | '/' | '/assessment' | '/results'
+  to: '/' | '/asra' | '/asra-results' | '/assessment' | '/results'
+  id: '__root__' | '/' | '/asra' | '/asra-results' | '/assessment' | '/results'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AsraRoute: typeof AsraRoute
+  AsraResultsRoute: typeof AsraResultsRoute
   AssessmentRoute: typeof AssessmentRoute
   ResultsRoute: typeof ResultsRoute
 }
@@ -66,6 +86,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/asra': {
+      id: '/asra'
+      path: '/asra'
+      fullPath: '/asra'
+      preLoaderRoute: typeof AsraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/asra-results': {
+      id: '/asra-results'
+      path: '/asra-results'
+      fullPath: '/asra-results'
+      preLoaderRoute: typeof AsraResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assessment': {
@@ -87,6 +121,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AsraRoute: AsraRoute,
+  AsraResultsRoute: AsraResultsRoute,
   AssessmentRoute: AssessmentRoute,
   ResultsRoute: ResultsRoute,
 }
