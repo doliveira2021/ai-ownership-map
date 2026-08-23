@@ -57,6 +57,17 @@ export const EN_MATURITY_LABELS: MaturitySix = [
   "Adaptive",
 ];
 
+const landing = {
+  areas: accountabilityAreas,
+  roles: agentRoleModel.map((role) => ({ role: role.role, detail: role.detail })),
+  legacyDomains: Object.fromEntries(
+    legacyDomains.map((domain) => [
+      domain.id,
+      { short: domain.short, name: domain.name, intent: domain.intent },
+    ]),
+  ),
+};
+
 export const enContent: ContentBundle = {
   domains,
   questions,
@@ -64,6 +75,7 @@ export const enContent: ContentBundle = {
   maturityLabels: EN_MATURITY_LABELS,
   scenarios,
   recommendations,
+  landing,
   levels: {
     maturity: {
       Unaware: "Unaware",
