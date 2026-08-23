@@ -4,11 +4,11 @@ import { Shell } from "@/components/shell";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { QUESTION_CONFIG_BY_ID } from "@/lib/asra-config";
-import { maturityDescriptionsFor } from "@/lib/asra-maturity-data";
-import { ASRA_PILOT_BY_ID, ASRA_PILOT_SCENARIOS } from "@/lib/asra-pilot-data";
+import { ASRA_PILOT_SCENARIOS } from "@/lib/asra-pilot-data";
 import { ASRA_DOMAINS } from "@/lib/asra-question-data";
 import { isQuestionApplicable, type MaturityValue } from "@/lib/asra-scoring";
 import { assessmentActions, useAssessment } from "@/lib/assessment-store";
+import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/asra")({
@@ -20,12 +20,18 @@ export const Route = createFileRoute("/asra")({
         content:
           "Vendor-agnostic AI security maturity assessment covering discovery, risk, governance, threat modeling, secure development, protection, validation, monitoring, incident response and continuous improvement.",
       },
+      { property: "og:title", content: "AI Security & Resilience Assessment (ASRA)" },
+      {
+        property: "og:description",
+        content:
+          "Score AI security maturity across ten domains with exposure, autonomy and business-resilience context.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: AsraAssessmentPage,
 });
-
-const maturityLabels = ["Not Established", "Reactive", "Emerging", "Defined", "Managed", "Adaptive"];
 
 function ContextRange({
   label,
@@ -54,6 +60,7 @@ function ContextRange({
         value={value}
         onChange={(event) => onChange(Number(event.target.value))}
         className="mt-3 w-full"
+        aria-label={label}
       />
     </label>
   );
@@ -68,6 +75,7 @@ function ApplicabilityToggle({
   value: boolean | undefined;
   onChange: (value: boolean) => void;
 }) {
+  const { t } = useI18n();
   return (
     <div className="panel p-4">
       <p className="text-sm font-medium">{label}</p>
@@ -76,6 +84,7 @@ function ApplicabilityToggle({
           <button
             key={String(option)}
             type="button"
+            aria-pressed={value === option}
             onClick={() => onChange(option)}
             className={cn(
               "rounded border px-3 py-1.5 text-xs transition-colors",
@@ -84,7 +93,7 @@ function ApplicabilityToggle({
                 : "border-border text-muted-foreground hover:bg-secondary",
             )}
           >
-            {option ? "Yes" : "No"}
+            {option ? t("asra.yes") : t("asra.no")}
           </button>
         ))}
       </div>
@@ -94,11 +103,13 @@ function ApplicabilityToggle({
 
 function MaturityOption({
   level,
+  label,
   description,
   selected,
   onSelect,
 }: {
   level: MaturityValue;
+  label: string;
   description: string;
   selected: boolean;
   onSelect: () => void;
@@ -107,6 +118,7 @@ function MaturityOption({
     <button
       type="button"
       onClick={onSelect}
+      aria-pressed={selected}
       className={cn(
         "flex gap-3 rounded border p-3 text-left transition-colors",
         selected
@@ -123,7 +135,7 @@ function MaturityOption({
         {level}
       </span>
       <span className="text-sm">
-        <span className="font-medium">{maturityLabels[level]}</span>
+        <span className="font-medium">{label}</span>
         <span className="mt-0.5 block text-muted-foreground">{description}</span>
       </span>
     </button>
@@ -132,8 +144,9 @@ function MaturityOption({
 
 function PilotSelector() {
   const state = useAssessment();
+  const { t, content } = useI18n();
   const activeScenario = state.activePilotScenario
-    ? ASRA_PILOT_BY_ID[state.activePilotScenario]
+    ? content.scenario(state.activePilotScenario)
     : undefined;
 
   return (
@@ -142,35 +155,31 @@ function PilotSelector() {
         <div>
           <div className="flex items-center gap-2">
             <FlaskConical className="size-4 text-primary" />
-            <p className="label-mono">Demo / Pilot mode</p>
+            <p className="label-mono">{t("asra.pilot.eyebrow")}</p>
           </div>
-          <h2 className="mt-1 text-lg font-semibold">Load a synthetic organization profile</h2>
-          <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-            Use these scenarios to review scoring, priorities and the results experience. Synthetic
-            profiles are test fixtures, not benchmarks or recommended target scores.
-          </p>
+          <h2 className="mt-1 text-lg font-semibold">{t("asra.pilot.title")}</h2>
+          <p className="mt-1 max-w-3xl text-sm text-muted-foreground">{t("asra.pilot.lead")}</p>
         </div>
         {state.asraMode === "demo" && (
           <Button variant="ghost" size="sm" onClick={() => assessmentActions.exitDemoMode()}>
-            <X className="size-4" /> Exit demo
+            <X className="size-4" /> {t("asra.pilot.exit")}
           </Button>
         )}
       </div>
 
       {activeScenario && (
         <div className="mt-4 rounded border border-primary/40 bg-primary/10 p-4">
-          <p className="font-mono text-xs text-primary">DEMO DATA ACTIVE</p>
+          <p className="font-mono text-xs text-primary">{t("asra.pilot.active")}</p>
           <p className="mt-1 font-medium">{activeScenario.name}</p>
           <p className="mt-1 text-sm text-muted-foreground">{activeScenario.description}</p>
-          <p className="mt-2 text-xs text-muted-foreground">
-            Editing any answer or risk-context value automatically converts this into a normal assessment.
-          </p>
+          <p className="mt-2 text-xs text-muted-foreground">{t("asra.pilot.editNote")}</p>
         </div>
       )}
 
       <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
         {ASRA_PILOT_SCENARIOS.map((scenario) => {
           const selected = state.asraMode === "demo" && state.activePilotScenario === scenario.id;
+          const localized = content.scenario(scenario.id);
           return (
             <button
               key={scenario.id}
@@ -183,13 +192,15 @@ function PilotSelector() {
                   : "border-border bg-card hover:border-primary/40 hover:bg-secondary/60",
               )}
             >
-              <p className="font-display font-semibold">{scenario.shortName}</p>
-              <p className="mt-2 line-clamp-3 text-xs text-muted-foreground">{scenario.description}</p>
+              <p className="font-display font-semibold">{localized.shortName}</p>
+              <p className="mt-2 line-clamp-3 text-xs text-muted-foreground">
+                {localized.description}
+              </p>
               <div className="mt-3 grid grid-cols-2 gap-1 font-mono text-[10px] text-muted-foreground">
-                <span>Exposure {scenario.context.exposure}</span>
-                <span>Autonomy {scenario.context.autonomy}</span>
-                <span>Impact {scenario.context.businessImpact}</span>
-                <span>Dependency {scenario.context.resilienceDependency}</span>
+                <span>{t("asra.pilot.exposure")} {scenario.context.exposure}</span>
+                <span>{t("asra.pilot.autonomy")} {scenario.context.autonomy}</span>
+                <span>{t("asra.pilot.impact")} {scenario.context.businessImpact}</span>
+                <span>{t("asra.pilot.dependency")} {scenario.context.resilienceDependency}</span>
               </div>
             </button>
           );
@@ -201,6 +212,7 @@ function PilotSelector() {
 
 function AsraAssessmentPage() {
   const state = useAssessment();
+  const { t, content } = useI18n();
   const applicableQuestions = ASRA_DOMAINS.flatMap((domain) => domain.questions).filter((question) =>
     isQuestionApplicable(question.id, state.context),
   );
@@ -215,52 +227,45 @@ function AsraAssessmentPage() {
     <Shell>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <p className="label-mono">ASRA v2</p>
-          <h1 className="mt-2 text-3xl font-semibold">AI Security & Resilience Assessment</h1>
-          <p className="mt-2 max-w-3xl text-sm text-muted-foreground">
-            Assess the current operating state of AI security across ten domains. Select the maturity
-            description that most closely reflects the assessed scope. Do not enter confidential or
-            sensitive company information.
-          </p>
+          <p className="label-mono">{t("asra.eyebrow")}</p>
+          <h1 className="mt-2 text-3xl font-semibold">{t("asra.title")}</h1>
+          <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{t("asra.lead")}</p>
         </div>
         <Button variant="ghost" size="sm" onClick={() => assessmentActions.resetAsra()}>
-          <RotateCcw className="size-4" /> Reset ASRA
+          <RotateCcw className="size-4" /> {t("asra.reset")}
         </Button>
       </div>
 
       <PilotSelector />
 
       <section className="mt-8">
-        <p className="label-mono">Risk context</p>
-        <h2 className="mt-1 text-xl font-semibold">How exposed and dependent is the business?</h2>
-        <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-          These context values do not change maturity. They influence exposure, autonomy,
-          resilience and the order of recommended priorities.
-        </p>
+        <p className="label-mono">{t("asra.context.eyebrow")}</p>
+        <h2 className="mt-1 text-xl font-semibold">{t("asra.context.title")}</h2>
+        <p className="mt-1 max-w-3xl text-sm text-muted-foreground">{t("asra.context.lead")}</p>
         <div className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           <ContextRange
-            label="AI Exposure"
+            label={t("asra.context.exposure")}
             value={state.context.exposure}
             max={100}
             suffix=" / 100"
             onChange={(value) => assessmentActions.setContext({ exposure: value })}
           />
           <ContextRange
-            label="AI Autonomy"
+            label={t("asra.context.autonomy")}
             value={state.context.autonomy}
             max={5}
             suffix=" / 5"
             onChange={(value) => assessmentActions.setContext({ autonomy: value })}
           />
           <ContextRange
-            label="Business Impact"
+            label={t("asra.context.impact")}
             value={state.context.businessImpact}
             max={100}
             suffix=" / 100"
             onChange={(value) => assessmentActions.setContext({ businessImpact: value })}
           />
           <ContextRange
-            label="AI Dependency"
+            label={t("asra.context.dependency")}
             value={state.context.resilienceDependency}
             max={100}
             suffix=" / 100"
@@ -269,12 +274,12 @@ function AsraAssessmentPage() {
         </div>
         <div className="mt-3 grid gap-3 md:grid-cols-2">
           <ApplicabilityToggle
-            label="Does the assessed scope use AI agents?"
+            label={t("asra.context.usesAgents")}
             value={state.context.usesAgents}
             onChange={(usesAgents) => assessmentActions.setContext({ usesAgents })}
           />
           <ApplicabilityToggle
-            label="Does the assessed scope use Generative AI?"
+            label={t("asra.context.usesGenAI")}
             value={state.context.usesGenAI}
             onChange={(usesGenAI) => assessmentActions.setContext({ usesGenAI })}
           />
@@ -284,19 +289,21 @@ function AsraAssessmentPage() {
       <div className="panel sticky top-16 z-20 mt-8 flex flex-wrap items-center gap-4 p-4">
         <div className="min-w-52 flex-1">
           <div className="flex justify-between text-xs text-muted-foreground">
-            <span>{answered} of {applicableQuestions.length} applicable questions answered</span>
+            <span>
+              {t("asra.progress", { answered, total: applicableQuestions.length })}
+            </span>
             <span>{percent}%</span>
           </div>
           <Progress value={percent} className="mt-2 h-1.5" />
         </div>
         {state.asraMode === "demo" && (
           <span className="rounded border border-primary/40 bg-primary/10 px-2 py-1 font-mono text-[10px] text-primary">
-            DEMO
+            {t("demo.badgeShort")}
           </span>
         )}
         <Button asChild>
           <Link to="/asra-results">
-            Results <ArrowRight className="size-4" />
+            {t("asra.resultsCta")} <ArrowRight className="size-4" />
           </Link>
         </Button>
       </div>
@@ -306,18 +313,20 @@ function AsraAssessmentPage() {
           isQuestionApplicable(question.id, state.context),
         );
         if (!questions.length) return null;
+        const domainContent = content.domain(domain.id);
 
         return (
           <section key={domain.id} className="mt-12">
-            <p className="label-mono">{domain.short}</p>
-            <h2 className="mt-1 text-xl font-semibold">{domain.name}</h2>
-            <p className="mt-1 max-w-3xl text-sm text-muted-foreground">{domain.intent}</p>
+            <p className="label-mono">{domainContent.short}</p>
+            <h2 className="mt-1 text-xl font-semibold">{domainContent.name}</h2>
+            <p className="mt-1 max-w-3xl text-sm text-muted-foreground">{domainContent.intent}</p>
 
             <div className="mt-5 space-y-4">
               {questions.map((question) => {
                 const answer = state.asraAnswers[question.id];
                 const config = QUESTION_CONFIG_BY_ID[question.id];
-                const descriptions = maturityDescriptionsFor(question.id);
+                const descriptions = content.maturityDescriptions(question.id);
+                const localized = content.question(question.id);
                 const agentOnly = config?.agentOnly;
                 const genAiOnly = config?.genAiOnly;
                 return (
@@ -325,19 +334,21 @@ function AsraAssessmentPage() {
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div className="max-w-3xl">
                         <p className="font-mono text-[11px] text-primary">{question.id}</p>
-                        <h3 className="mt-1 font-display font-semibold">{question.title}</h3>
-                        <p className="mt-1 text-sm text-muted-foreground">{question.prompt}</p>
+                        <h3 className="mt-1 font-display font-semibold">{localized.title}</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">{localized.prompt}</p>
                         {(agentOnly || genAiOnly) && (
                           <p className="mt-2 text-xs text-primary/90">
-                            {agentOnly ? "Agent-specific" : ""}
+                            {agentOnly ? t("asra.agentSpecific") : ""}
                             {agentOnly && genAiOnly ? " · " : ""}
-                            {genAiOnly ? "GenAI-specific" : ""}
+                            {genAiOnly ? t("asra.genAiSpecific") : ""}
                           </p>
                         )}
                       </div>
                       {answer !== undefined && (
                         <span className="rounded border border-primary/40 bg-primary/10 px-2 py-1 font-mono text-xs text-primary">
-                          {answer === null ? "N/A" : `${answer} — ${maturityLabels[answer]}`}
+                          {answer === null
+                            ? t("asra.na")
+                            : `${answer} — ${content.maturityLabel(answer)}`}
                         </span>
                       )}
                     </div>
@@ -347,6 +358,7 @@ function AsraAssessmentPage() {
                         <MaturityOption
                           key={level}
                           level={level}
+                          label={content.maturityLabel(level)}
                           description={descriptions[level]}
                           selected={answer === level}
                           onSelect={() => assessmentActions.setAsraAnswer(question.id, level)}
@@ -357,6 +369,7 @@ function AsraAssessmentPage() {
                     <div className="mt-3 border-t border-border pt-3">
                       <button
                         type="button"
+                        aria-pressed={answer === null}
                         onClick={() => assessmentActions.setAsraAnswer(question.id, null)}
                         className={cn(
                           "rounded border px-3 py-2 text-xs transition-colors",
@@ -365,7 +378,7 @@ function AsraAssessmentPage() {
                             : "border-border text-muted-foreground hover:bg-secondary",
                         )}
                       >
-                        Not applicable to this assessed scope
+                        {t("asra.naButton")}
                       </button>
                     </div>
                   </article>

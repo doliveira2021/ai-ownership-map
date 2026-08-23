@@ -221,3 +221,5 @@ export function generateAsraRoadmap(answers: AsraAnswers, context: AssessmentCon
     SCALE: recommendations.filter((recommendation) => recommendation.horizon === "SCALE"),
   } satisfies Record<Horizon, AsraRecommendation[]>;
 }
+
+export const ASRA_RECOMMENDATION_TEMPLATES = templates;
