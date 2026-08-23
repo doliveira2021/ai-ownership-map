@@ -63,6 +63,12 @@ export type LevelContentDict = {
   horizon: Record<string, string>;
 };
 
+export type LandingContent = {
+  areas: string[];
+  roles: { role: string; detail: string }[];
+  legacyDomains: Record<string, { short: string; name: string; intent: string }>;
+};
+
 export type ContentBundle = {
   domains: DomainContentDict;
   questions: QuestionContentDict;
@@ -71,6 +77,7 @@ export type ContentBundle = {
   scenarios: ScenarioContentDict;
   recommendations: RecommendationContentDict;
   levels: LevelContentDict;
+  landing: LandingContent;
 };
 
 export type UiDict = Record<string, string>;
