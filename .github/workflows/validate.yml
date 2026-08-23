@@ -24,6 +24,9 @@ jobs:
       - name: Validate ASRA configuration
         run: bun scripts/validate-asra.ts
 
+      - name: Validate localization coverage
+        run: bun scripts/validate-i18n.ts
+
       - name: Test ASRA scoring scenarios
         run: bun scripts/test-asra-scoring.ts
 
