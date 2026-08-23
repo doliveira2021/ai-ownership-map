@@ -1,3 +1,8 @@
+import {
+  accountabilityAreas,
+  agentRoleModel,
+  domains as legacyDomains,
+} from "@/lib/assessment-data";
 import { ASRA_MATURITY_DESCRIPTIONS } from "@/lib/asra-maturity-data";
 import { ASRA_PILOT_SCENARIOS } from "@/lib/asra-pilot-data";
 import { ASRA_DOMAINS } from "@/lib/asra-question-data";
