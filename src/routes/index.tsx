@@ -59,12 +59,12 @@ function Index() {
           </div>
           <div className="mt-7 flex flex-wrap gap-3">
             <Button asChild size="lg">
-              <Link to="/asra">
+              <Link to="/assessment">
                 {t("landing.ctaStart")} <ArrowRight className="size-4" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="secondary">
-              <Link to="/asra-results">{t("landing.ctaResults")}</Link>
+              <Link to="/results">{t("landing.ctaResults")}</Link>
             </Button>
           </div>
         </div>
