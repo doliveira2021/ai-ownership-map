@@ -10,6 +10,10 @@ export const enPractices: PracticesBundle = {
     "external-review": "External / Independent Review",
     "high-stakes-inventory": "High-Stakes AI Inventory & Accountability",
     "safeguard-effectiveness": "Safeguard Effectiveness / Continuous Improvement",
+    "shared-responsibility": "Shared Responsibility & Accountability Boundaries",
+    "lifecycle-security": "Full AI Security Lifecycle",
+    "agent-authority-boundaries": "Agent Authority & Action Boundaries",
+    "supply-chain-integrity": "AI & Agent Supply Chain Integrity",
   },
   entries: {
     "IP-RSP-001": {
@@ -88,6 +92,69 @@ export const enPractices: PracticesBundle = {
         "The published framework describes evaluating models against defined thresholds and applying mitigations and stronger safeguards as model capability changes.",
       implication:
         "Re-evaluate AI systems whenever the model, tools, privileges or autonomy change, and adjust safeguards to the new capability instead of relying on fixed calendar reviews.",
+    },
+    "IP-MSFT-001": {
+      title: "Shared responsibility for how AI is applied",
+      summary:
+        "The public guidance describes a shared responsibility model in which the organization using AI remains responsible for access, data, prompts, security and compliance decisions, even when platform-level protections are provided by the AI provider.",
+      implication:
+        "Document the provider-versus-enterprise responsibility boundary for every critical AI system, including business ownership, residual-risk ownership, incident responsibility and data-access accountability.",
+    },
+    "IP-MSFT-002": {
+      title: "Security across the full AI lifecycle",
+      summary:
+        "The public guidance describes AI security spanning identify, protect, detect, respond, recover and govern, rather than stopping at preventive controls.",
+      implication:
+        "Require every critical AI system to have prevention, detection, response, recovery and governance coverage, each with a named owner and evidence.",
+    },
+    "IP-MSFT-003": {
+      title: "Discover AI usage before trying to protect it",
+      summary:
+        "The public guidance describes gaining visibility into the AI applications an organization uses and builds as a prerequisite for protecting them, including embedded SaaS AI capabilities and agents.",
+      implication:
+        "Establish continuous discovery of AI applications, models, agents, embedded SaaS AI and related identities before relying on control-coverage metrics.",
+    },
+    "IP-MSFT-004": {
+      title: "Maintain an AI Bill of Materials",
+      summary:
+        "The public guidance describes maintaining visibility into AI application components, data and AI artifacts from code to cloud.",
+      implication:
+        "For critical AI systems, maintain an AI BOM covering model and provider, libraries, system instructions where appropriate, datasets, vector stores, agents, tools and connectors, MCP servers where present, identities, runtime and external APIs.",
+    },
+    "IP-MSFT-005": {
+      title: "Least agency, not only least privilege",
+      summary:
+        "The public guidance describes restricting not only what an agent can access but what it is allowed to do autonomously, with human approval for high-impact actions.",
+      implication:
+        "Define a documented action envelope for critical agents: permitted actions, approval-required actions, prohibited actions, transaction or impact limits and escalation rules.",
+    },
+    "IP-MSFT-006": {
+      title: "Govern the agent tool supply chain",
+      summary:
+        "The public guidance describes treating agent tools and their descriptions or metadata as trusted execution dependencies whose changes must be governed.",
+      implication:
+        "Inventory agent tools and MCP dependencies, assign ownership, and apply change control, integrity review, authorization boundaries, revocation and monitoring when tool capabilities are added or modified.",
+    },
+    "IP-MSFT-007": {
+      title: "Treat AI-generated tool arguments as untrusted input",
+      summary:
+        "The public guidance describes validating function and tool arguments produced by a model at the execution boundary instead of trusting them because a model generated them.",
+      implication:
+        "Validate every AI-generated tool invocation with schema validation, allowlists, parameter constraints, business-rule checks, independent authorization and transaction limits where appropriate.",
+    },
+    "IP-MSFT-008": {
+      title: "Circuit breakers and containment for autonomous agents",
+      summary:
+        "The public guidance describes agentic systems supporting auditability, access control and circuit-breaker or containment capabilities.",
+      implication:
+        "Ensure every critical agent supports tested containment: disable the identity, revoke credentials and delegated access, block tools, stop the runtime or new actions, preserve logs and state, and support controlled recovery.",
+    },
+    "IP-MSFT-009": {
+      title: "Reassess when capability or autonomy changes",
+      summary:
+        "The public guidance describes security and governance requirements evolving across the lifecycle as agents gain autonomy, data access, tools or capability.",
+      implication:
+        "Trigger reassessment when the model, tools, MCP dependencies, privileges, data access, external exposure, autonomy or business criticality materially changes.",
     },
   },
 };
