@@ -332,6 +332,65 @@ export const esUi: Record<UiKey, string> = {
     "Comparación de los valores reales de KPI/KRI frente a sus objetivos.",
   "tracker.skill.o5":
     "Recomendaciones estancadas y la siguiente mejor acción para cada una.",
+  "tracker.skill.contextTitle":
+    "Qué contienen los resultados ASRA exportados",
+  "tracker.skill.c1":
+    "Los resultados de la evaluación incluyen la madurez por dominio y el contexto de exposición, autonomía y resiliencia del alcance evaluado.",
+  "tracker.skill.c2":
+    "Las recomendaciones ya están priorizadas por ASRA. No las reordenes salvo que la persona usuaria pida explícitamente una anulación, y conserva siempre los valores de prioridad y los ID originales.",
+  "tracker.skill.c3":
+    "Los Action Packs traducen cada recomendación en pasos de ejecución de 7d/30d/60d/90d, con roles responsables, dependencias, requisitos de evidencia y KPI/KRI.",
+  "tracker.skill.c4":
+    "Las Referencias de Prácticas del Sector (catálogo {version}) son solo contexto de apoyo. Pueden explicar o enriquecer una acción, pero nunca deben modificar puntuaciones, prioridades ni disparadores de recomendación, ni sugerir respaldo, certificación o validación por parte de Microsoft, Anthropic, Google DeepMind o cualquier otro proveedor.",
+  "tracker.skill.c5":
+    "Las Opciones de Tecnología son solo ejemplos de implementación: primero la capacidad, después la categoría; los ejemplos de proveedores no son exhaustivos ni implican respaldo.",
+  "tracker.skill.c6":
+    "Los conceptos de seguridad agéntica representados en ASRA incluyen agencia mínima, gobierno de la cadena de suministro de IA y de agentes, validación de argumentos de herramientas generados por IA, circuit breakers y contención, AI BOM/inventario, responsabilidad compartida y reevaluación cuando la capacidad o la autonomía cambian de forma material. Usa estos conceptos solo cuando ya sean relevantes para una acción exportada; nunca inventes nuevos hallazgos de evaluación.",
+  "tracker.skill.c7":
+    "Toda acción crítica de IA o de agentes debe conservar propiedad responsable, requisitos de evidencia y una cadencia de revisión.",
+  "tracker.skill.opTitle":
+    "Modelo operativo",
+  "tracker.skill.opNote":
+    "Partes de los resultados ASRA exportados y del plan de ejecución. Nunca vuelves a ejecutar ni recalculas la evaluación.",
+  "tracker.skill.op1":
+    "Evaluación — ASRA puntuó madurez, exposición, autonomía y resiliencia del alcance evaluado. Trata esos valores como entradas fijas.",
+  "tracker.skill.op2":
+    "Interpretación ejecutiva — explica el significado de los hallazgos en términos de riesgo de negocio, sin modificarlos.",
+  "tracker.skill.op3":
+    "Dirección de liderazgo — conecta las recomendaciones priorizadas con las decisiones que debe tomar la dirección: propiedad, financiación, secuenciación y aceptación de riesgo.",
+  "tracker.skill.op4":
+    "Action Packs — las tareas de 7d/30d/60d/90d, responsables, dependencias, evidencias y KPI/KRI exportados para cada recomendación.",
+  "tracker.skill.op5":
+    "Ejecución local y revisión semanal — mantén estado, bloqueos, fechas y evidencias localmente y ejecuta la cadencia de revisión semanal.",
+  "tracker.skill.op6":
+    "Medición y evidencia — controla los valores de línea base, objetivo y actual de los KPI/KRI y mantén actualizadas las referencias de evidencia.",
+  "tracker.skill.groundTitle":
+    "Reglas de fundamentación y no alucinación",
+  "tracker.skill.g1":
+    "Nunca inventes hallazgos, puntuaciones, evidencias, responsables, fechas ni estados de finalización.",
+  "tracker.skill.g2":
+    "Distingue siempre los hechos derivados de la evaluación de las actualizaciones locales añadidas por la persona usuaria.",
+  "tracker.skill.g3":
+    "Nunca afirmes cumplimiento, certificación o preparación para auditoría.",
+  "tracker.skill.g4":
+    "Nunca afirmes que un proveedor satisface una recomendación solo porque aparece en Opciones de Tecnología o en Referencias de Prácticas del Sector.",
+  "tracker.skill.g5":
+    "Pregunta a la persona usuaria por los hechos locales de ejecución que falten, en lugar de suponerlos.",
+  "tracker.skill.g6":
+    "Trata Riesgo Aceptado y Diferido como decisiones explícitas de gobierno, nunca como remediación exitosa.",
+  "tracker.skill.execTitle":
+    "Salidas ejecutivas sugeridas (solo a petición)",
+  "tracker.skill.execNote":
+    "ASRA no genera estos documentos. Puedes producirlos localmente, a petición, a partir de los datos exportados.",
+  "tracker.skill.exec1":
+    "Board Risk Brief — resumen en lenguaje natural, de muy alto nivel, de los principales hallazgos y los riesgos de negocio asociados, dirigido al Consejo y al CEO.",
+  "tracker.skill.exec2":
+    "Executive Action Brief — resumen orientado al liderazgo que conecta hallazgos y riesgos con la dirección recomendada, las prioridades, los roles responsables y el foco de 90 días, dirigido a CISO, CIO, CTO y líderes de IA.",
+  "tracker.skill.exec3":
+    "Fundamenta ambos documentos de forma determinista en los hallazgos y recomendaciones exportados, no inventes nuevos riesgos ni prioridades y etiqueta claramente cualquier actualización local aportada por la persona usuaria.",
+  "tracker.readme.sourceTitle":
+    "Versiones de origen",
+
   "tracker.weekly.title":
     "Revisión semanal",
   "tracker.weekly.s1":
