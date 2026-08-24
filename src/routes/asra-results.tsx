@@ -7,6 +7,7 @@ import {
   NinetyDayPlan,
   useResolvedActionPacks,
 } from "@/components/action-pack";
+import { FrameworkGroundingFull } from "@/components/framework-grounding";
 import { IndustryPracticesSection } from "@/components/industry-practices";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
