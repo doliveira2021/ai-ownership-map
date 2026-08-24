@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, FlaskConical, RotateCcw, X } from "lucide-react";
+import { FrameworkGroundingCompact } from "@/components/framework-grounding";
 import { Shell } from "@/components/shell";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -236,6 +237,8 @@ function AsraAssessmentPage() {
           <RotateCcw className="size-4" /> {t("asra.reset")}
         </Button>
       </div>
+
+      <FrameworkGroundingCompact />
 
       <PilotSelector />
 

@@ -365,6 +365,28 @@ export const ptBrUi: Record<UiKey, string> = {
   "practices.viewMore": "Ver mais referências",
   "practices.viewLess": "Mostrar menos referências",
   "practices.version": "Versão do catálogo de referências {version}",
+  // Metodologia / base em frameworks
+  "method.eyebrow": "Metodologia",
+  "method.title": "Baseado em frameworks reconhecidos do setor",
+  "method.body":
+    "O ASRA tem como base frameworks e práticas de segurança reconhecidos no setor, incluindo NIST AI RMF, NIST CSF, ISO/IEC 42001, ISO/IEC 27001, CSA AI Controls Matrix, MITRE ATLAS e as orientações da OWASP para IA generativa e agêntica. A avaliação transforma essas referências em perguntas práticas, sinais de maturidade, indicadores de risco e recomendações acionáveis.",
+  "method.genaiProfile":
+    "Também considera o NIST Generative AI Profile (NIST AI 600-1) para riscos e salvaguardas específicos de IA generativa.",
+  "method.how.title": "Como o ASRA utiliza essas referências",
+  "method.point.notSingle": "O ASRA não é cópia nem reprodução de um único framework.",
+  "method.point.synthesis":
+    "Ele sintetiza múltiplas referências reconhecidas em perguntas operacionais de avaliação, sinais de maturidade e recomendações.",
+  "method.point.traceability":
+    "Os mapeamentos de frameworks são apenas evidência de apoio e rastreabilidade; não representam aval de pontuação por parte dos responsáveis pelos frameworks.",
+  "method.point.practicesSeparate":
+    "As Referências de Práticas do Setor são uma camada separada: práticas públicas divulgadas por organizações de IA, e não evidência de framework.",
+  "method.point.technologySeparate":
+    "As Opções de Tecnologia são uma camada separada: categorias ilustrativas de capacidade de implementação e exemplos de provedores.",
+  "method.disclaimer":
+    "O alinhamento a frameworks indica cobertura estimada de maturidade com base nas respostas da avaliação. Não representa certificação, conformidade formal nem auditoria.",
+  "method.assessmentDisclaimer":
+    "Esta avaliação oferece orientação de maturidade e alinhamento. Não constitui certificação, aconselhamento jurídico, validação de conformidade regulatória nem auditoria.",
+
   "footer.author.prefix": "Criado por",
   "footer.author.name": "Diego Oliveira",
   "footer.author.linkLabel": "Perfil no LinkedIn de Diego Oliveira (abre em nova aba)",

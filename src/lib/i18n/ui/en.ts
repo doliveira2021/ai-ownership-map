@@ -360,6 +360,28 @@ export const enUi = {
   "practices.viewMore": "View more references",
   "practices.viewLess": "Show fewer references",
   "practices.version": "Reference catalog version {version}",
+  // Methodology / framework grounding
+  "method.eyebrow": "Methodology",
+  "method.title": "Built on recognized industry frameworks",
+  "method.body":
+    "ASRA is grounded in recognized industry frameworks and security practices, including NIST AI RMF, NIST CSF, ISO/IEC 42001, ISO/IEC 27001, CSA AI Controls Matrix, MITRE ATLAS, and OWASP guidance for generative and agentic AI. The assessment operationalizes these references into practical questions, maturity signals, risk indicators, and actionable recommendations.",
+  "method.genaiProfile":
+    "It also draws on the NIST Generative AI Profile (NIST AI 600-1) for generative-AI specific risks and safeguards.",
+  "method.how.title": "How ASRA uses these references",
+  "method.point.notSingle": "ASRA is not copied from, nor a restatement of, any single framework.",
+  "method.point.synthesis":
+    "It synthesizes multiple recognized references into operational assessment questions, maturity signals and recommendations.",
+  "method.point.traceability":
+    "Framework mappings are supporting evidence and traceability only; they are not scoring endorsements by the framework owners.",
+  "method.point.practicesSeparate":
+    "Industry Practice References are a separate layer: public practices published by AI organizations, not framework evidence.",
+  "method.point.technologySeparate":
+    "Technology Options are a separate layer: illustrative implementation capability categories and example providers.",
+  "method.disclaimer":
+    "Framework alignment indicates estimated maturity coverage based on assessment responses. It does not represent certification, formal compliance, or an audit.",
+  "method.assessmentDisclaimer":
+    "This assessment provides maturity and alignment guidance. It does not constitute certification, legal advice, regulatory compliance validation, or an audit.",
+
   "footer.author.prefix": "Created by",
   "footer.author.name": "Diego Oliveira",
   "footer.author.linkLabel": "LinkedIn profile of Diego Oliveira (opens in a new tab)",

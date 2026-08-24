@@ -1,3 +1,4 @@
+import { ASRA_FRAMEWORK_BASIS } from "../src/lib/asra-framework-basis";
 import { ASRA_PILOT_SCENARIOS } from "../src/lib/asra-pilot-data";
 import { ASRA_QUESTIONS } from "../src/lib/asra-question-data";
 import { ASRA_RECOMMENDATION_TEMPLATES } from "../src/lib/asra-recommendations";
@@ -95,6 +96,85 @@ for (const locale of LOCALES as readonly Locale[]) {
     const domain = content.landing.legacyDomains[id];
     check(!!domain?.short && !!domain?.name && !!domain?.intent, `[${locale}] Incomplete landing domain: ${id}`);
   }
+}
+
+// Framework-grounding (methodology layer) validation
+const METHOD_KEYS = [
+  "method.eyebrow",
+  "method.title",
+  "method.body",
+  "method.genaiProfile",
+  "method.how.title",
+  "method.point.notSingle",
+  "method.point.synthesis",
+  "method.point.traceability",
+  "method.point.practicesSeparate",
+  "method.point.technologySeparate",
+  "method.disclaimer",
+  "method.assessmentDisclaimer",
+];
+
+const REQUIRED_FRAMEWORKS = [
+  "NIST AI RMF",
+  "NIST GenAI Profile",
+  "NIST CSF",
+  "ISO/IEC 42001",
+  "ISO/IEC 27001",
+  "CSA AICM",
+  "MITRE ATLAS",
+  "OWASP GenAI",
+  "OWASP Agentic",
+];
+
+const visibleFrameworks = ASRA_FRAMEWORK_BASIS.map((entry) => entry.name);
+for (const name of REQUIRED_FRAMEWORKS) {
+  check(visibleFrameworks.includes(name), `Framework grounding list must include: ${name}`);
+}
+check(
+  ASRA_FRAMEWORK_BASIS.some((entry) => /CSA AI Controls Matrix/.test(entry.longName)),
+  "CSA AICM must expose its official long name (CSA AI Controls Matrix).",
+);
+check(
+  ASRA_FRAMEWORK_BASIS.some((entry) => /NIST AI 600-1/.test(entry.longName)),
+  "NIST GenAI Profile must expose its official long name (NIST AI 600-1).",
+);
+
+const FORBIDDEN_CLAIMS = [
+  /certified/i,
+  /compliant with/i,
+  /validated by/i,
+  /endorsed by/i,
+  /certificad[oa]/i,
+  /avalad[oa] por/i,
+  /validad[oa] por/i,
+  /em conformidade com/i,
+];
+
+for (const locale of LOCALES as readonly Locale[]) {
+  const ui = LOCALE_UI[locale] as Record<string, string>;
+  for (const key of METHOD_KEYS) {
+    const value = ui[key];
+    check(
+      typeof value === "string" && value.trim().length > 0,
+      `[${locale}] Missing framework-grounding key: ${key}`,
+    );
+    for (const pattern of FORBIDDEN_CLAIMS) {
+      check(
+        !pattern.test(value ?? ""),
+        `[${locale}] Methodology copy must not claim ${pattern} (${key}).`,
+      );
+    }
+  }
+  check(
+    /certification/i.test(ui["method.disclaimer"] ?? "") ||
+      /certifica/i.test(ui["method.disclaimer"] ?? ""),
+    `[${locale}] method.disclaimer must state it is not a certification.`,
+  );
+  check(
+    (ui["method.point.practicesSeparate"] ?? "").length > 0 &&
+      (ui["method.point.technologySeparate"] ?? "").length > 0,
+    `[${locale}] Industry Practice and Technology Options must be described as separate layers.`,
+  );
 }
 
 if (errors.length) {

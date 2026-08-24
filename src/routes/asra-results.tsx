@@ -7,6 +7,7 @@ import {
   NinetyDayPlan,
   useResolvedActionPacks,
 } from "@/components/action-pack";
+import { FrameworkGroundingFull } from "@/components/framework-grounding";
 import { IndustryPracticesSection } from "@/components/industry-practices";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -407,10 +408,7 @@ function AsraResultsPage() {
         recommendationIds={recommendations.map((recommendation) => recommendation.id)}
       />
 
-      <div className="panel mt-10 p-5">
-        <p className="label-mono">{t("results.method.eyebrow")}</p>
-        <p className="mt-2 text-sm text-muted-foreground">{t("results.method.body")}</p>
-      </div>
+      <FrameworkGroundingFull />
     </Shell>
   );
 }
