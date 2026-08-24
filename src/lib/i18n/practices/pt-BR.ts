@@ -10,7 +10,7 @@ export const ptBrPractices: PracticesBundle = {
     "external-review": "Revisão externa / independente",
     "high-stakes-inventory": "Inventário e responsabilização de IA crítica",
     "safeguard-effectiveness": "Eficácia das salvaguardas / melhoria contínua",
-  "shared-responsibility": "Responsabilidade compartilhada e limites de accountability",
+    "shared-responsibility": "Responsabilidade compartilhada e limites de accountability",
     "lifecycle-security": "Ciclo de vida completo de segurança de IA",
     "agent-authority-boundaries": "Autoridade e limites de ação de agentes",
     "supply-chain-integrity": "Integridade da cadeia de suprimentos de IA e agentes",

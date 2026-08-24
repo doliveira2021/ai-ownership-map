@@ -10,7 +10,7 @@ export const esPractices: PracticesBundle = {
     "external-review": "Revisión externa / independiente",
     "high-stakes-inventory": "Inventario y rendición de cuentas de IA crítica",
     "safeguard-effectiveness": "Eficacia de las salvaguardas / mejora continua",
-  "shared-responsibility": "Responsabilidad compartida y límites de rendición de cuentas",
+    "shared-responsibility": "Responsabilidad compartida y límites de rendición de cuentas",
     "lifecycle-security": "Ciclo de vida completo de seguridad de IA",
     "agent-authority-boundaries": "Autoridad y límites de acción de los agentes",
     "supply-chain-integrity": "Integridad de la cadena de suministro de IA y agentes",

@@ -10,7 +10,7 @@ export const enPractices: PracticesBundle = {
     "external-review": "External / Independent Review",
     "high-stakes-inventory": "High-Stakes AI Inventory & Accountability",
     "safeguard-effectiveness": "Safeguard Effectiveness / Continuous Improvement",
-  "shared-responsibility": "Shared Responsibility & Accountability Boundaries",
+    "shared-responsibility": "Shared Responsibility & Accountability Boundaries",
     "lifecycle-security": "Full AI Security Lifecycle",
     "agent-authority-boundaries": "Agent Authority & Action Boundaries",
     "supply-chain-integrity": "AI & Agent Supply Chain Integrity",

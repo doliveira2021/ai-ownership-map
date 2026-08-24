@@ -61,10 +61,7 @@ for (const practice of ASRA_INDUSTRY_PRACTICES) {
     `[${id}] Empty organization name.`,
   );
   check(categoryIds.has(practice.practiceCategory), `[${id}] Invalid category.`);
-  check(
-    practice.sourceUrl.startsWith("https://"),
-    `[${id}] Public source URL must be HTTPS.`,
-  );
+  check(practice.sourceUrl.startsWith("https://"), `[${id}] Public source URL must be HTTPS.`);
   check(practice.sourceTitle.trim().length > 0, `[${id}] Missing source title.`);
   check(ISO_DATE.test(practice.sourceDate), `[${id}] Invalid source date.`);
   check(ISO_DATE.test(practice.lastReviewed), `[${id}] Invalid last-reviewed date.`);
@@ -76,7 +73,10 @@ for (const practice of ASRA_INDUSTRY_PRACTICES) {
     check(domainIds.has(domain), `[${id}] Unknown related domain: ${domain}`);
   }
   for (const recommendation of practice.relatedRecommendationIds) {
-    check(recommendationIds.has(recommendation), `[${id}] Unknown recommendation: ${recommendation}`);
+    check(
+      recommendationIds.has(recommendation),
+      `[${id}] Unknown recommendation: ${recommendation}`,
+    );
   }
 }
 

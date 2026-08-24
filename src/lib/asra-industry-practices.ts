@@ -69,7 +69,8 @@ const DEEPMIND_FSF = {
 
 const MICROSOFT_SHARED_RESPONSIBILITY = {
   sourceTitle: "Microsoft Learn — AI shared responsibility (security fundamentals)",
-  sourceUrl: "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility-ai",
+  sourceUrl:
+    "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility-ai",
   sourceDate: "2026-08-01",
   lastReviewed: "2026-08-24",
   organizations: ["Microsoft"],
@@ -77,7 +78,8 @@ const MICROSOFT_SHARED_RESPONSIBILITY = {
 
 const MICROSOFT_AI_SECURITY_PRACTICES = {
   sourceTitle: "Microsoft Learn — AI security best practices",
-  sourceUrl: "https://learn.microsoft.com/en-us/azure/security/fundamentals/ai-security-best-practices",
+  sourceUrl:
+    "https://learn.microsoft.com/en-us/azure/security/fundamentals/ai-security-best-practices",
   sourceDate: "2026-08-01",
   lastReviewed: "2026-08-24",
   organizations: ["Microsoft"],
@@ -92,7 +94,8 @@ const MICROSOFT_AI_POSTURE = {
 } as const;
 
 const MICROSOFT_AGENT_SECURITY_BLOG = {
-  sourceTitle: "Microsoft Security Blog — Securing AI agents as AI tools move from reading to acting",
+  sourceTitle:
+    "Microsoft Security Blog — Securing AI agents as AI tools move from reading to acting",
   sourceUrl:
     "https://www.microsoft.com/en-us/security/blog/2026/06/30/securing-ai-agents-ai-tools-move-from-reading-acting/",
   sourceDate: "2026-06-30",
@@ -242,12 +245,7 @@ export const ASRA_INDUSTRY_PRACTICES: IndustryPractice[] = [
     practiceId: "IP-MSFT-004",
     practiceCategory: "high-stakes-inventory",
     relatedDomains: ["discovery", "secure-sdlc", "protection", "threat-modeling"],
-    relatedRecommendationIds: [
-      "REC-DISC-001",
-      "REC-SDLC-001",
-      "REC-PROT-001",
-      "REC-THRT-001",
-    ],
+    relatedRecommendationIds: ["REC-DISC-001", "REC-SDLC-001", "REC-PROT-001", "REC-THRT-001"],
     ...MICROSOFT_AI_POSTURE,
   },
   {
@@ -268,12 +266,7 @@ export const ASRA_INDUSTRY_PRACTICES: IndustryPractice[] = [
     practiceId: "IP-MSFT-007",
     practiceCategory: "agent-authority-boundaries",
     relatedDomains: ["secure-sdlc", "threat-modeling", "protection", "validation"],
-    relatedRecommendationIds: [
-      "REC-SDLC-001",
-      "REC-THRT-001",
-      "REC-PROT-001",
-      "REC-VAL-001",
-    ],
+    relatedRecommendationIds: ["REC-SDLC-001", "REC-THRT-001", "REC-PROT-001", "REC-VAL-001"],
     ...MICROSOFT_AGENT_FRAMEWORK_SAFETY,
   },
   {
@@ -287,12 +280,7 @@ export const ASRA_INDUSTRY_PRACTICES: IndustryPractice[] = [
     practiceId: "IP-MSFT-009",
     practiceCategory: "risk-based-control-escalation",
     relatedDomains: ["risk", "governance", "measurement", "validation"],
-    relatedRecommendationIds: [
-      "REC-RISK-001",
-      "REC-GOV-001",
-      "REC-MEAS-001",
-      "REC-VAL-001",
-    ],
+    relatedRecommendationIds: ["REC-RISK-001", "REC-GOV-001", "REC-MEAS-001", "REC-VAL-001"],
     ...MICROSOFT_AGENT_MATURITY,
   },
 ];
@@ -302,9 +290,7 @@ export const ASRA_INDUSTRY_PRACTICE_IDS = ASRA_INDUSTRY_PRACTICES.map(
 );
 
 /** Practices whose related recommendations intersect the triggered set first. */
-export function sortPracticesForRecommendations(
-  recommendationIds: string[],
-): IndustryPractice[] {
+export function sortPracticesForRecommendations(recommendationIds: string[]): IndustryPractice[] {
   const active = new Set(recommendationIds);
   return [...ASRA_INDUSTRY_PRACTICES].sort((a, b) => {
     const relevance = (practice: IndustryPractice) =>
