@@ -7,6 +7,7 @@ import { QUESTION_CONFIG_BY_ID } from "@/lib/asra-config";
 import { ASRA_PILOT_SCENARIOS } from "@/lib/asra-pilot-data";
 import { ASRA_DOMAINS } from "@/lib/asra-question-data";
 import { isQuestionApplicable, type MaturityValue } from "@/lib/asra-scoring";
+import { STRATEGIC_PLATFORM_OPTIONS } from "@/lib/asra-technology-catalog";
 import { assessmentActions, useAssessment } from "@/lib/assessment-store";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
