@@ -368,8 +368,7 @@ export const enUi = {
   "method.genaiProfile":
     "It also draws on the NIST Generative AI Profile (NIST AI 600-1) for generative-AI specific risks and safeguards.",
   "method.how.title": "How ASRA uses these references",
-  "method.point.notSingle":
-    "ASRA is not copied from, nor a restatement of, any single framework.",
+  "method.point.notSingle": "ASRA is not copied from, nor a restatement of, any single framework.",
   "method.point.synthesis":
     "It synthesizes multiple recognized references into operational assessment questions, maturity signals and recommendations.",
   "method.point.traceability":

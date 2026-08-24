@@ -373,8 +373,7 @@ export const ptBrUi: Record<UiKey, string> = {
   "method.genaiProfile":
     "Também considera o NIST Generative AI Profile (NIST AI 600-1) para riscos e salvaguardas específicos de IA generativa.",
   "method.how.title": "Como o ASRA utiliza essas referências",
-  "method.point.notSingle":
-    "O ASRA não é cópia nem reprodução de um único framework.",
+  "method.point.notSingle": "O ASRA não é cópia nem reprodução de um único framework.",
   "method.point.synthesis":
     "Ele sintetiza múltiplas referências reconhecidas em perguntas operacionais de avaliação, sinais de maturidade e recomendações.",
   "method.point.traceability":
