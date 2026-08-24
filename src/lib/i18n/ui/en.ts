@@ -376,6 +376,31 @@ export const enUi = {
     "Date recorded",
   "tracker.generated":
     "Generated from an ASRA assessment on {date}. Locale: {locale}.",
+  // Industry practice references
+  "practices.eyebrow": "Industry Practice References",
+  "practices.title": "How frontier-AI organizations describe their own practices",
+  "practices.lead":
+    "Selected practices documented publicly by frontier-AI organizations. They can help enterprise leaders translate AI security and resilience principles into operating practices. They are not standards, controls, certification requirements, rankings or endorsements, and they never affect ASRA scores or recommendations.",
+  "practices.disclaimer":
+    "These references summarize selected practices documented publicly by AI organizations. They are provided for context only and do not constitute a standard, certification requirement, endorsement, ranking, or validation of any provider or organization. Practices and policies change over time; review the linked public source for current information.",
+  "practices.category": "Category",
+  "practices.organization": "Organization",
+  "practices.publicPractice": "Public practice",
+  "practices.implication": "What this means for your program",
+  "practices.related": "Related ASRA areas",
+  "practices.sourceDate": "Source date",
+  "practices.lastReviewed": "Last reviewed",
+  "practices.viewSource": "View public source",
+  "practices.viewDetails": "View details",
+  "practices.hideDetails": "Hide details",
+  "practices.viewMore": "View more references",
+  "practices.viewLess": "Show fewer references",
+  "practices.version": "Reference catalog version {version}",
+  "footer.author.prefix": "Created by",
+  "footer.author.name": "Diego Oliveira",
+  "footer.author.linkLabel": "LinkedIn profile of Diego Oliveira (opens in a new tab)",
+  "footer.author.body":
+    "ASRA is an independent, non-commercial resource created to help organizations understand the security and resilience gaps introduced by AI and identify practical ways to address them using recognized industry frameworks and security practices. The author has no financial interest in the technologies or providers referenced in this assessment.",
 } satisfies UiDict;
 
 export type UiKey = keyof typeof enUi;

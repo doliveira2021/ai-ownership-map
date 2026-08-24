@@ -374,4 +374,29 @@ export const ptBrUi: Record<UiKey, string> = {
     "Data de registro",
   "tracker.generated":
     "Gerado a partir de uma avaliação ASRA em {date}. Idioma: {locale}.",
+  // Referências de práticas do setor
+  "practices.eyebrow": "Referências de Práticas do Setor",
+  "practices.title": "Como organizações de IA de fronteira descrevem suas próprias práticas",
+  "practices.lead":
+    "Práticas selecionadas e documentadas publicamente por organizações de IA de fronteira. Elas podem ajudar lideranças corporativas a traduzir princípios de segurança e resiliência de IA em práticas operacionais. Não são normas, controles, requisitos de certificação, rankings nem endossos, e nunca afetam as pontuações ou recomendações do ASRA.",
+  "practices.disclaimer":
+    "Estas referências resumem práticas selecionadas e documentadas publicamente por organizações de IA. São fornecidas apenas como contexto e não constituem norma, requisito de certificação, endosso, ranking ou validação de qualquer fornecedor ou organização. Práticas e políticas mudam ao longo do tempo; consulte a fonte pública vinculada para informações atualizadas.",
+  "practices.category": "Categoria",
+  "practices.organization": "Organização",
+  "practices.publicPractice": "Prática pública",
+  "practices.implication": "O que isso significa para o seu programa",
+  "practices.related": "Áreas relacionadas do ASRA",
+  "practices.sourceDate": "Data da fonte",
+  "practices.lastReviewed": "Última revisão",
+  "practices.viewSource": "Ver fonte pública",
+  "practices.viewDetails": "Ver detalhes",
+  "practices.hideDetails": "Ocultar detalhes",
+  "practices.viewMore": "Ver mais referências",
+  "practices.viewLess": "Mostrar menos referências",
+  "practices.version": "Versão do catálogo de referências {version}",
+  "footer.author.prefix": "Criado por",
+  "footer.author.name": "Diego Oliveira",
+  "footer.author.linkLabel": "Perfil no LinkedIn de Diego Oliveira (abre em nova aba)",
+  "footer.author.body":
+    "O ASRA é um recurso independente e sem finalidade comercial, criado para ajudar organizações a compreender as lacunas de segurança e resiliência introduzidas pela IA e identificar formas práticas de tratá-las com base em frameworks e práticas de segurança reconhecidos pelo mercado. O autor não possui interesse financeiro nas tecnologias ou fornecedores mencionados nesta avaliação.",
 } satisfies UiDict;

@@ -374,4 +374,29 @@ export const esUi: Record<UiKey, string> = {
     "Fecha de registro",
   "tracker.generated":
     "Generado a partir de una evaluación ASRA el {date}. Idioma: {locale}.",
+  // Referencias de prácticas del sector
+  "practices.eyebrow": "Referencias de Prácticas del Sector",
+  "practices.title": "Cómo describen sus propias prácticas las organizaciones de IA de frontera",
+  "practices.lead":
+    "Prácticas seleccionadas y documentadas públicamente por organizaciones de IA de frontera. Pueden ayudar a los líderes corporativos a traducir los principios de seguridad y resiliencia de IA en prácticas operativas. No son normas, controles, requisitos de certificación, rankings ni respaldos, y nunca afectan las puntuaciones ni las recomendaciones de ASRA.",
+  "practices.disclaimer":
+    "Estas referencias resumen prácticas seleccionadas y documentadas públicamente por organizaciones de IA. Se proporcionan solo como contexto y no constituyen una norma, un requisito de certificación, un respaldo, un ranking ni una validación de ningún proveedor u organización. Las prácticas y políticas cambian con el tiempo; consulte la fuente pública enlazada para obtener información actualizada.",
+  "practices.category": "Categoría",
+  "practices.organization": "Organización",
+  "practices.publicPractice": "Práctica pública",
+  "practices.implication": "Qué significa esto para su programa",
+  "practices.related": "Áreas relacionadas de ASRA",
+  "practices.sourceDate": "Fecha de la fuente",
+  "practices.lastReviewed": "Última revisión",
+  "practices.viewSource": "Ver fuente pública",
+  "practices.viewDetails": "Ver detalles",
+  "practices.hideDetails": "Ocultar detalles",
+  "practices.viewMore": "Ver más referencias",
+  "practices.viewLess": "Mostrar menos referencias",
+  "practices.version": "Versión del catálogo de referencias {version}",
+  "footer.author.prefix": "Creado por",
+  "footer.author.name": "Diego Oliveira",
+  "footer.author.linkLabel": "Perfil de LinkedIn de Diego Oliveira (se abre en una pestaña nueva)",
+  "footer.author.body":
+    "ASRA es un recurso independiente y sin fines comerciales, creado para ayudar a las organizaciones a comprender las brechas de seguridad y resiliencia introducidas por la IA e identificar formas prácticas de abordarlas utilizando marcos y prácticas de seguridad reconocidos por la industria. El autor no tiene interés financiero en las tecnologías ni en los proveedores mencionados en esta evaluación.",
 } satisfies UiDict;
