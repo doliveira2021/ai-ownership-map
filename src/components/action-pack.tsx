@@ -47,8 +47,11 @@ function TaskList({
 
 const BUCKET_ORDER: StackBucket[] = ["use-existing", "extend", "evaluate"];
 
+type LooseTranslate = (key: string, params?: Record<string, string | number>) => string;
+
 export function ActionPackPanel({ pack }: { pack: ResolvedActionPack }) {
-  const { t, content } = useI18n();
+  const { t: translate, content } = useI18n();
+  const t = translate as LooseTranslate;
   const [open, setOpen] = useState(false);
   const localized = content.recommendation(pack.recommendationId);
   const packContent = content.actionPack(pack.recommendationId);
@@ -209,7 +212,8 @@ const PHASE_LABELS: Record<QuarterPhase, string> = {
 };
 
 export function NinetyDayPlan({ packs }: { packs: ResolvedActionPack[] }) {
-  const { t, content } = useI18n();
+  const { t: translate, content } = useI18n();
+  const t = translate as LooseTranslate;
   const plan = useMemo(() => buildNinetyDayPlan(packs), [packs]);
 
   return (
@@ -254,7 +258,8 @@ export function ExportTrackerPanel({
   recommendations: AsraRecommendation[];
   context: AssessmentContext;
 }) {
-  const { t, content, locale } = useI18n();
+  const { t: translate, content, locale } = useI18n();
+  const t = translate as LooseTranslate;
   const [busy, setBusy] = useState(false);
 
   async function handleExport() {

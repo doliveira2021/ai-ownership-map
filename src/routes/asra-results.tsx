@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, FileText, Info, Map, ShieldCheck } from "lucide-react";
+import { ArrowLeft, FileText, Info, Map as MapIcon, ShieldCheck } from "lucide-react";
 import { Shell, ScoreRing } from "@/components/shell";
 import {
   ActionPackPanel,
@@ -365,7 +365,7 @@ function AsraResultsPage() {
 
       <section className="mt-10">
         <div className="flex items-center gap-2">
-          <Map className="size-4 text-primary" />
+          <MapIcon className="size-4 text-primary" />
           <p className="label-mono">{t("results.roadmap.eyebrow")}</p>
         </div>
         <h2 className="mt-1 text-xl font-semibold">{t("results.roadmap.title")}</h2>
