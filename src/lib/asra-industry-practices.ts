@@ -28,7 +28,7 @@ export type PracticeCategoryId = (typeof PRACTICE_CATEGORY_IDS)[number];
 export type IndustryPractice = {
   practiceId: string;
   practiceCategory: PracticeCategoryId;
-  organizations: string[];
+  organizations: readonly string[];
   sourceTitle: string;
   sourceUrl: string;
   /** Publication or last-update date stated by the public source (ISO date). */
