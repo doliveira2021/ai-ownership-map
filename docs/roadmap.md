@@ -8,8 +8,7 @@ This document records planned features and enhancements for the ASRA (AI Securit
 
 **Status:** Planned — not implemented  
 **Target area:** `/asra-results` visualization layer  
-**Added:** 2026-08-24  
-**Commit:** `2623799005241fc49f49b6230478f84357e40ffd`
+**Added:** 2026-08-24
 
 ### Goal
 
