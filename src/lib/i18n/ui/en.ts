@@ -392,7 +392,6 @@ export const enUi = {
     "Ground both documents deterministically in the exported findings and recommendations, invent no new risks or priorities, and clearly label any user-supplied local updates.",
   "tracker.readme.sourceTitle":
     "Source versions",
-  "tracker.weekly.title":
 
   "tracker.weekly.title":
     "Weekly review",
