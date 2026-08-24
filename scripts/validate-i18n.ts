@@ -1,4 +1,4 @@
-import { ASRA_FRAMEWORK_BASIS } from "../src/lib/asra-framework-basis";
+import { ASRA_FRAMEWORK_BASIS, MAPPED_FRAMEWORK_NAMES, frameworkAnchor } from "../src/lib/asra-framework-basis";
 import { ASRA_PILOT_SCENARIOS } from "../src/lib/asra-pilot-data";
 import { ASRA_QUESTIONS } from "../src/lib/asra-question-data";
 import { ASRA_RECOMMENDATION_TEMPLATES } from "../src/lib/asra-recommendations";
@@ -175,6 +175,90 @@ for (const locale of LOCALES as readonly Locale[]) {
       (ui["method.point.technologySeparate"] ?? "").length > 0,
     `[${locale}] Industry Practice and Technology Options must be described as separate layers.`,
   );
+}
+
+// Framework library validation
+const ALLOWED_DOMAINS = [
+  "nist.gov",
+  "iso.org",
+  "cloudsecurityalliance.org",
+  "mitre.org",
+  "owasp.org",
+];
+
+check(
+  ASRA_FRAMEWORK_BASIS.length === 9,
+  `Framework library must expose 9 entries; got ${ASRA_FRAMEWORK_BASIS.length}.`,
+);
+
+const seenIds = new Set<string>();
+for (const entry of ASRA_FRAMEWORK_BASIS) {
+  check(!!entry.id && /^[a-z0-9-]+$/.test(entry.id), `Framework ${entry.name} needs a stable slug id.`);
+  check(!seenIds.has(entry.id), `Duplicate framework slug: ${entry.id}`);
+  seenIds.add(entry.id);
+  check(!!entry.organization, `Framework ${entry.name} must declare an issuing organization.`);
+  check(entry.url.startsWith("https://"), `Framework ${entry.name} must use an https official URL.`);
+  let host = "";
+  try {
+    host = new URL(entry.url).hostname;
+  } catch {
+    check(false, `Framework ${entry.name} has an invalid official URL.`);
+  }
+  check(
+    ALLOWED_DOMAINS.some((domain) => host === domain || host.endsWith(`.${domain}`)),
+    `Framework ${entry.name} must link to an authoritative domain (got ${host}).`,
+  );
+  check(
+    frameworkAnchor(entry.name) === `/frameworks#${entry.id}`,
+    `Framework ${entry.name} must resolve to /frameworks#${entry.id}.`,
+  );
+}
+
+for (const name of MAPPED_FRAMEWORK_NAMES) {
+  check(
+    ASRA_FRAMEWORK_BASIS.some((entry) => entry.name === name),
+    `Mapped framework ${name} has no library entry.`,
+  );
+}
+
+const LIBRARY_KEYS = [
+  "nav.frameworks",
+  "library.eyebrow",
+  "library.title",
+  "library.intro",
+  "library.copyright",
+  "library.disclaimer",
+  "library.organization",
+  "library.version",
+  "library.purpose",
+  "library.asraUse",
+  "library.referenceType",
+  "library.typeMapped",
+  "library.typeStructural",
+  "library.viewSource",
+  "library.paywallNote",
+  "library.link",
+];
+
+for (const locale of LOCALES as readonly Locale[]) {
+  const ui = LOCALE_UI[locale] as Record<string, string>;
+  const keys = [
+    ...LIBRARY_KEYS,
+    ...ASRA_FRAMEWORK_BASIS.flatMap((entry) => [
+      `framework.${entry.id}.purpose`,
+      `framework.${entry.id}.use`,
+    ]),
+  ];
+  for (const key of keys) {
+    const value = ui[key];
+    check(
+      typeof value === "string" && value.trim().length > 0,
+      `[${locale}] Missing framework library key: ${key}`,
+    );
+    for (const pattern of FORBIDDEN_CLAIMS) {
+      check(!pattern.test(value ?? ""), `[${locale}] Library copy must not claim ${pattern} (${key}).`);
+    }
+  }
 }
 
 if (errors.length) {
