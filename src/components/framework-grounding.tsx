@@ -1,4 +1,5 @@
-import { Library } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight, Library } from "lucide-react";
 import { ASRA_FRAMEWORK_BASIS } from "@/lib/asra-framework-basis";
 import { useI18n } from "@/lib/i18n";
 
@@ -6,17 +7,34 @@ function FrameworkChips() {
   return (
     <ul className="mt-3 flex flex-wrap gap-2">
       {ASRA_FRAMEWORK_BASIS.map((entry) => (
-        <li
-          key={entry.name}
-          title={entry.longName}
-          className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground"
-        >
-          {entry.name}
+        <li key={entry.name}>
+          <Link
+            to="/frameworks"
+            hash={entry.id}
+            title={entry.longName}
+            className="inline-block rounded-full border border-border px-3 py-1 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+          >
+            {entry.name}
+          </Link>
         </li>
       ))}
     </ul>
   );
 }
+
+function LibraryLink() {
+  const { t } = useI18n();
+  return (
+    <Link
+      to="/frameworks"
+      className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-primary underline underline-offset-4"
+    >
+      {t("library.link")}
+      <ArrowRight className="size-3.5" />
+    </Link>
+  );
+}
+
 
 /** Concise credibility block shown near the start of the assessment. */
 export function FrameworkGroundingCompact() {
@@ -33,6 +51,7 @@ export function FrameworkGroundingCompact() {
       <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{t("method.body")}</p>
       <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{t("method.genaiProfile")}</p>
       <FrameworkChips />
+      <LibraryLink />
       <p className="mt-3 text-xs text-muted-foreground">{t("method.disclaimer")}</p>
     </section>
   );
@@ -61,6 +80,7 @@ export function FrameworkGroundingFull() {
       <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{t("method.body")}</p>
       <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{t("method.genaiProfile")}</p>
       <FrameworkChips />
+      <LibraryLink />
 
       <h3 className="mt-5 text-sm font-semibold">{t("method.how.title")}</h3>
       <ul className="mt-2 space-y-2 text-sm text-muted-foreground">

@@ -8,6 +8,7 @@ import {
   useResolvedActionPacks,
 } from "@/components/action-pack";
 import { FrameworkGroundingFull } from "@/components/framework-grounding";
+import { FrameworkLink } from "@/components/framework-link";
 import { IndustryPracticesSection } from "@/components/industry-practices";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -292,7 +293,7 @@ function AsraResultsPage() {
                     <div className="mt-2 flex flex-wrap gap-2">
                       {traces.length ? traces.map((trace) => (
                         <span key={`${trace.framework}-${trace.refs.join("-")}`} className="rounded border border-border px-2 py-1 text-xs text-muted-foreground">
-                          <span className="text-foreground">{trace.framework}</span> · {trace.refs.join(", ")} · {trace.confidence}
+                          <FrameworkLink name={trace.framework} className="text-foreground" /> · {trace.refs.join(", ")} · {trace.confidence}
                         </span>
                       )) : (
                         <span className="text-sm text-muted-foreground">{t("results.drill.noFramework")}</span>
