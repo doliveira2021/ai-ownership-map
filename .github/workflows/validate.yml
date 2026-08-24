@@ -30,6 +30,9 @@ jobs:
       - name: Validate Action Packs and tracker export
         run: bun scripts/validate-action-packs.ts
 
+      - name: Validate industry practice references
+        run: bun scripts/validate-industry-practices.ts
+
       - name: Test ASRA scoring scenarios
         run: bun scripts/test-asra-scoring.ts
 

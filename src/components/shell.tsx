@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { FlaskConical, ShieldCheck } from "lucide-react";
+import { FlaskConical, Linkedin, ShieldCheck } from "lucide-react";
 import { useAssessment } from "@/lib/assessment-store";
 import { LOCALES, LOCALE_LABELS, LOCALE_NAMES, useI18n, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -94,7 +94,23 @@ export function Shell({ children }: { children: ReactNode }) {
         )}
       </header>
       <main className="mx-auto max-w-6xl px-5 py-10">{children}</main>
-      <footer className="mx-auto max-w-6xl px-5 pb-10 label-mono">{t("footer.privacy")}</footer>
+      <footer className="mx-auto max-w-6xl space-y-3 px-5 pb-10">
+        <p className="label-mono">{t("footer.privacy")}</p>
+        <p className="max-w-4xl text-xs leading-relaxed text-muted-foreground">
+          <span>{t("footer.author.prefix")} </span>
+          <a
+            href="https://www.linkedin.com/in/diegosilvaoliveira/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t("footer.author.linkLabel")}
+            className="inline-flex items-center gap-1 text-foreground underline underline-offset-4"
+          >
+            <Linkedin className="size-3.5" />
+            {t("footer.author.name")}
+          </a>
+          <span>. {t("footer.author.body")}</span>
+        </p>
+      </footer>
     </div>
   );
 }

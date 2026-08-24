@@ -7,6 +7,7 @@ import {
   NinetyDayPlan,
   useResolvedActionPacks,
 } from "@/components/action-pack";
+import { IndustryPracticesSection } from "@/components/industry-practices";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { validateAssessmentConfiguration } from "@/lib/asra-config";
@@ -400,6 +401,10 @@ function AsraResultsPage() {
         packs={actionPacks}
         recommendations={recommendations}
         context={state.context}
+      />
+
+      <IndustryPracticesSection
+        recommendationIds={recommendations.map((recommendation) => recommendation.id)}
       />
 
       <div className="panel mt-10 p-5">
