@@ -10,8 +10,7 @@ export const enUi = {
     "Assessment data stays in this browser. Do not enter confidential or sensitive company information.",
   "demo.badge": "DEMO DATA",
   "demo.badgeShort": "DEMO",
-  "demo.bannerNote":
-    "Synthetic pilot profile — not a real organization assessment or benchmark.",
+  "demo.bannerNote": "Synthetic pilot profile — not a real organization assessment or benchmark.",
 
   // Landing
   "landing.eyebrow": "AI Accountability & Responsibility Model",
@@ -156,134 +155,82 @@ export const enUi = {
     "Scores are deterministic and reproducible. Framework alignment is supporting traceability, not certification, legal advice, regulatory validation or an audit.",
 
   // Action Packs, technology options and Local Action Tracker export
-  "pack.view":
-    "View Action Pack",
-  "pack.hide":
-    "Hide Action Pack",
-  "pack.eyebrow":
-    "Action Pack",
-  "pack.why":
-    "Why it matters",
-  "pack.priority":
-    "Priority",
-  "pack.targetMaturity":
-    "Target maturity",
-  "pack.horizon":
-    "Suggested horizon",
-  "pack.effort":
-    "Effort",
-  "pack.businessImpact":
-    "Business impact",
-  "pack.urgency":
-    "Control urgency",
-  "pack.first7":
-    "Immediate actions — first 7 days",
-  "pack.plan30":
-    "30-day plan",
-  "pack.plan60":
-    "60-day plan",
-  "pack.plan90":
-    "90-day plan",
-  "pack.owners":
-    "Suggested owners",
-  "pack.dependencies":
-    "Dependencies / prerequisites",
-  "pack.evidence":
-    "Evidence of completion",
-  "pack.kpis":
-    "KPIs / KRIs",
-  "pack.level.Low":
-    "Low",
-  "pack.level.Medium":
-    "Medium",
-  "pack.level.High":
-    "High",
-  "pack.urgency.Immediate":
-    "Immediate",
-  "pack.urgency.Near-term":
-    "Near-term",
-  "pack.urgency.Strategic":
-    "Strategic",
-  "pack.tech.title":
-    "Technology options",
-  "pack.tech.capabilities":
-    "Capabilities to consider",
-  "pack.tech.categories":
-    "Technology categories",
-  "pack.tech.providers":
-    "Examples to evaluate",
+  "pack.view": "View Action Pack",
+  "pack.hide": "Hide Action Pack",
+  "pack.eyebrow": "Action Pack",
+  "pack.why": "Why it matters",
+  "pack.priority": "Priority",
+  "pack.targetMaturity": "Target maturity",
+  "pack.horizon": "Suggested horizon",
+  "pack.effort": "Effort",
+  "pack.businessImpact": "Business impact",
+  "pack.urgency": "Control urgency",
+  "pack.first7": "Immediate actions — first 7 days",
+  "pack.plan30": "30-day plan",
+  "pack.plan60": "60-day plan",
+  "pack.plan90": "90-day plan",
+  "pack.owners": "Suggested owners",
+  "pack.dependencies": "Dependencies / prerequisites",
+  "pack.evidence": "Evidence of completion",
+  "pack.kpis": "KPIs / KRIs",
+  "pack.level.Low": "Low",
+  "pack.level.Medium": "Medium",
+  "pack.level.High": "High",
+  "pack.urgency.Immediate": "Immediate",
+  "pack.urgency.Near-term": "Near-term",
+  "pack.urgency.Strategic": "Strategic",
+  "pack.tech.title": "Technology options",
+  "pack.tech.capabilities": "Capabilities to consider",
+  "pack.tech.categories": "Technology categories",
+  "pack.tech.providers": "Examples to evaluate",
   "pack.tech.disclaimer":
     "Technology examples are provided for implementation context only. Inclusion does not constitute endorsement, ranking, certification, or a statement that a specific product satisfies the recommendation. Capabilities and product offerings change over time and should be independently validated.",
-  "pack.tech.catalog":
-    "Local technology catalog {version} · last reviewed {reviewed}",
-  "pack.stack.title":
-    "Your stack",
-  "pack.stack.use-existing":
-    "Use what you already have",
-  "pack.stack.extend":
-    "Extend your current stack",
-  "pack.stack.evaluate":
-    "Evaluate specialized technology",
-  "plan90.eyebrow":
-    "Execution",
-  "plan90.title":
-    "Build my 90-day action plan",
+  "pack.tech.catalog": "Local technology catalog {version} · last reviewed {reviewed}",
+  "pack.stack.title": "Your stack",
+  "pack.stack.use-existing": "Use what you already have",
+  "pack.stack.extend": "Extend your current stack",
+  "pack.stack.evaluate": "Evaluate specialized technology",
+  "plan90.eyebrow": "Execution",
+  "plan90.title": "Build my 90-day action plan",
   "plan90.lead":
     "The highest-priority triggered actions consolidated into one quarterly view. Overlapping tasks appear once.",
-  "plan90.p1":
-    "Days 0–30 — Establish control",
-  "plan90.p2":
-    "Days 31–60 — Reduce exposure",
-  "plan90.p3":
-    "Days 61–90 — Validate & operationalize",
-  "plan90.empty":
-    "No consolidated actions in this phase.",
-  "asra.platforms.title":
-    "Strategic technology platforms already in use",
+  "plan90.p1": "Days 0–30 — Establish control",
+  "plan90.p2": "Days 31–60 — Reduce exposure",
+  "plan90.p3": "Days 61–90 — Validate & operationalize",
+  "plan90.empty": "No consolidated actions in this phase.",
+  "asra.platforms.title": "Strategic technology platforms already in use",
   "asra.platforms.lead":
     "Optional and local to this browser. These selections never change maturity, exposure or priority scores — they only tailor the technology guidance inside Action Packs.",
-  "asra.platforms.other":
-    "Other",
-  "asra.platforms.count":
-    "{count} selected",
-  "export.title":
-    "Local Action Tracker",
+  "asra.platforms.other": "Other",
+  "asra.platforms.count": "{count} selected",
+  "export.title": "Local Action Tracker",
   "export.lead":
     "Download a platform-neutral tracker package generated in your browser from the currently triggered Action Packs. Use it with the agent or runtime of your choice.",
-  "export.button":
-    "Export Local Action Tracker",
-  "export.privacyTitle":
-    "Privacy model",
+  "export.button": "Export Local Action Tracker",
+  "export.privacyTitle": "Privacy model",
   "export.privacy1":
     "ASRA does not receive or sync the execution updates contained in the exported tracker.",
   "export.privacy2":
     "The downloaded files are controlled by you. No backend call is made to generate them.",
   "export.privacy3":
     "If you use the skill with a cloud-hosted AI assistant, your data remains subject to that provider's data handling terms. For strict confidentiality, run it in an approved enterprise environment or with a local/self-hosted model.",
-  "export.empty":
-    "Answer more questions to trigger Action Packs before exporting a tracker.",
-  "tracker.readme.title":
-    "ASRA Local Action Tracker",
+  "export.empty": "Answer more questions to trigger Action Packs before exporting a tracker.",
+  "tracker.readme.title": "ASRA Local Action Tracker",
   "tracker.readme.intro":
     "This package turns your ASRA assessment results into a local execution plan. It is platform neutral, works with the agent or runtime of your choice, and does not require ASRA after export.",
-  "tracker.readme.howTitle":
-    "How to use",
+  "tracker.readme.howTitle": "How to use",
   "tracker.readme.how1":
     "Keep all files together in one working folder controlled by your organization.",
-  "tracker.readme.how2":
-    "Load SKILL.md into your agent or assistant as its operating procedure.",
+  "tracker.readme.how2": "Load SKILL.md into your agent or assistant as its operating procedure.",
   "tracker.readme.how3":
     "Treat actions.json as the local source of truth and update it as work progresses.",
   "tracker.readme.how4":
     "Use the weekly, executive and evidence templates for recurring reporting.",
   "tracker.readme.how5":
     "Record evidence references as local paths or ticket IDs rather than uploading documents.",
-  "tracker.readme.filesTitle":
-    "Files",
-  "tracker.readme.contextTitle":
-    "Assessment context",
-  "tracker.privacy.title":
-    "Privacy model",
+  "tracker.readme.filesTitle": "Files",
+  "tracker.readme.contextTitle": "Assessment context",
+  "tracker.privacy.title": "Privacy model",
   "tracker.privacy.p1":
     "ASRA does not receive, store or sync the execution updates you record in this package. Nothing in this tracker is sent back to the assessment.",
   "tracker.privacy.p2":
@@ -292,18 +239,13 @@ export const enUi = {
     "If you use these files with a cloud-hosted AI assistant, the data you provide is still subject to that assistant provider's data handling terms. For strict confidentiality, use an approved enterprise environment or a local/self-hosted model runtime.",
   "tracker.privacy.p4":
     "Role-based ownership is the default. Employee names are not required and should not be added unless your organization decides otherwise.",
-  "tracker.skill.title":
-    "Local Action Tracker — agent operating procedure",
+  "tracker.skill.title": "Local Action Tracker — agent operating procedure",
   "tracker.skill.purpose":
     "You help a security leader execute an AI security remediation plan locally. You track tasks, evidence, KPIs/KRIs, blockers, owners, due dates and progress.",
-  "tracker.skill.rulesTitle":
-    "Rules",
-  "tracker.skill.r1":
-    "Treat actions.json as the single local source of truth.",
-  "tracker.skill.r2":
-    "Never call the ASRA site or any ASRA API to sync action status.",
-  "tracker.skill.r3":
-    "Never upload or transmit evidence automatically.",
+  "tracker.skill.rulesTitle": "Rules",
+  "tracker.skill.r1": "Treat actions.json as the single local source of truth.",
+  "tracker.skill.r2": "Never call the ASRA site or any ASRA API to sync action status.",
+  "tracker.skill.r3": "Never upload or transmit evidence automatically.",
   "tracker.skill.r4":
     "Preserve the original actionId, recommendationId and task ids for traceability.",
   "tracker.skill.r5":
@@ -312,30 +254,20 @@ export const enUi = {
     "Maintain owner role, target date, completion percentage, dependencies, blockers and evidence references.",
   "tracker.skill.r7":
     "Maintain KPI/KRI baseline, target and current values with the review cadence.",
-  "tracker.skill.r8":
-    "Update lastReviewed and nextReview whenever a review is performed.",
-  "tracker.skill.r9":
-    "Support role-based ownership by default and never require employee names.",
-  "tracker.skill.r10":
-    "Allow local notes, internal ticket IDs and links or paths to evidence.",
+  "tracker.skill.r8": "Update lastReviewed and nextReview whenever a review is performed.",
+  "tracker.skill.r9": "Support role-based ownership by default and never require employee names.",
+  "tracker.skill.r10": "Allow local notes, internal ticket IDs and links or paths to evidence.",
   "tracker.skill.r11":
     "Base every recommendation you make only on the local action state in this package.",
   "tracker.skill.r12":
     "Never modify the ASRA scores, priorities or recommendation content; they are the assessment baseline.",
-  "tracker.skill.outputsTitle":
-    "Expected outputs",
-  "tracker.skill.o1":
-    "Weekly review summaries using weekly-review-template.md.",
-  "tracker.skill.o2":
-    "Executive status reports using executive-status-template.md.",
-  "tracker.skill.o3":
-    "A list of overdue and blocked actions with the reason and owner role.",
-  "tracker.skill.o4":
-    "A comparison of actual KPI/KRI values against their targets.",
-  "tracker.skill.o5":
-    "Stalled recommendations and the next best action for each.",
-  "tracker.skill.contextTitle":
-    "What the exported ASRA results contain",
+  "tracker.skill.outputsTitle": "Expected outputs",
+  "tracker.skill.o1": "Weekly review summaries using weekly-review-template.md.",
+  "tracker.skill.o2": "Executive status reports using executive-status-template.md.",
+  "tracker.skill.o3": "A list of overdue and blocked actions with the reason and owner role.",
+  "tracker.skill.o4": "A comparison of actual KPI/KRI values against their targets.",
+  "tracker.skill.o5": "Stalled recommendations and the next best action for each.",
+  "tracker.skill.contextTitle": "What the exported ASRA results contain",
   "tracker.skill.c1":
     "Assessment outputs include maturity by domain plus exposure, autonomy and resilience context for the assessed scope.",
   "tracker.skill.c2":
@@ -350,8 +282,7 @@ export const enUi = {
     "Agentic-security concepts represented in ASRA include least agency, AI and agent supply-chain governance, validation of AI-generated tool arguments, circuit breakers and containment, AI BOM/inventory, shared responsibility, and reassessment when capability or autonomy materially changes. Use these concepts only where they are already relevant to an exported action; never invent new assessment findings.",
   "tracker.skill.c7":
     "Every critical AI or agent action must preserve accountable ownership, evidence requirements and a review cadence.",
-  "tracker.skill.opTitle":
-    "Operating model",
+  "tracker.skill.opTitle": "Operating model",
   "tracker.skill.opNote":
     "You start from the exported ASRA results and execution plan. You never rerun or recompute the assessment.",
   "tracker.skill.op1":
@@ -366,22 +297,18 @@ export const enUi = {
     "Local Execution & Weekly Review — maintain status, blockers, dates and evidence locally, and run the weekly review cadence.",
   "tracker.skill.op6":
     "Measurement & Evidence — track KPI/KRI baseline, target and current values and keep evidence references current.",
-  "tracker.skill.groundTitle":
-    "Grounding and non-hallucination rules",
+  "tracker.skill.groundTitle": "Grounding and non-hallucination rules",
   "tracker.skill.g1":
     "Never invent findings, scores, evidence, owners, dates or completion status.",
   "tracker.skill.g2":
     "Always distinguish assessment-derived facts from local updates added by the user.",
-  "tracker.skill.g3":
-    "Never claim compliance, certification or audit readiness.",
+  "tracker.skill.g3": "Never claim compliance, certification or audit readiness.",
   "tracker.skill.g4":
     "Never claim that a provider satisfies a recommendation merely because it appears in Technology Options or Industry Practice References.",
-  "tracker.skill.g5":
-    "Ask the user for missing local execution facts instead of guessing them.",
+  "tracker.skill.g5": "Ask the user for missing local execution facts instead of guessing them.",
   "tracker.skill.g6":
     "Treat Accepted Risk and Deferred as explicit governance decisions, never as successful remediation.",
-  "tracker.skill.execTitle":
-    "Suggested executive outputs (on request only)",
+  "tracker.skill.execTitle": "Suggested executive outputs (on request only)",
   "tracker.skill.execNote":
     "ASRA does not generate these documents. You may produce them locally on request from the exported data.",
   "tracker.skill.exec1":
@@ -390,51 +317,29 @@ export const enUi = {
     "Executive Action Brief — a leadership-oriented summary connecting findings and risks to recommended direction, priorities, owner roles and the 90-day focus, written for CISO, CIO, CTO and AI leaders.",
   "tracker.skill.exec3":
     "Ground both documents deterministically in the exported findings and recommendations, invent no new risks or priorities, and clearly label any user-supplied local updates.",
-  "tracker.readme.sourceTitle":
-    "Source versions",
+  "tracker.readme.sourceTitle": "Source versions",
 
-  "tracker.weekly.title":
-    "Weekly review",
-  "tracker.weekly.s1":
-    "Progress since last review",
-  "tracker.weekly.s2":
-    "Overdue actions",
-  "tracker.weekly.s3":
-    "Blocked actions and blockers",
-  "tracker.weekly.s4":
-    "KPI/KRI movement",
-  "tracker.weekly.s5":
-    "Decisions needed",
-  "tracker.weekly.s6":
-    "Next week's focus",
-  "tracker.exec.title":
-    "Executive status report",
-  "tracker.exec.s1":
-    "Posture summary",
-  "tracker.exec.s2":
-    "Top risks and exposure",
-  "tracker.exec.s3":
-    "Progress against the 90-day plan",
-  "tracker.exec.s4":
-    "Accepted risks and deferrals",
-  "tracker.exec.s5":
-    "KPI/KRI dashboard",
-  "tracker.exec.s6":
-    "Decisions and investment requested",
-  "tracker.evidence.title":
-    "Evidence index",
-  "tracker.evidence.s1":
-    "Action / task reference",
-  "tracker.evidence.s2":
-    "Evidence description",
-  "tracker.evidence.s3":
-    "Local location or ticket ID",
-  "tracker.evidence.s4":
-    "Owner role",
-  "tracker.evidence.s5":
-    "Date recorded",
-  "tracker.generated":
-    "Generated from an ASRA assessment on {date}. Locale: {locale}.",
+  "tracker.weekly.title": "Weekly review",
+  "tracker.weekly.s1": "Progress since last review",
+  "tracker.weekly.s2": "Overdue actions",
+  "tracker.weekly.s3": "Blocked actions and blockers",
+  "tracker.weekly.s4": "KPI/KRI movement",
+  "tracker.weekly.s5": "Decisions needed",
+  "tracker.weekly.s6": "Next week's focus",
+  "tracker.exec.title": "Executive status report",
+  "tracker.exec.s1": "Posture summary",
+  "tracker.exec.s2": "Top risks and exposure",
+  "tracker.exec.s3": "Progress against the 90-day plan",
+  "tracker.exec.s4": "Accepted risks and deferrals",
+  "tracker.exec.s5": "KPI/KRI dashboard",
+  "tracker.exec.s6": "Decisions and investment requested",
+  "tracker.evidence.title": "Evidence index",
+  "tracker.evidence.s1": "Action / task reference",
+  "tracker.evidence.s2": "Evidence description",
+  "tracker.evidence.s3": "Local location or ticket ID",
+  "tracker.evidence.s4": "Owner role",
+  "tracker.evidence.s5": "Date recorded",
+  "tracker.generated": "Generated from an ASRA assessment on {date}. Locale: {locale}.",
   // Industry practice references
   "practices.eyebrow": "Industry Practice References",
   "practices.title": "How frontier-AI organizations describe their own practices",

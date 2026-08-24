@@ -158,14 +158,14 @@ for (const locale of LOCALES as readonly Locale[]) {
   });
 
   for (const file of TRACKER_FILES) {
-    check(
-      (files[file] ?? "").trim().length > 0,
-      `[${locale}] Export package is missing ${file}.`,
-    );
+    check((files[file] ?? "").trim().length > 0, `[${locale}] Export package is missing ${file}.`);
   }
 
   const doc = JSON.parse(files["actions.json"]!);
-  check(Array.isArray(doc.actions) && doc.actions.length === packs.length, `[${locale}] actions.json action count mismatch.`);
+  check(
+    Array.isArray(doc.actions) && doc.actions.length === packs.length,
+    `[${locale}] actions.json action count mismatch.`,
+  );
   for (const action of doc.actions) {
     for (const field of [
       "actionId",
@@ -192,7 +192,10 @@ for (const locale of LOCALES as readonly Locale[]) {
     ]) {
       check(action[field] !== undefined, `[${locale}] ${action.actionId}: missing field ${field}.`);
     }
-    check("lastReviewed" in action && "nextReview" in action, `[${locale}] ${action.actionId}: missing review fields.`);
+    check(
+      "lastReviewed" in action && "nextReview" in action,
+      `[${locale}] ${action.actionId}: missing review fields.`,
+    );
     for (const task of action.tasks) {
       check(
         task.status === "Not Started" && task.percentComplete === 0,
@@ -231,7 +234,10 @@ for (const locale of LOCALES as readonly Locale[]) {
     check((ui[key] ?? "").trim().length > 0, `[${locale}] Missing skill i18n key: ${key}.`);
     check(!skillMd.includes(key), `[${locale}] SKILL.md leaked untranslated key ${key}.`);
   }
-  const nonScoring = ui["tracker.skill.c4"]!.replaceAll("{version}", ASRA_INDUSTRY_PRACTICES_VERSION);
+  const nonScoring = ui["tracker.skill.c4"]!.replaceAll(
+    "{version}",
+    ASRA_INDUSTRY_PRACTICES_VERSION,
+  );
   check(
     skillMd.includes(nonScoring),
     `[${locale}] SKILL.md must state the industry practice non-scoring / non-endorsement rule.`,
@@ -260,10 +266,7 @@ for (const file of [
   "src/lib/recommendations.ts",
 ]) {
   const source = readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
-  check(
-    !/from\s+"\.\/asra-export"/.test(source),
-    `${file} must not import export/skill logic.`,
-  );
+  check(!/from\s+"\.\/asra-export"/.test(source), `${file} must not import export/skill logic.`);
 }
 
 // 5. 90-day plan must de-duplicate tasks.
