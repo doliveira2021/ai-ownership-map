@@ -3,6 +3,7 @@ import { ExternalLink, Library } from "lucide-react";
 import { Shell } from "@/components/shell";
 import { ASRA_FRAMEWORK_BASIS } from "@/lib/asra-framework-basis";
 import { useI18n } from "@/lib/i18n";
+import type { UiKey } from "@/lib/i18n/ui/en";
 
 const TITLE = "Framework Library | ASRA";
 const DESCRIPTION =
@@ -70,12 +71,12 @@ function FrameworkLibraryPage() {
               <div>
                 <dt className="label-mono">{t("library.purpose")}</dt>
                 <dd className="mt-0.5 text-muted-foreground">
-                  {t(`framework.${entry.id}.purpose`)}
+                  {t(`framework.${entry.id}.purpose` as UiKey)}
                 </dd>
               </div>
               <div>
                 <dt className="label-mono">{t("library.asraUse")}</dt>
-                <dd className="mt-0.5 text-muted-foreground">{t(`framework.${entry.id}.use`)}</dd>
+                <dd className="mt-0.5 text-muted-foreground">{t(`framework.${entry.id}.use` as UiKey)}</dd>
               </div>
             </dl>
 

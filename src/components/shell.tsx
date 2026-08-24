@@ -47,6 +47,7 @@ export function Shell({ children }: { children: ReactNode }) {
     { to: "/", label: t("nav.overview") },
     { to: "/asra", label: t("nav.asra") },
     { to: "/asra-results", label: t("nav.results") },
+    { to: "/frameworks", label: t("nav.frameworks") },
   ] as const;
 
   return (
