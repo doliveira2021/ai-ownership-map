@@ -407,10 +407,7 @@ function AsraResultsPage() {
         recommendationIds={recommendations.map((recommendation) => recommendation.id)}
       />
 
-      <div className="panel mt-10 p-5">
-        <p className="label-mono">{t("results.method.eyebrow")}</p>
-        <p className="mt-2 text-sm text-muted-foreground">{t("results.method.body")}</p>
-      </div>
+      <FrameworkGroundingFull />
     </Shell>
   );
 }
