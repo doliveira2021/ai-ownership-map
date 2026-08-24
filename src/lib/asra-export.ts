@@ -12,6 +12,7 @@ import {
   type ResolvedActionPack,
 } from "./asra-action-packs";
 import type { AsraRecommendation } from "./asra-recommendations";
+import { ASRA_INDUSTRY_PRACTICES_VERSION } from "./asra-industry-practices";
 import {
   TECHNOLOGY_CATALOG_LAST_REVIEWED,
   TECHNOLOGY_CATALOG_VERSION,
@@ -90,6 +91,7 @@ export type TrackerDocument = {
     actionPackVersion: string;
     technologyCatalogVersion: string;
     technologyCatalogLastReviewed: string;
+    industryPracticeCatalogVersion: string;
   };
   assessmentContext: AssessmentContext;
   disclaimer: string;
@@ -208,6 +210,14 @@ ${bullets([1, 2, 3, 4, 5].map((n) => tr.t(`tracker.readme.how${n}`)))}
 
 ${bullets([...TRACKER_FILES])}
 
+## ${tr.t("tracker.readme.sourceTitle")}
+
+${bullets([
+  `Action Pack version: ${doc.source.actionPackVersion}`,
+  `Technology catalog version: ${doc.source.technologyCatalogVersion} (reviewed ${doc.source.technologyCatalogLastReviewed})`,
+  `Industry Practice catalog version: ${doc.source.industryPracticeCatalogVersion}`,
+])}
+
 ## ${tr.t("tracker.readme.contextTitle")}
 
 ${contextLines}
@@ -232,9 +242,31 @@ description: ${tr.t("tracker.skill.title")}
 
 ${tr.t("tracker.skill.purpose")}
 
+## ${tr.t("tracker.skill.contextTitle")}
+
+${bullets([
+  tr.t("tracker.skill.c1"),
+  tr.t("tracker.skill.c2"),
+  tr.t("tracker.skill.c3"),
+  tr.t("tracker.skill.c4", { version: doc.source.industryPracticeCatalogVersion }),
+  tr.t("tracker.skill.c5"),
+  tr.t("tracker.skill.c6"),
+  tr.t("tracker.skill.c7"),
+])}
+
+## ${tr.t("tracker.skill.opTitle")}
+
+${tr.t("tracker.skill.opNote")}
+
+${[1, 2, 3, 4, 5, 6].map((n) => `${n}. ${tr.t(`tracker.skill.op${n}`)}`).join("\n")}
+
 ## ${tr.t("tracker.skill.rulesTitle")}
 
 ${bullets(Array.from({ length: 12 }, (_, i) => tr.t(`tracker.skill.r${i + 1}`)))}
+
+## ${tr.t("tracker.skill.groundTitle")}
+
+${bullets(Array.from({ length: 6 }, (_, i) => tr.t(`tracker.skill.g${i + 1}`)))}
 
 ## Status values
 
@@ -244,13 +276,19 @@ ${bullets([...TRACKER_STATUSES])}
 
 ${bullets([1, 2, 3, 4, 5].map((n) => tr.t(`tracker.skill.o${n}`)))}
 
+## ${tr.t("tracker.skill.execTitle")}
+
+${tr.t("tracker.skill.execNote")}
+
+${bullets([1, 2, 3].map((n) => tr.t(`tracker.skill.exec${n}`)))}
+
 ## ${tr.t("tracker.privacy.title")}
 
 ${bullets([1, 2, 3].map((n) => tr.t(`tracker.privacy.p${n}`)))}
 
 ---
 
-Source: ASRA action packs ${doc.source.actionPackVersion}, technology catalog ${doc.source.technologyCatalogVersion}.
+Source: ASRA action packs ${doc.source.actionPackVersion}, technology catalog ${doc.source.technologyCatalogVersion}, industry practice catalog ${doc.source.industryPracticeCatalogVersion}.
 ${doc.disclaimer}
 `;
 }
@@ -291,7 +329,22 @@ const ACTION_SCHEMA = {
     schemaVersion: { type: "string" },
     generatedAt: { type: "string" },
     locale: { type: "string" },
-    source: { type: "object" },
+    source: {
+      type: "object",
+      required: [
+        "framework",
+        "actionPackVersion",
+        "technologyCatalogVersion",
+        "industryPracticeCatalogVersion",
+      ],
+      properties: {
+        framework: { type: "string" },
+        actionPackVersion: { type: "string" },
+        technologyCatalogVersion: { type: "string" },
+        technologyCatalogLastReviewed: { type: "string" },
+        industryPracticeCatalogVersion: { type: "string" },
+      },
+    },
     assessmentContext: { type: "object" },
     disclaimer: { type: "string" },
     privacy: { type: "array", items: { type: "string" } },
@@ -383,6 +436,7 @@ export function buildTrackerPackage(args: {
       actionPackVersion: ACTION_PACK_VERSION,
       technologyCatalogVersion: TECHNOLOGY_CATALOG_VERSION,
       technologyCatalogLastReviewed: TECHNOLOGY_CATALOG_LAST_REVIEWED,
+      industryPracticeCatalogVersion: ASRA_INDUSTRY_PRACTICES_VERSION,
     },
     assessmentContext: context,
     disclaimer: tr.t("pack.tech.disclaimer"),
