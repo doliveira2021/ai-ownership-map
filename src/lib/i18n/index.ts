@@ -107,6 +107,11 @@ export type LocalizedContent = {
   };
   level: (kind: keyof LevelContentDict, value: string) => string;
   landing: ContentBundle["landing"];
+  actionPack: (recommendationId: string) => ContentBundle["actionPacks"][string] | undefined;
+  task: (recommendationId: string, taskId: string) => string;
+  kpi: (recommendationId: string, kpiId: string) => string;
+  technologyCategory: (categoryId: string) => string;
+  capability: (capabilityId: string) => { description: string; notes: string };
 };
 
 export function localizedContent(current: Locale): LocalizedContent {
@@ -137,6 +142,23 @@ export function localizedContent(current: Locale): LocalizedContent {
       },
     level: (kind, value) => bundle.levels[kind]?.[value] ?? fallback.levels[kind]?.[value] ?? value,
     landing: bundle.landing ?? fallback.landing,
+    actionPack: (recommendationId) =>
+      bundle.actionPacks[recommendationId] ?? fallback.actionPacks[recommendationId],
+    task: (recommendationId, taskId) =>
+      bundle.actionPacks[recommendationId]?.tasks[taskId] ??
+      fallback.actionPacks[recommendationId]?.tasks[taskId] ??
+      taskId,
+    kpi: (recommendationId, kpiId) =>
+      bundle.actionPacks[recommendationId]?.kpis[kpiId] ??
+      fallback.actionPacks[recommendationId]?.kpis[kpiId] ??
+      kpiId,
+    technologyCategory: (categoryId) =>
+      (bundle.technology.categories as Record<string, string>)[categoryId] ??
+      (fallback.technology.categories as Record<string, string>)[categoryId] ??
+      categoryId,
+    capability: (capabilityId) =>
+      bundle.technology.capabilities[capabilityId] ??
+      fallback.technology.capabilities[capabilityId] ?? { description: "", notes: "" },
   };
 }
 

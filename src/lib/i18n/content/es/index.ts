@@ -1,3 +1,4 @@
+import { esActions } from "../../actions/es";
 import type { ContentBundle, MaturitySix } from "../../types";
 import { maturity } from "./maturity";
 import { domains, questions } from "./questions";
@@ -12,6 +13,8 @@ const maturityLabels: MaturitySix = [
 ];
 
 export const esContent: ContentBundle = {
+  actionPacks: esActions.actionPacks,
+  technology: esActions.technology,
   domains,
   questions,
   maturity,

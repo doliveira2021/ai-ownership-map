@@ -152,4 +152,226 @@ export const ptBrUi: Record<UiKey, string> = {
   "results.method.eyebrow": "Nota metodológica",
   "results.method.body":
     "As pontuações são determinísticas e reprodutíveis. O alinhamento a frameworks é rastreabilidade de apoio, não certificação, aconselhamento jurídico, validação regulatória ou auditoria.",
+
+  // Action Packs, technology options and Local Action Tracker export
+  "pack.view":
+    "Ver Action Pack",
+  "pack.hide":
+    "Ocultar Action Pack",
+  "pack.eyebrow":
+    "Action Pack",
+  "pack.why":
+    "Por que isso importa",
+  "pack.priority":
+    "Prioridade",
+  "pack.targetMaturity":
+    "Maturidade-alvo",
+  "pack.horizon":
+    "Horizonte sugerido",
+  "pack.effort":
+    "Esforço",
+  "pack.businessImpact":
+    "Impacto no negócio",
+  "pack.urgency":
+    "Urgência do controle",
+  "pack.first7":
+    "Ações imediatas — primeiros 7 dias",
+  "pack.plan30":
+    "Plano de 30 dias",
+  "pack.plan60":
+    "Plano de 60 dias",
+  "pack.plan90":
+    "Plano de 90 dias",
+  "pack.owners":
+    "Responsáveis sugeridos",
+  "pack.dependencies":
+    "Dependências / pré-requisitos",
+  "pack.evidence":
+    "Evidência de conclusão",
+  "pack.kpis":
+    "KPIs / KRIs",
+  "pack.level.Low":
+    "Baixo",
+  "pack.level.Medium":
+    "Médio",
+  "pack.level.High":
+    "Alto",
+  "pack.urgency.Immediate":
+    "Imediata",
+  "pack.urgency.Near-term":
+    "Curto prazo",
+  "pack.urgency.Strategic":
+    "Estratégica",
+  "pack.tech.title":
+    "Opções de tecnologia",
+  "pack.tech.capabilities":
+    "Capacidades a considerar",
+  "pack.tech.categories":
+    "Categorias de tecnologia",
+  "pack.tech.providers":
+    "Exemplos para avaliar",
+  "pack.tech.disclaimer":
+    "Os exemplos de tecnologia servem apenas como contexto de implementação. A menção não constitui endosso, ranking, certificação nem afirmação de que um produto específico atende à recomendação. Capacidades e ofertas mudam ao longo do tempo e devem ser validadas de forma independente.",
+  "pack.tech.catalog":
+    "Catálogo local de tecnologia {version} · última revisão {reviewed}",
+  "pack.stack.title":
+    "Seu stack",
+  "pack.stack.use-existing":
+    "Use o que você já tem",
+  "pack.stack.extend":
+    "Amplie o stack atual",
+  "pack.stack.evaluate":
+    "Avalie tecnologia especializada",
+  "plan90.eyebrow":
+    "Execução",
+  "plan90.title":
+    "Montar meu plano de ação de 90 dias",
+  "plan90.lead":
+    "As ações acionadas de maior prioridade consolidadas em uma visão trimestral. Tarefas sobrepostas aparecem uma única vez.",
+  "plan90.p1":
+    "Dias 0–30 — Estabelecer controle",
+  "plan90.p2":
+    "Dias 31–60 — Reduzir exposição",
+  "plan90.p3":
+    "Dias 61–90 — Validar e operacionalizar",
+  "plan90.empty":
+    "Nenhuma ação consolidada nesta fase.",
+  "asra.platforms.title":
+    "Plataformas de tecnologia estratégicas já em uso",
+  "asra.platforms.lead":
+    "Opcional e local a este navegador. Estas seleções não alteram maturidade, exposição nem pontuações de prioridade — apenas ajustam a orientação de tecnologia dentro dos Action Packs.",
+  "asra.platforms.other":
+    "Outro",
+  "asra.platforms.count":
+    "{count} selecionadas",
+  "export.title":
+    "Rastreador local de ações",
+  "export.lead":
+    "Baixe um pacote de acompanhamento neutro de plataforma, gerado no seu navegador a partir dos Action Packs acionados. Use com o agente ou runtime de sua preferência.",
+  "export.button":
+    "Exportar rastreador local de ações",
+  "export.privacyTitle":
+    "Modelo de privacidade",
+  "export.privacy1":
+    "A ASRA não recebe nem sincroniza as atualizações de execução contidas no rastreador exportado.",
+  "export.privacy2":
+    "Os arquivos baixados ficam sob seu controle. Nenhuma chamada de backend é feita para gerá-los.",
+  "export.privacy3":
+    "Se você usar a skill com um assistente de IA hospedado em nuvem, seus dados continuam sujeitos aos termos de tratamento de dados daquele provedor. Para confidencialidade estrita, execute em ambiente corporativo aprovado ou com modelo local/self-hosted.",
+  "export.empty":
+    "Responda mais perguntas para acionar Action Packs antes de exportar um rastreador.",
+  "tracker.readme.title":
+    "Rastreador local de ações ASRA",
+  "tracker.readme.intro":
+    "Este pacote transforma os resultados da sua avaliação ASRA em um plano de execução local. É neutro de plataforma, funciona com o agente ou runtime de sua escolha e não depende da ASRA após a exportação.",
+  "tracker.readme.howTitle":
+    "Como usar",
+  "tracker.readme.how1":
+    "Mantenha todos os arquivos juntos em uma pasta de trabalho controlada pela sua organização.",
+  "tracker.readme.how2":
+    "Carregue o SKILL.md no seu agente ou assistente como procedimento operacional.",
+  "tracker.readme.how3":
+    "Trate actions.json como a fonte local da verdade e atualize-o conforme o trabalho avança.",
+  "tracker.readme.how4":
+    "Use os modelos semanal, executivo e de evidências para o reporte recorrente.",
+  "tracker.readme.how5":
+    "Registre referências de evidência como caminhos locais ou IDs de chamado, em vez de enviar documentos.",
+  "tracker.readme.filesTitle":
+    "Arquivos",
+  "tracker.readme.contextTitle":
+    "Contexto da avaliação",
+  "tracker.privacy.title":
+    "Modelo de privacidade",
+  "tracker.privacy.p1":
+    "A ASRA não recebe, armazena nem sincroniza as atualizações de execução registradas neste pacote. Nada deste rastreador retorna à avaliação.",
+  "tracker.privacy.p2":
+    "Os arquivos exportados estão inteiramente sob seu controle e foram gerados no seu navegador.",
+  "tracker.privacy.p3":
+    "Se você usar estes arquivos com um assistente de IA hospedado em nuvem, os dados fornecidos continuam sujeitos aos termos de tratamento de dados daquele provedor. Para confidencialidade estrita, use um ambiente corporativo aprovado ou um runtime de modelo local/self-hosted.",
+  "tracker.privacy.p4":
+    "A responsabilidade por papel é o padrão. Nomes de funcionários não são necessários e não devem ser incluídos, salvo decisão da sua organização.",
+  "tracker.skill.title":
+    "Rastreador local de ações — procedimento operacional do agente",
+  "tracker.skill.purpose":
+    "Você apoia um líder de segurança na execução local de um plano de remediação de segurança de IA, acompanhando tarefas, evidências, KPIs/KRIs, bloqueios, responsáveis, prazos e progresso.",
+  "tracker.skill.rulesTitle":
+    "Regras",
+  "tracker.skill.r1":
+    "Trate actions.json como a única fonte local da verdade.",
+  "tracker.skill.r2":
+    "Nunca chame o site ou qualquer API da ASRA para sincronizar status de ações.",
+  "tracker.skill.r3":
+    "Nunca envie ou transmita evidências automaticamente.",
+  "tracker.skill.r4":
+    "Preserve os identificadores originais actionId, recommendationId e das tarefas para rastreabilidade.",
+  "tracker.skill.r5":
+    "Use somente estes status: Not Started, In Progress, Blocked, Complete, Accepted Risk, Deferred.",
+  "tracker.skill.r6":
+    "Mantenha papel responsável, data-alvo, percentual de conclusão, dependências, bloqueios e referências de evidência.",
+  "tracker.skill.r7":
+    "Mantenha valores de baseline, meta e atual de cada KPI/KRI, com a cadência de revisão.",
+  "tracker.skill.r8":
+    "Atualize lastReviewed e nextReview sempre que uma revisão for realizada.",
+  "tracker.skill.r9":
+    "Adote responsabilidade por papel como padrão e nunca exija nomes de funcionários.",
+  "tracker.skill.r10":
+    "Permita notas locais, IDs de chamados internos e links ou caminhos para evidências.",
+  "tracker.skill.r11":
+    "Baseie todas as recomendações apenas no estado local das ações deste pacote.",
+  "tracker.skill.r12":
+    "Nunca altere pontuações, prioridades ou conteúdo das recomendações da ASRA; eles são a linha de base da avaliação.",
+  "tracker.skill.outputsTitle":
+    "Resultados esperados",
+  "tracker.skill.o1":
+    "Resumos de revisão semanal usando weekly-review-template.md.",
+  "tracker.skill.o2":
+    "Relatórios executivos usando executive-status-template.md.",
+  "tracker.skill.o3":
+    "Lista de ações atrasadas e bloqueadas, com motivo e papel responsável.",
+  "tracker.skill.o4":
+    "Comparação dos valores reais de KPI/KRI com as metas.",
+  "tracker.skill.o5":
+    "Recomendações estagnadas e a próxima melhor ação para cada uma.",
+  "tracker.weekly.title":
+    "Revisão semanal",
+  "tracker.weekly.s1":
+    "Progresso desde a última revisão",
+  "tracker.weekly.s2":
+    "Ações atrasadas",
+  "tracker.weekly.s3":
+    "Ações bloqueadas e bloqueios",
+  "tracker.weekly.s4":
+    "Evolução de KPIs/KRIs",
+  "tracker.weekly.s5":
+    "Decisões necessárias",
+  "tracker.weekly.s6":
+    "Foco da próxima semana",
+  "tracker.exec.title":
+    "Relatório executivo de status",
+  "tracker.exec.s1":
+    "Resumo da postura",
+  "tracker.exec.s2":
+    "Principais riscos e exposição",
+  "tracker.exec.s3":
+    "Progresso do plano de 90 dias",
+  "tracker.exec.s4":
+    "Riscos aceitos e adiamentos",
+  "tracker.exec.s5":
+    "Painel de KPIs/KRIs",
+  "tracker.exec.s6":
+    "Decisões e investimento solicitados",
+  "tracker.evidence.title":
+    "Índice de evidências",
+  "tracker.evidence.s1":
+    "Referência de ação / tarefa",
+  "tracker.evidence.s2":
+    "Descrição da evidência",
+  "tracker.evidence.s3":
+    "Local ou ID de chamado",
+  "tracker.evidence.s4":
+    "Papel responsável",
+  "tracker.evidence.s5":
+    "Data de registro",
+  "tracker.generated":
+    "Gerado a partir de uma avaliação ASRA em {date}. Idioma: {locale}.",
 } satisfies UiDict;

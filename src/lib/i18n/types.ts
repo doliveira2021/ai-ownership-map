@@ -1,5 +1,6 @@
 import type { AsraDomainId } from "@/lib/asra-config";
 import type { AsraPilotScenarioId } from "@/lib/asra-pilot-data";
+import type { ActionsBundle } from "./actions/types";
 
 export const LOCALES = ["en", "pt-BR", "es"] as const;
 export type Locale = (typeof LOCALES)[number];
@@ -78,6 +79,8 @@ export type ContentBundle = {
   recommendations: RecommendationContentDict;
   levels: LevelContentDict;
   landing: LandingContent;
+  actionPacks: ActionsBundle["actionPacks"];
+  technology: ActionsBundle["technology"];
 };
 
 export type UiDict = Record<string, string>;
