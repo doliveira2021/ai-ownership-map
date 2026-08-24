@@ -1,4 +1,6 @@
+import { readFileSync } from "node:fs";
 import {
+  ACTION_PACK_VERSION,
   ACTION_PACKS,
   ACTION_PHASES,
   resolveActionPacks,
@@ -10,6 +12,7 @@ import {
   TECHNOLOGY_CATEGORY_IDS,
 } from "../src/lib/asra-technology-catalog";
 import { buildTrackerPackage, TRACKER_FILES } from "../src/lib/asra-export";
+import { ASRA_INDUSTRY_PRACTICES_VERSION } from "../src/lib/asra-industry-practices";
 import { LOCALE_CONTENT, LOCALE_UI } from "../src/lib/i18n";
 import { LOCALES, type Locale } from "../src/lib/i18n/types";
 import { defaultAssessmentContext } from "../src/lib/assessment-store";
@@ -205,6 +208,61 @@ for (const locale of LOCALES as readonly Locale[]) {
   check(
     files["SKILL.md"]!.includes("actions.json"),
     `[${locale}] SKILL.md must reference actions.json as source of truth.`,
+  );
+
+  const skillMd = files["SKILL.md"]!;
+  check(
+    skillMd.includes(ASRA_INDUSTRY_PRACTICES_VERSION),
+    `[${locale}] SKILL.md must record the industry practice catalog version.`,
+  );
+  for (const key of [
+    "tracker.skill.contextTitle",
+    "tracker.skill.opTitle",
+    "tracker.skill.groundTitle",
+    "tracker.skill.execTitle",
+    ...Array.from({ length: 7 }, (_, i) => `tracker.skill.c${i + 1}`),
+    ...Array.from({ length: 6 }, (_, i) => `tracker.skill.op${i + 1}`),
+    ...Array.from({ length: 6 }, (_, i) => `tracker.skill.g${i + 1}`),
+    ...Array.from({ length: 3 }, (_, i) => `tracker.skill.exec${i + 1}`),
+    "tracker.skill.opNote",
+    "tracker.skill.execNote",
+    "tracker.readme.sourceTitle",
+  ]) {
+    check((ui[key] ?? "").trim().length > 0, `[${locale}] Missing skill i18n key: ${key}.`);
+    check(!skillMd.includes(key), `[${locale}] SKILL.md leaked untranslated key ${key}.`);
+  }
+  const nonScoring = ui["tracker.skill.c4"]!.replaceAll("{version}", ASRA_INDUSTRY_PRACTICES_VERSION);
+  check(
+    skillMd.includes(nonScoring),
+    `[${locale}] SKILL.md must state the industry practice non-scoring / non-endorsement rule.`,
+  );
+  check(
+    doc.source.industryPracticeCatalogVersion === ASRA_INDUSTRY_PRACTICES_VERSION,
+    `[${locale}] actions.json source metadata must include industryPracticeCatalogVersion.`,
+  );
+  check(
+    files["README.md"]!.includes(ASRA_INDUSTRY_PRACTICES_VERSION) &&
+      files["README.md"]!.includes(ACTION_PACK_VERSION),
+    `[${locale}] README.md must summarise source versions.`,
+  );
+  const schema = JSON.parse(files["action-schema.json"]!);
+  check(
+    (schema.properties?.source?.required ?? []).includes("industryPracticeCatalogVersion"),
+    `[${locale}] action-schema.json must require industryPracticeCatalogVersion.`,
+  );
+}
+
+// 4b. Scoring / recommendation modules must not depend on export or skill logic.
+for (const file of [
+  "src/lib/asra-scoring.ts",
+  "src/lib/asra-recommendations.ts",
+  "src/lib/scoring.ts",
+  "src/lib/recommendations.ts",
+]) {
+  const source = readFileSync(new URL(`../${file}`, import.meta.url), "utf8");
+  check(
+    !/from\s+"\.\/asra-export"/.test(source),
+    `${file} must not import export/skill logic.`,
   );
 }
 
