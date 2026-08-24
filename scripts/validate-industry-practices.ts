@@ -24,10 +24,30 @@ check(
   /^\d{4}\.\d{2}$/.test(ASRA_INDUSTRY_PRACTICES_VERSION),
   `Invalid practice catalog version: ${ASRA_INDUSTRY_PRACTICES_VERSION}`,
 );
-check(
-  ASRA_INDUSTRY_PRACTICES.length === 11,
-  `Expected 11 industry practice entries; got ${ASRA_INDUSTRY_PRACTICES.length}.`,
+const EXPECTED_ENTRIES_BY_ORGANIZATION: Record<string, number> = {
+  Anthropic: 9,
+  "Google DeepMind": 2,
+  Microsoft: 9,
+};
+const EXPECTED_TOTAL_ENTRIES = Object.values(EXPECTED_ENTRIES_BY_ORGANIZATION).reduce(
+  (total, count) => total + count,
+  0,
 );
+
+check(
+  ASRA_INDUSTRY_PRACTICES.length === EXPECTED_TOTAL_ENTRIES,
+  `Expected ${EXPECTED_TOTAL_ENTRIES} industry practice entries; got ${ASRA_INDUSTRY_PRACTICES.length}.`,
+);
+
+for (const [organization, expected] of Object.entries(EXPECTED_ENTRIES_BY_ORGANIZATION)) {
+  const actual = ASRA_INDUSTRY_PRACTICES.filter((practice) =>
+    practice.organizations.includes(organization),
+  ).length;
+  check(
+    actual === expected,
+    `Expected ${expected} entries sourced from ${organization}; got ${actual}.`,
+  );
+}
 
 const seen = new Set<string>();
 for (const practice of ASRA_INDUSTRY_PRACTICES) {
@@ -49,8 +69,8 @@ for (const practice of ASRA_INDUSTRY_PRACTICES) {
   check(ISO_DATE.test(practice.sourceDate), `[${id}] Invalid source date.`);
   check(ISO_DATE.test(practice.lastReviewed), `[${id}] Invalid last-reviewed date.`);
   check(
-    practice.relatedDomains.length > 0 || practice.relatedRecommendationIds.length > 0,
-    `[${id}] At least one related ASRA domain or recommendation is required.`,
+    practice.relatedDomains.length > 0 && practice.relatedRecommendationIds.length > 0,
+    `[${id}] At least one related ASRA domain and recommendation are required.`,
   );
   for (const domain of practice.relatedDomains) {
     check(domainIds.has(domain), `[${id}] Unknown related domain: ${domain}`);
