@@ -51,6 +51,7 @@ export function FrameworkGroundingCompact() {
       <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{t("method.body")}</p>
       <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{t("method.genaiProfile")}</p>
       <FrameworkChips />
+      <LibraryLink />
       <p className="mt-3 text-xs text-muted-foreground">{t("method.disclaimer")}</p>
     </section>
   );
@@ -79,6 +80,7 @@ export function FrameworkGroundingFull() {
       <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{t("method.body")}</p>
       <p className="mt-2 max-w-3xl text-sm text-muted-foreground">{t("method.genaiProfile")}</p>
       <FrameworkChips />
+      <LibraryLink />
 
       <h3 className="mt-5 text-sm font-semibold">{t("method.how.title")}</h3>
       <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
