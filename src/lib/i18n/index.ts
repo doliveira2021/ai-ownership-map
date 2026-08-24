@@ -112,6 +112,8 @@ export type LocalizedContent = {
   kpi: (recommendationId: string, kpiId: string) => string;
   technologyCategory: (categoryId: string) => string;
   capability: (capabilityId: string) => { description: string; notes: string };
+  practice: (practiceId: string) => { title: string; summary: string; implication: string };
+  practiceCategory: (categoryId: string) => string;
 };
 
 export function localizedContent(current: Locale): LocalizedContent {
@@ -159,6 +161,17 @@ export function localizedContent(current: Locale): LocalizedContent {
     capability: (capabilityId) =>
       bundle.technology.capabilities[capabilityId] ??
       fallback.technology.capabilities[capabilityId] ?? { description: "", notes: "" },
+    practice: (practiceId) =>
+      bundle.practices.entries[practiceId] ??
+      fallback.practices.entries[practiceId] ?? {
+        title: practiceId,
+        summary: "",
+        implication: "",
+      },
+    practiceCategory: (categoryId) =>
+      (bundle.practices.categories as Record<string, string>)[categoryId] ??
+      (fallback.practices.categories as Record<string, string>)[categoryId] ??
+      categoryId,
   };
 }
 

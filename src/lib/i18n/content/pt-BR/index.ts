@@ -1,4 +1,5 @@
 import { ptBrActions } from "../../actions/pt-BR";
+import { ptBrPractices } from "../../practices/pt-BR";
 import type { ContentBundle, MaturitySix } from "../../types";
 import { maturity } from "./maturity";
 import { domains, questions } from "./questions";
@@ -13,6 +14,7 @@ const maturityLabels: MaturitySix = [
 ];
 
 export const ptBrContent: ContentBundle = {
+  practices: ptBrPractices,
   actionPacks: ptBrActions.actionPacks,
   technology: ptBrActions.technology,
   domains,
