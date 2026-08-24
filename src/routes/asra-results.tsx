@@ -26,17 +26,17 @@ import { useI18n } from "@/lib/i18n";
 export const Route = createFileRoute("/asra-results")({
   head: () => ({
     meta: [
-      { title: "ASRA Results | AI Security & Resilience" },
+      { title: "Results | ASRA — AI Security & Resilience Assessment" },
       {
         name: "description",
         content:
-          "AI Security Maturity, AI Exposure, AI Autonomy, Business Resilience and prioritized remediation roadmap.",
+          "ASRA results dashboard: maturity score, exposure, autonomy, business resilience, risk quadrant, recommendations and NOW/NEXT/SCALE roadmap.",
       },
-      { property: "og:title", content: "ASRA Results | AI Security & Resilience" },
+      { property: "og:title", content: "Results | ASRA — AI Security & Resilience Assessment" },
       {
         property: "og:description",
         content:
-          "Review AI security maturity, exposure, autonomy, resilience and a prioritized NOW / NEXT / SCALE roadmap.",
+          "ASRA results dashboard: maturity score, exposure, autonomy, business resilience, risk quadrant, recommendations and NOW/NEXT/SCALE roadmap.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

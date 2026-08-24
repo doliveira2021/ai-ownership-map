@@ -25,16 +25,17 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/results")({
   head: () => ({
     meta: [
-      { title: "AI Accountability Results & Executive Report" },
+      { title: "AI Accountability Results | ASRA" },
       {
         name: "description",
         content:
-          "AI security maturity score, accountability coverage indicator, ownership gaps, decision-right gaps, recommendations and a phased accountability roadmap.",
+          "ASRA accountability results: maturity score, coverage indicator, ownership gaps, decision-right gaps and a phased roadmap.",
       },
-      { property: "og:title", content: "AI Accountability Results & Executive Report" },
+      { property: "og:title", content: "AI Accountability Results | ASRA" },
       {
         property: "og:description",
-        content: "Maturity score, accountability coverage, ownership gaps and a phased roadmap.",
+        content:
+          "ASRA accountability results: maturity score, coverage indicator, ownership gaps, decision-right gaps and a phased roadmap.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

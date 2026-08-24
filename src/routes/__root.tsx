@@ -77,11 +77,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AI Security & Resilience Assessment (ASRA)" },
+      { title: "ASRA — AI Security & Resilience Assessment" },
       {
         name: "description",
         content:
-          "A vendor-agnostic maturity assessment for securing the AI-powered enterprise across governance, exposure, autonomy and business resilience.",
+          "Free, vendor-agnostic AI security maturity assessment. Score AI exposure, autonomy, governance and resilience, then get a prioritized remediation roadmap.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
