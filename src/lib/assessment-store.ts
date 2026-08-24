@@ -17,6 +17,12 @@ export type AssessmentState = {
   context: AssessmentContext;
   asraMode: "assessment" | "demo";
   activePilotScenario?: AsraPilotScenarioId | undefined;
+
+  /**
+   * Optional, local-only list of strategic technology platforms already in use.
+   * Never participates in scoring — it only tailors Action Pack technology guidance.
+   */
+  strategicPlatforms: string[];
 };
 
 const STORAGE_KEY = "ai-accountability-assessment-v1";
@@ -39,6 +45,7 @@ const emptyState: AssessmentState = {
   context: defaultAssessmentContext,
   asraMode: "assessment",
   activePilotScenario: undefined,
+  strategicPlatforms: [],
 };
 
 let state: AssessmentState = emptyState;
@@ -60,6 +67,7 @@ function load(): AssessmentState {
       context: { ...defaultAssessmentContext, ...parsed.context },
       asraAnswers: parsed.asraAnswers ?? {},
       asraMode: parsed.asraMode ?? "assessment",
+      strategicPlatforms: parsed.strategicPlatforms ?? [],
     };
   } catch {
     return emptyState;
@@ -127,6 +135,17 @@ export const assessmentActions = {
   setAsraAnswer(questionId: string, level: MaturityValue | null) {
     markAsRealAssessment();
     update({ asraAnswers: { ...state.asraAnswers, [questionId]: level } });
+  },
+  toggleStrategicPlatform(platform: string) {
+    const current = state.strategicPlatforms;
+    update({
+      strategicPlatforms: current.includes(platform)
+        ? current.filter((item) => item !== platform)
+        : [...current, platform],
+    });
+  },
+  clearStrategicPlatforms() {
+    update({ strategicPlatforms: [] });
   },
   setContext(next: Partial<AssessmentContext>) {
     markAsRealAssessment();

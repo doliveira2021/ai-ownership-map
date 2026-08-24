@@ -7,6 +7,7 @@ import { ASRA_MATURITY_DESCRIPTIONS } from "@/lib/asra-maturity-data";
 import { ASRA_PILOT_SCENARIOS } from "@/lib/asra-pilot-data";
 import { ASRA_DOMAINS } from "@/lib/asra-question-data";
 import { ASRA_RECOMMENDATION_TEMPLATES } from "@/lib/asra-recommendations";
+import { enActions } from "../actions/en";
 import type {
   ContentBundle,
   DomainContentDict,
@@ -74,6 +75,8 @@ const landing = {
 };
 
 export const enContent: ContentBundle = {
+  actionPacks: enActions.actionPacks,
+  technology: enActions.technology,
   domains,
   questions,
   maturity,

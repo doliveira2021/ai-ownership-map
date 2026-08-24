@@ -1,6 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, FileText, Info, Map, ShieldCheck } from "lucide-react";
+import { ArrowLeft, FileText, Info, Map as MapIcon, ShieldCheck } from "lucide-react";
 import { Shell, ScoreRing } from "@/components/shell";
+import {
+  ActionPackPanel,
+  ExportTrackerPanel,
+  NinetyDayPlan,
+  useResolvedActionPacks,
+} from "@/components/action-pack";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { validateAssessmentConfiguration } from "@/lib/asra-config";
@@ -44,6 +50,12 @@ function AsraResultsPage() {
   const scores = calculateAssessmentScores(state.asraAnswers, state.context);
   const recommendations = generateAsraRecommendations(state.asraAnswers, state.context);
   const roadmap = generateAsraRoadmap(state.asraAnswers, state.context);
+  const actionPacks = useResolvedActionPacks(
+    recommendations,
+    state.context,
+    state.strategicPlatforms,
+  );
+  const packById = new Map(actionPacks.map((pack) => [pack.recommendationId, pack]));
   const quadrant = riskQuadrant(scores.maturity, scores.exposure);
   const configValidation = validateAssessmentConfiguration();
   const topQuestionRisks = scores.questionScores.filter((score) => score.controlGap > 0).slice(0, 12);
@@ -339,6 +351,9 @@ function AsraResultsPage() {
                     </p>
                   </div>
                 </div>
+                {packById.has(recommendation.id) && (
+                  <ActionPackPanel pack={packById.get(recommendation.id)!} />
+                )}
               </article>
             );
           })}
@@ -350,7 +365,7 @@ function AsraResultsPage() {
 
       <section className="mt-10">
         <div className="flex items-center gap-2">
-          <Map className="size-4 text-primary" />
+          <MapIcon className="size-4 text-primary" />
           <p className="label-mono">{t("results.roadmap.eyebrow")}</p>
         </div>
         <h2 className="mt-1 text-xl font-semibold">{t("results.roadmap.title")}</h2>
@@ -378,6 +393,14 @@ function AsraResultsPage() {
           ))}
         </div>
       </section>
+
+      <NinetyDayPlan packs={actionPacks} />
+
+      <ExportTrackerPanel
+        packs={actionPacks}
+        recommendations={recommendations}
+        context={state.context}
+      />
 
       <div className="panel mt-10 p-5">
         <p className="label-mono">{t("results.method.eyebrow")}</p>

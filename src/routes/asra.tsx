@@ -7,6 +7,7 @@ import { QUESTION_CONFIG_BY_ID } from "@/lib/asra-config";
 import { ASRA_PILOT_SCENARIOS } from "@/lib/asra-pilot-data";
 import { ASRA_DOMAINS } from "@/lib/asra-question-data";
 import { isQuestionApplicable, type MaturityValue } from "@/lib/asra-scoring";
+import { STRATEGIC_PLATFORM_OPTIONS } from "@/lib/asra-technology-catalog";
 import { assessmentActions, useAssessment } from "@/lib/assessment-store";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -283,6 +284,49 @@ function AsraAssessmentPage() {
             value={state.context.usesGenAI}
             onChange={(usesGenAI) => assessmentActions.setContext({ usesGenAI })}
           />
+        </div>
+        <div className="mt-6 rounded-xl bg-muted/40 p-4">
+          <p className="label-mono">{t("asra.platforms.title")}</p>
+          <p className="mt-1 max-w-3xl text-xs text-muted-foreground">
+            {t("asra.platforms.lead")}
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {STRATEGIC_PLATFORM_OPTIONS.map((platform) => {
+              const selected = state.strategicPlatforms.includes(platform);
+              return (
+                <button
+                  key={platform}
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() => assessmentActions.toggleStrategicPlatform(platform)}
+                  className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+                    selected
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-border text-muted-foreground hover:border-primary/50"
+                  }`}
+                >
+                  {platform}
+                </button>
+              );
+            })}
+            <button
+              type="button"
+              aria-pressed={state.strategicPlatforms.includes("Other")}
+              onClick={() => assessmentActions.toggleStrategicPlatform("Other")}
+              className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+                state.strategicPlatforms.includes("Other")
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border text-muted-foreground hover:border-primary/50"
+              }`}
+            >
+              {t("asra.platforms.other")}
+            </button>
+          </div>
+          {state.strategicPlatforms.length > 0 && (
+            <p className="mt-2 font-mono text-[11px] text-muted-foreground">
+              {t("asra.platforms.count", { count: state.strategicPlatforms.length })}
+            </p>
+          )}
         </div>
       </section>
 
