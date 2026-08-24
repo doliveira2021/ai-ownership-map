@@ -9,17 +9,17 @@ import { useI18n } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "AI Accountability & Responsibility Assessment" },
+      { title: "ASRA — AI Security & Resilience Assessment" },
       {
         name: "description",
         content:
-          "Assess AI ownership, decision rights, agent sponsorship, residual risk acceptance and incident authority with a 0–5 maturity model and accountability coverage score.",
+          "Free, vendor-agnostic AI security maturity assessment. Score AI exposure, autonomy, governance and resilience, then get a prioritized remediation roadmap.",
       },
-      { property: "og:title", content: "AI Accountability & Responsibility Assessment" },
+      { property: "og:title", content: "ASRA — AI Security & Resilience Assessment" },
       {
         property: "og:description",
         content:
-          "Evaluate whether AI responsibilities are explicitly assigned, documented, auditable and maintained as AI systems evolve.",
+          "Free, vendor-agnostic AI security maturity assessment. Score AI exposure, autonomy, governance and resilience, then get a prioritized remediation roadmap.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

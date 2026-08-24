@@ -15,17 +15,17 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/asra")({
   head: () => ({
     meta: [
-      { title: "AI Security & Resilience Assessment" },
+      { title: "AI Security & Resilience Assessment | ASRA" },
       {
         name: "description",
         content:
-          "Vendor-agnostic AI security maturity assessment covering discovery, risk, governance, threat modeling, secure development, protection, validation, monitoring, incident response and continuous improvement.",
+          "ASRA assessment: score AI security maturity across discovery, risk, governance, threat modeling, secure development, protection and monitoring.",
       },
-      { property: "og:title", content: "AI Security & Resilience Assessment (ASRA)" },
+      { property: "og:title", content: "AI Security & Resilience Assessment | ASRA" },
       {
         property: "og:description",
         content:
-          "Score AI security maturity across ten domains with exposure, autonomy and business-resilience context.",
+          "ASRA assessment: score AI security maturity across discovery, risk, governance, threat modeling, secure development, protection and monitoring.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

@@ -19,16 +19,17 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/assessment")({
   head: () => ({
     meta: [
-      { title: "AI Accountability Assessment | Maturity Questionnaire" },
+      { title: "AI Accountability Assessment | ASRA" },
       {
         name: "description",
         content:
-          "Answer 0–5 maturity questions on AI ownership, agent sponsorship, autonomy approval, residual risk acceptance, incident authority and decision rights.",
+          "ASRA accountability assessment: score AI ownership, decision rights, agent sponsorship, residual risk acceptance and incident authority.",
       },
-      { property: "og:title", content: "AI Accountability Assessment" },
+      { property: "og:title", content: "AI Accountability Assessment | ASRA" },
       {
         property: "og:description",
-        content: "0–5 maturity questionnaire covering AI ownership, decision rights and agent sponsorship.",
+        content:
+          "ASRA accountability assessment: score AI ownership, decision rights, agent sponsorship, residual risk acceptance and incident authority.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
