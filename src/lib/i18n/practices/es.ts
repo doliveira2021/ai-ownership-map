@@ -10,6 +10,10 @@ export const esPractices: PracticesBundle = {
     "external-review": "Revisión externa / independiente",
     "high-stakes-inventory": "Inventario y rendición de cuentas de IA crítica",
     "safeguard-effectiveness": "Eficacia de las salvaguardas / mejora continua",
+  "shared-responsibility": "Responsabilidad compartida y límites de rendición de cuentas",
+    "lifecycle-security": "Ciclo de vida completo de seguridad de IA",
+    "agent-authority-boundaries": "Autoridad y límites de acción de los agentes",
+    "supply-chain-integrity": "Integridad de la cadena de suministro de IA y agentes",
   },
   entries: {
     "IP-RSP-001": {
@@ -88,6 +92,69 @@ export const esPractices: PracticesBundle = {
         "El framework público describe la evaluación de modelos frente a umbrales definidos y la aplicación de mitigaciones y salvaguardas más estrictas conforme cambia la capacidad del modelo.",
       implication:
         "Reevalúe los sistemas de IA cada vez que cambien el modelo, las herramientas, los privilegios o la autonomía, y ajuste las salvaguardas a la nueva capacidad en lugar de depender de revisiones en fechas fijas.",
+    },
+    "IP-MSFT-001": {
+      title: "Responsabilidad compartida sobre cómo se aplica la IA",
+      summary:
+        "La guía pública describe un modelo de responsabilidad compartida en el que la organización que usa IA sigue siendo responsable del acceso, los datos, los prompts y las decisiones de seguridad y cumplimiento, aun cuando el proveedor ofrezca protecciones a nivel de plataforma.",
+      implication:
+        "Documente la frontera de responsabilidad entre proveedor y empresa para cada sistema de IA crítico, incluyendo propiedad de negocio, aceptación del riesgo residual, responsabilidad ante incidentes y rendición de cuentas sobre el acceso a datos.",
+    },
+    "IP-MSFT-002": {
+      title: "Seguridad en todo el ciclo de vida de la IA",
+      summary:
+        "La guía pública describe una seguridad de IA que abarca identificar, proteger, detectar, responder, recuperar y gobernar, en lugar de detenerse en los controles preventivos.",
+      implication:
+        "Exija que todo sistema de IA crítico tenga cobertura de prevención, detección, respuesta, recuperación y gobierno, cada una con responsable designado y evidencia.",
+    },
+    "IP-MSFT-003": {
+      title: "Descubrir el uso de IA antes de intentar protegerlo",
+      summary:
+        "La guía pública describe obtener visibilidad de las aplicaciones de IA que la organización usa y construye como requisito previo para protegerlas, incluidas las capacidades de IA integradas en SaaS y los agentes.",
+      implication:
+        "Establezca un descubrimiento continuo de aplicaciones de IA, modelos, agentes, IA integrada en SaaS e identidades relacionadas antes de confiar en métricas de cobertura de controles.",
+    },
+    "IP-MSFT-004": {
+      title: "Mantener un AI Bill of Materials (AI BOM)",
+      summary:
+        "La guía pública describe mantener visibilidad sobre los componentes, datos y artefactos de IA de las aplicaciones, del código a la nube.",
+      implication:
+        "Para los sistemas de IA críticos, mantenga un AI BOM que cubra modelo y proveedor, librerías, instrucciones de sistema cuando corresponda, conjuntos de datos, almacenes vectoriales, agentes, herramientas y conectores, servidores MCP cuando existan, identidades, runtime y APIs externas.",
+    },
+    "IP-MSFT-005": {
+      title: "Mínima agencia, no solo mínimo privilegio",
+      summary:
+        "La guía pública describe restringir no solo a qué puede acceder un agente, sino qué puede hacer de forma autónoma, con aprobación humana para acciones de alto impacto.",
+      implication:
+        "Defina un envolvente de acción documentado para los agentes críticos: acciones permitidas, acciones que requieren aprobación, acciones prohibidas, límites de transacción o impacto y reglas de escalamiento.",
+    },
+    "IP-MSFT-006": {
+      title: "Gobernar la cadena de herramientas de los agentes",
+      summary:
+        "La guía pública describe tratar las herramientas de los agentes y sus descripciones o metadatos como dependencias de ejecución confiables cuyos cambios deben gobernarse.",
+      implication:
+        "Inventaríe las herramientas de agentes y dependencias MCP, asigne responsables y aplique control de cambios, revisión de integridad, límites de autorización, revocación y monitoreo cuando se agreguen o modifiquen capacidades de herramientas.",
+    },
+    "IP-MSFT-007": {
+      title: "Tratar los argumentos de herramientas generados por IA como entrada no confiable",
+      summary:
+        "La guía pública describe validar en la frontera de ejecución los argumentos de funciones y herramientas producidos por un modelo, en lugar de confiar en ellos por haber sido generados por un modelo.",
+      implication:
+        "Valide cada invocación de herramienta generada por IA con validación de esquema, listas de permitidos, restricciones de parámetros, reglas de negocio, autorización independiente y límites de transacción cuando corresponda.",
+    },
+    "IP-MSFT-008": {
+      title: "Circuit breakers y contención para agentes autónomos",
+      summary:
+        "La guía pública describe sistemas agénticos que soportan auditabilidad, control de acceso y capacidades de circuit breaker o contención.",
+      implication:
+        "Asegure que todo agente crítico soporte una contención probada: deshabilitar la identidad, revocar credenciales y accesos delegados, bloquear herramientas, detener el runtime o nuevas acciones, preservar logs y estado y permitir una recuperación controlada.",
+    },
+    "IP-MSFT-009": {
+      title: "Reevaluar cuando cambien la capacidad o la autonomía",
+      summary:
+        "La guía pública describe requisitos de seguridad y gobierno que evolucionan a lo largo del ciclo de vida a medida que los agentes ganan autonomía, acceso a datos, herramientas o capacidad.",
+      implication:
+        "Active una reevaluación cuando cambien de forma material el modelo, las herramientas, las dependencias MCP, los privilegios, el acceso a datos, la exposición externa, la autonomía o la criticidad de negocio.",
     },
   },
 };

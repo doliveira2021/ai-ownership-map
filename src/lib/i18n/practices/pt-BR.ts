@@ -10,6 +10,10 @@ export const ptBrPractices: PracticesBundle = {
     "external-review": "Revisão externa / independente",
     "high-stakes-inventory": "Inventário e responsabilização de IA crítica",
     "safeguard-effectiveness": "Eficácia das salvaguardas / melhoria contínua",
+  "shared-responsibility": "Responsabilidade compartilhada e limites de accountability",
+    "lifecycle-security": "Ciclo de vida completo de segurança de IA",
+    "agent-authority-boundaries": "Autoridade e limites de ação de agentes",
+    "supply-chain-integrity": "Integridade da cadeia de suprimentos de IA e agentes",
   },
   entries: {
     "IP-RSP-001": {
@@ -88,6 +92,69 @@ export const ptBrPractices: PracticesBundle = {
         "O framework público descreve a avaliação de modelos frente a limiares definidos e a aplicação de mitigações e salvaguardas mais fortes conforme a capacidade do modelo muda.",
       implication:
         "Reavalie os sistemas de IA sempre que modelo, ferramentas, privilégios ou autonomia mudarem e ajuste as salvaguardas à nova capacidade, em vez de depender de revisões em datas fixas.",
+    },
+    "IP-MSFT-001": {
+      title: "Responsabilidade compartilhada sobre como a IA é aplicada",
+      summary:
+        "A orientação pública descreve um modelo de responsabilidade compartilhada em que a organização que usa IA continua responsável por acesso, dados, prompts e decisões de segurança e conformidade, mesmo quando o provedor oferece proteções na plataforma.",
+      implication:
+        "Documente a fronteira de responsabilidade entre provedor e empresa para cada sistema de IA crítico, incluindo propriedade de negócio, aceitação de risco residual, responsabilidade em incidentes e accountability sobre acesso a dados.",
+    },
+    "IP-MSFT-002": {
+      title: "Segurança em todo o ciclo de vida da IA",
+      summary:
+        "A orientação pública descreve a segurança de IA cobrindo identificar, proteger, detectar, responder, recuperar e governar, em vez de parar nos controles preventivos.",
+      implication:
+        "Exija que todo sistema de IA crítico tenha cobertura de prevenção, detecção, resposta, recuperação e governança, cada uma com responsável nomeado e evidências.",
+    },
+    "IP-MSFT-003": {
+      title: "Descobrir o uso de IA antes de tentar protegê-lo",
+      summary:
+        "A orientação pública descreve obter visibilidade das aplicações de IA que a organização usa e desenvolve como pré-requisito para protegê-las, incluindo recursos de IA embarcados em SaaS e agentes.",
+      implication:
+        "Estabeleça descoberta contínua de aplicações de IA, modelos, agentes, IA embarcada em SaaS e identidades relacionadas antes de confiar em métricas de cobertura de controles.",
+    },
+    "IP-MSFT-004": {
+      title: "Manter um AI Bill of Materials (AI BOM)",
+      summary:
+        "A orientação pública descreve manter visibilidade sobre componentes, dados e artefatos de IA das aplicações, do código à nuvem.",
+      implication:
+        "Para sistemas de IA críticos, mantenha um AI BOM cobrindo modelo e provedor, bibliotecas, instruções de sistema quando aplicável, conjuntos de dados, bases vetoriais, agentes, ferramentas e conectores, servidores MCP quando existirem, identidades, runtime e APIs externas.",
+    },
+    "IP-MSFT-005": {
+      title: "Mínima agência, não apenas mínimo privilégio",
+      summary:
+        "A orientação pública descreve restringir não apenas o que um agente pode acessar, mas o que ele pode fazer de forma autônoma, com aprovação humana para ações de alto impacto.",
+      implication:
+        "Defina um envelope de ação documentado para agentes críticos: ações permitidas, ações que exigem aprovação, ações proibidas, limites de transação ou impacto e regras de escalonamento.",
+    },
+    "IP-MSFT-006": {
+      title: "Governar a cadeia de ferramentas dos agentes",
+      summary:
+        "A orientação pública descreve tratar as ferramentas dos agentes e suas descrições ou metadados como dependências confiáveis de execução, cujas mudanças precisam ser governadas.",
+      implication:
+        "Inventarie ferramentas de agentes e dependências MCP, atribua responsáveis e aplique controle de mudanças, revisão de integridade, limites de autorização, revogação e monitoramento quando capacidades de ferramentas forem adicionadas ou alteradas.",
+    },
+    "IP-MSFT-007": {
+      title: "Tratar argumentos de ferramentas gerados por IA como entrada não confiável",
+      summary:
+        "A orientação pública descreve validar os argumentos de funções e ferramentas produzidos por um modelo na fronteira de execução, em vez de confiar neles apenas porque foram gerados por um modelo.",
+      implication:
+        "Valide toda invocação de ferramenta gerada por IA com validação de esquema, listas de permissão, restrições de parâmetros, regras de negócio, autorização independente e limites de transação quando aplicável.",
+    },
+    "IP-MSFT-008": {
+      title: "Circuit breakers e contenção para agentes autônomos",
+      summary:
+        "A orientação pública descreve sistemas agênticos que suportam auditabilidade, controle de acesso e capacidades de circuit breaker ou contenção.",
+      implication:
+        "Garanta que todo agente crítico suporte contenção testada: desabilitar a identidade, revogar credenciais e acessos delegados, bloquear ferramentas, parar o runtime ou novas ações, preservar logs e estado e permitir recuperação controlada.",
+    },
+    "IP-MSFT-009": {
+      title: "Reavaliar quando capacidade ou autonomia mudar",
+      summary:
+        "A orientação pública descreve requisitos de segurança e governança que evoluem ao longo do ciclo de vida à medida que os agentes ganham autonomia, acesso a dados, ferramentas ou capacidade.",
+      implication:
+        "Acione uma reavaliação quando houver mudança material em modelo, ferramentas, dependências MCP, privilégios, acesso a dados, exposição externa, autonomia ou criticidade de negócio.",
     },
   },
 };
