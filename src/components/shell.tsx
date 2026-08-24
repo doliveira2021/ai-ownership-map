@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { FlaskConical, ShieldCheck } from "lucide-react";
+import { FlaskConical, Linkedin, ShieldCheck } from "lucide-react";
 import { useAssessment } from "@/lib/assessment-store";
 import { LOCALES, LOCALE_LABELS, LOCALE_NAMES, useI18n, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
