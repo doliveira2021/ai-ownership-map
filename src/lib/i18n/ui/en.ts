@@ -334,6 +334,66 @@ export const enUi = {
     "A comparison of actual KPI/KRI values against their targets.",
   "tracker.skill.o5":
     "Stalled recommendations and the next best action for each.",
+  "tracker.skill.contextTitle":
+    "What the exported ASRA results contain",
+  "tracker.skill.c1":
+    "Assessment outputs include maturity by domain plus exposure, autonomy and resilience context for the assessed scope.",
+  "tracker.skill.c2":
+    "Recommendations are already prioritized by ASRA. Do not re-rank them unless the user explicitly asks for an override, and always preserve the original priority values and IDs.",
+  "tracker.skill.c3":
+    "Action Packs translate each recommendation into 7d/30d/60d/90d execution steps with owner roles, dependencies, evidence requirements and KPIs/KRIs.",
+  "tracker.skill.c4":
+    "Industry Practice References (catalog {version}) are supporting context only. They may explain or enrich an action, but must never change scores, priorities or recommendation triggers, and never imply endorsement, certification or validation by Microsoft, Anthropic, Google DeepMind or any other provider.",
+  "tracker.skill.c5":
+    "Technology Options are implementation examples only: capability first, category second, provider examples non-exhaustive and non-endorsing.",
+  "tracker.skill.c6":
+    "Agentic-security concepts represented in ASRA include least agency, AI and agent supply-chain governance, validation of AI-generated tool arguments, circuit breakers and containment, AI BOM/inventory, shared responsibility, and reassessment when capability or autonomy materially changes. Use these concepts only where they are already relevant to an exported action; never invent new assessment findings.",
+  "tracker.skill.c7":
+    "Every critical AI or agent action must preserve accountable ownership, evidence requirements and a review cadence.",
+  "tracker.skill.opTitle":
+    "Operating model",
+  "tracker.skill.opNote":
+    "You start from the exported ASRA results and execution plan. You never rerun or recompute the assessment.",
+  "tracker.skill.op1":
+    "Assessment — ASRA scored maturity, exposure, autonomy and resilience for the assessed scope. Treat these values as fixed inputs.",
+  "tracker.skill.op2":
+    "Executive Interpretation — explain what the findings mean in business risk terms, without changing them.",
+  "tracker.skill.op3":
+    "Leadership Direction — connect the prioritized recommendations to decisions leadership must make: ownership, funding, sequencing and risk acceptance.",
+  "tracker.skill.op4":
+    "Action Packs — the 7d/30d/60d/90d tasks, owners, dependencies, evidence and KPIs/KRIs exported for each recommendation.",
+  "tracker.skill.op5":
+    "Local Execution & Weekly Review — maintain status, blockers, dates and evidence locally, and run the weekly review cadence.",
+  "tracker.skill.op6":
+    "Measurement & Evidence — track KPI/KRI baseline, target and current values and keep evidence references current.",
+  "tracker.skill.groundTitle":
+    "Grounding and non-hallucination rules",
+  "tracker.skill.g1":
+    "Never invent findings, scores, evidence, owners, dates or completion status.",
+  "tracker.skill.g2":
+    "Always distinguish assessment-derived facts from local updates added by the user.",
+  "tracker.skill.g3":
+    "Never claim compliance, certification or audit readiness.",
+  "tracker.skill.g4":
+    "Never claim that a provider satisfies a recommendation merely because it appears in Technology Options or Industry Practice References.",
+  "tracker.skill.g5":
+    "Ask the user for missing local execution facts instead of guessing them.",
+  "tracker.skill.g6":
+    "Treat Accepted Risk and Deferred as explicit governance decisions, never as successful remediation.",
+  "tracker.skill.execTitle":
+    "Suggested executive outputs (on request only)",
+  "tracker.skill.execNote":
+    "ASRA does not generate these documents. You may produce them locally on request from the exported data.",
+  "tracker.skill.exec1":
+    "Board Risk Brief — a very high-level, natural-language summary of the main findings and the associated business risks, written for Board and CEO audiences.",
+  "tracker.skill.exec2":
+    "Executive Action Brief — a leadership-oriented summary connecting findings and risks to recommended direction, priorities, owner roles and the 90-day focus, written for CISO, CIO, CTO and AI leaders.",
+  "tracker.skill.exec3":
+    "Ground both documents deterministically in the exported findings and recommendations, invent no new risks or priorities, and clearly label any user-supplied local updates.",
+  "tracker.readme.sourceTitle":
+    "Source versions",
+  "tracker.weekly.title":
+
   "tracker.weekly.title":
     "Weekly review",
   "tracker.weekly.s1":
