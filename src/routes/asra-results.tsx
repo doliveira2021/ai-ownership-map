@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, FileText, Info, Map as MapIcon, ShieldCheck } from "lucide-react";
 import { Shell, ScoreRing } from "@/components/shell";
@@ -7,6 +8,7 @@ import {
   NinetyDayPlan,
   useResolvedActionPacks,
 } from "@/components/action-pack";
+import { FrameworkAlignmentHeatmap } from "@/components/framework-alignment";
 import { FrameworkGroundingFull } from "@/components/framework-grounding";
 import { FrameworkLink } from "@/components/framework-link";
 import { IndustryPracticesSection } from "@/components/industry-practices";
@@ -49,6 +51,7 @@ export const Route = createFileRoute("/asra-results")({
 
 function AsraResultsPage() {
   const state = useAssessment();
+  const [view, setView] = useState<"domains" | "alignment">("domains");
   const { t, content } = useI18n();
   const scores = calculateAssessmentScores(state.asraAnswers, state.context);
   const recommendations = generateAsraRecommendations(state.asraAnswers, state.context);
