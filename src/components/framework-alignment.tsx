@@ -9,10 +9,10 @@ import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const BAND_CLASS: Record<string, string> = {
-  low: "bg-destructive/15 text-destructive-foreground",
-  partial: "bg-accent/40 text-foreground",
-  moderate: "bg-primary/20 text-foreground",
-  strong: "bg-primary/45 text-foreground",
+  low: "bg-destructive/25 text-foreground",
+  partial: "bg-accent/70 text-foreground",
+  moderate: "bg-primary/25 text-foreground",
+  strong: "bg-primary/50 text-foreground",
 };
 
 const BANDS = ["low", "partial", "moderate", "strong"] as const;
