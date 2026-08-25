@@ -116,6 +116,34 @@ export const esUi: Record<UiKey, string> = {
   "results.domains.answered":
     "{answered} de {total} preguntas aplicables respondidas · haga clic para inspeccionar los factores",
   "results.domains.noGaps": "No hay brechas de control evaluadas en este dominio.",
+  "results.view.label": "Vista",
+  "results.view.domains": "Madurez por dominio",
+  "results.view.alignment": "Alineación con marcos",
+  "results.alignment.eyebrow": "Mapa de calor de alineación con marcos",
+  "results.alignment.title": "Alineación estimada con los marcos en los que se fundamenta ASRA",
+  "results.alignment.lead":
+    "Estimación direccional derivada de las preguntas respondidas y de la trazabilidad de marcos ya existente en ASRA. No es una auditoría, certificación, evaluación de conformidad ni declaración de cumplimiento.",
+  "results.alignment.frameworkColumn": "Marco de referencia",
+  "results.alignment.overallColumn": "Alineación estimada",
+  "results.alignment.structuralOnly": "referencia estructural — no puntuada",
+  "results.alignment.notScored": "No puntuado",
+  "results.alignment.noData": "Sin preguntas mapeadas respondidas",
+  "results.alignment.cellTitle":
+    "{framework} · {domain}: estimación de {value}% a partir de {questions} pregunta(s) mapeada(s) respondida(s)",
+  "results.alignment.legend": "Alineación estimada:",
+  "results.alignment.band.low": "Baja (0–29)",
+  "results.alignment.band.partial": "Parcial (30–54)",
+  "results.alignment.band.moderate": "Moderada (55–79)",
+  "results.alignment.band.strong": "Fuerte (80–100)",
+  "results.alignment.methodology.summary": "Cómo se calcula esta estimación",
+  "results.alignment.methodology.body":
+    "Para cada marco, ASRA toma las preguntas aplicables que usted respondió y que están mapeadas a ese marco, convierte cada respuesta en un porcentaje normalizado de madurez y las promedia usando los pesos de pregunta ya existentes. Las celdas por dominio aplican el mismo cálculo restringido a ese dominio.",
+  "results.alignment.methodology.confidence":
+    "La confianza del mapeo ajusta únicamente la contribución de la pregunta a la estimación: los mapeos directos cuentan por completo, los temáticos parcialmente y los candidatos en menor medida. La puntuación de la evaluación, las recomendaciones y la hoja de ruta no se ven afectadas.",
+  "results.alignment.methodology.structural":
+    "Los marcos usados solo como referencia estructural no tienen mapeo por pregunta, por lo que se muestran como contexto y nunca se puntúan. Las celdas sin preguntas mapeadas respondidas se muestran vacías, no como cero.",
+  "results.alignment.disclaimer":
+    "ASRA es independiente y no está afiliada, respaldada ni certificada por ninguno de estos marcos ni por sus organizaciones emisoras.",
   "results.priorityShort": "Prioridad {score}",
   "results.currentMaturity": "Madurez actual: {level} — {label}",
   "results.drill.eyebrow": "Análisis detallado de riesgo",
