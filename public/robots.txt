@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://asra-ai-security-resilience.lovable.app/sitemap.xml
+Sitemap: https://aisecurityresilience.org/sitemap.xml
