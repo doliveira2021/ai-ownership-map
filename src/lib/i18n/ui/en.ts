@@ -117,6 +117,34 @@ export const enUi = {
   "results.domains.answered":
     "{answered} of {total} applicable questions answered · click to inspect drivers",
   "results.domains.noGaps": "No assessed control gaps in this domain.",
+  "results.view.label": "View",
+  "results.view.domains": "Domain maturity",
+  "results.view.alignment": "Framework alignment",
+  "results.alignment.eyebrow": "Framework alignment heatmap",
+  "results.alignment.title": "Estimated alignment with the frameworks ASRA is grounded in",
+  "results.alignment.lead":
+    "Directional estimate derived from your answered questions and ASRA's existing framework traceability. It is not an audit, certification, conformity assessment or compliance statement.",
+  "results.alignment.frameworkColumn": "Framework",
+  "results.alignment.overallColumn": "Estimated alignment",
+  "results.alignment.structuralOnly": "structural reference — not scored",
+  "results.alignment.notScored": "Not scored",
+  "results.alignment.noData": "No answered mapped questions",
+  "results.alignment.cellTitle":
+    "{framework} · {domain}: estimated {value}% from {questions} mapped answered question(s)",
+  "results.alignment.legend": "Estimated alignment:",
+  "results.alignment.band.low": "Low (0–29)",
+  "results.alignment.band.partial": "Partial (30–54)",
+  "results.alignment.band.moderate": "Moderate (55–79)",
+  "results.alignment.band.strong": "Strong (80–100)",
+  "results.alignment.methodology.summary": "How this estimate is calculated",
+  "results.alignment.methodology.body":
+    "For each framework, ASRA takes the applicable questions you answered that are mapped to that framework, converts each answer to a normalized maturity percentage, and averages them using the existing question weights. Domain cells apply the same calculation restricted to that domain.",
+  "results.alignment.methodology.confidence":
+    "Mapping confidence adjusts a question's contribution to the estimate only: direct mappings count in full, thematic mappings count partially, and candidate mappings count least. Assessment scoring, recommendations and the roadmap are unaffected.",
+  "results.alignment.methodology.structural":
+    "Frameworks used only as structural references have no per-question mapping, so they are shown for context and never scored. Cells with no answered mapped question are shown as empty rather than as zero.",
+  "results.alignment.disclaimer":
+    "ASRA is independent and not affiliated with, endorsed by, or certified against any of these frameworks or their issuing organizations.",
   "results.priorityShort": "Priority {score}",
   "results.currentMaturity": "Current maturity: {level} — {label}",
   "results.drill.eyebrow": "Risk drill-down",

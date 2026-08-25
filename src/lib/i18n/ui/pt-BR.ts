@@ -116,6 +116,34 @@ export const ptBrUi: Record<UiKey, string> = {
   "results.domains.answered":
     "{answered} de {total} perguntas aplicáveis respondidas · clique para inspecionar os fatores",
   "results.domains.noGaps": "Nenhuma lacuna de controle avaliada neste domínio.",
+  "results.view.label": "Visualização",
+  "results.view.domains": "Maturidade por domínio",
+  "results.view.alignment": "Alinhamento com frameworks",
+  "results.alignment.eyebrow": "Mapa de calor de alinhamento com frameworks",
+  "results.alignment.title": "Alinhamento estimado com os frameworks que fundamentam o ASRA",
+  "results.alignment.lead":
+    "Estimativa direcional derivada das perguntas respondidas e da rastreabilidade de frameworks já existente no ASRA. Não é auditoria, certificação, avaliação de conformidade nem declaração de compliance.",
+  "results.alignment.frameworkColumn": "Framework",
+  "results.alignment.overallColumn": "Alinhamento estimado",
+  "results.alignment.structuralOnly": "referência estrutural — não pontuada",
+  "results.alignment.notScored": "Não pontuado",
+  "results.alignment.noData": "Nenhuma pergunta mapeada respondida",
+  "results.alignment.cellTitle":
+    "{framework} · {domain}: estimativa de {value}% a partir de {questions} pergunta(s) mapeada(s) respondida(s)",
+  "results.alignment.legend": "Alinhamento estimado:",
+  "results.alignment.band.low": "Baixo (0–29)",
+  "results.alignment.band.partial": "Parcial (30–54)",
+  "results.alignment.band.moderate": "Moderado (55–79)",
+  "results.alignment.band.strong": "Forte (80–100)",
+  "results.alignment.methodology.summary": "Como esta estimativa é calculada",
+  "results.alignment.methodology.body":
+    "Para cada framework, o ASRA considera as perguntas aplicáveis que você respondeu e que estão mapeadas para aquele framework, converte cada resposta em um percentual normalizado de maturidade e faz a média usando os pesos de pergunta já existentes. As células por domínio aplicam o mesmo cálculo restrito àquele domínio.",
+  "results.alignment.methodology.confidence":
+    "A confiança do mapeamento ajusta apenas a contribuição da pergunta para a estimativa: mapeamentos diretos contam integralmente, temáticos contam parcialmente e candidatos contam menos. A pontuação da avaliação, as recomendações e o roadmap não são afetados.",
+  "results.alignment.methodology.structural":
+    "Frameworks usados apenas como referência estrutural não possuem mapeamento por pergunta; por isso são exibidos como contexto e nunca pontuados. Células sem pergunta mapeada respondida aparecem vazias, e não como zero.",
+  "results.alignment.disclaimer":
+    "O ASRA é independente e não é afiliado, endossado nem certificado por nenhum desses frameworks ou suas organizações emissoras.",
   "results.priorityShort": "Prioridade {score}",
   "results.currentMaturity": "Maturidade atual: {level} — {label}",
   "results.drill.eyebrow": "Detalhamento de risco",
