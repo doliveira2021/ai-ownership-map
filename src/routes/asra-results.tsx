@@ -170,8 +170,43 @@ function AsraResultsPage() {
       </details>
 
       <section className="mt-10">
-        <p className="label-mono">{t("results.domains.eyebrow")}</p>
-        <h2 className="mt-1 text-xl font-semibold">{t("results.domains.title")}</h2>
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="label-mono">
+              {view === "domains" ? t("results.domains.eyebrow") : t("results.alignment.eyebrow")}
+            </p>
+            <h2 className="mt-1 text-xl font-semibold">
+              {view === "domains" ? t("results.domains.title") : t("results.alignment.title")}
+            </h2>
+          </div>
+          <div
+            role="tablist"
+            aria-label={t("results.view.label")}
+            className="flex gap-1 rounded-full border border-border p-1"
+          >
+            {(["domains", "alignment"] as const).map((option) => (
+              <button
+                key={option}
+                type="button"
+                role="tab"
+                aria-selected={view === option}
+                onClick={() => setView(option)}
+                className={
+                  view === option
+                    ? "rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground"
+                    : "rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
+                }
+              >
+                {option === "domains" ? t("results.view.domains") : t("results.view.alignment")}
+              </button>
+            ))}
+          </div>
+        </div>
+        {view === "alignment" ? (
+          <div className="mt-5">
+            <FrameworkAlignmentHeatmap answers={state.asraAnswers} context={state.context} />
+          </div>
+        ) : (
         <div className="mt-5 grid gap-3 md:grid-cols-2">
           {scores.domainScores.map((domain) => {
             const domainRisks = scores.questionScores
