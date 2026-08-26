@@ -194,8 +194,10 @@ export function localizedContent(current: Locale): LocalizedContent {
 }
 
 export function useLocale(): Locale {
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const ssrLocale = useContext(SsrLocaleContext);
+  return useSyncExternalStore(subscribe, getSnapshot, () => ssrLocale);
 }
+
 
 export function useI18n() {
   const current = useLocale();
