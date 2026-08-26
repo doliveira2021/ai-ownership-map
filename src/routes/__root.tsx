@@ -10,6 +10,10 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { LocaleProvider } from "../lib/i18n";
+import { readLocaleFromCookieString } from "../lib/i18n/locale-cookie";
+import { HTML_LANG, type Locale } from "../lib/i18n/types";
+import { getRequestLocale } from "../lib/locale.functions";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -73,6 +77,14 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  // Resolve the visitor's locale before the first render so SSR emits the
+  // selected language instead of always shipping English HTML.
+  beforeLoad: async (): Promise<{ locale: Locale }> => {
+    if (typeof document !== "undefined") {
+      return { locale: readLocaleFromCookieString(document.cookie) ?? "en" };
+    }
+    return { locale: await getRequestLocale() };
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -112,8 +124,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const locale = useRootLocale();
   return (
-    <html lang="en">
+    <html lang={HTML_LANG[locale]}>
       <head>
         <HeadContent />
       </head>
@@ -125,13 +138,23 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function useRootLocale(): Locale {
+  try {
+    return Route.useRouteContext().locale ?? "en";
+  } catch {
+    return "en";
+  }
+}
+
 function RootComponent() {
-  const { queryClient } = Route.useRouteContext();
+  const { queryClient, locale } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <LocaleProvider locale={locale ?? "en"}>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </LocaleProvider>
     </QueryClientProvider>
   );
 }
