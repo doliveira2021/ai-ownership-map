@@ -3,7 +3,8 @@ import { ASRA_PILOT_SCENARIOS } from "../src/lib/asra-pilot-data";
 import { ASRA_QUESTIONS } from "../src/lib/asra-question-data";
 import { ASRA_RECOMMENDATION_TEMPLATES } from "../src/lib/asra-recommendations";
 import { ASRA_DOMAINS } from "../src/lib/asra-question-data";
-import { LOCALE_CONTENT, LOCALE_UI } from "../src/lib/i18n";
+import { LOCALE_CONTENT, LOCALE_UI, localizedContent } from "../src/lib/i18n";
+import { readLocaleFromCookieString, serializeLocaleCookie } from "../src/lib/i18n/locale-cookie";
 import { enContent } from "../src/lib/i18n/content/en";
 import { enUi } from "../src/lib/i18n/ui/en";
 import { LOCALES, type Locale } from "../src/lib/i18n/types";
@@ -261,7 +262,114 @@ for (const locale of LOCALES as readonly Locale[]) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Regression guard: translated narrative copy must not be identical to English
+// and the locale lookup must resolve the selected bundle (not the EN fallback).
+// ---------------------------------------------------------------------------
+
+/** Canonical technical terms / acronyms that legitimately stay identical across locales. */
+const CANONICAL_IDENTICAL_UI_KEYS = new Set([
+  "demo.badgeShort",
+  "asra.eyebrow",
+  "asra.na",
+  "asra.no",
+  "results.alignment.frameworkColumn",
+  "results.roadmap.eyebrow",
+  "results.roadmap.title",
+  "pack.eyebrow",
+  "pack.kpis",
+  "footer.author.name",
+]);
+
+for (const locale of LOCALES as readonly Locale[]) {
+  if (locale === "en") continue;
+  const content = LOCALE_CONTENT[locale];
+  const ui = LOCALE_UI[locale] as Record<string, string>;
+  const localized = localizedContent(locale);
+
+  for (const key of uiKeys) {
+    if (CANONICAL_IDENTICAL_UI_KEYS.has(key)) continue;
+    check(
+      ui[key] !== (enUi as Record<string, string>)[key],
+      `[${locale}] UI key ${key} is identical to English; add a real translation or allowlist it.`,
+    );
+  }
+
+  for (const id of questionIds) {
+    check(
+      content.questions[id]?.title !== enContent.questions[id]?.title &&
+        content.questions[id]?.prompt !== enContent.questions[id]?.prompt,
+      `[${locale}] Question ${id} text is identical to English.`,
+    );
+    const descriptions = content.maturity[id] ?? [];
+    const enDescriptions = enContent.maturity[id] ?? [];
+    descriptions.forEach((text, index) => {
+      check(
+        text !== enDescriptions[index],
+        `[${locale}] Maturity description ${id}[${index}] is identical to English.`,
+      );
+    });
+
+    // Locale routing must return the locale bundle, not the English fallback.
+    check(
+      localized.question(id).title === content.questions[id]?.title,
+      `[${locale}] localizedContent() did not resolve question ${id} from the ${locale} bundle.`,
+    );
+    check(
+      localized.maturityDescriptions(id)[0] === descriptions[0],
+      `[${locale}] localizedContent() did not resolve maturity ${id} from the ${locale} bundle.`,
+    );
+  }
+
+  for (const id of domainIds) {
+    check(
+      content.domains[id]?.name !== enContent.domains[id]?.name &&
+        content.domains[id]?.intent !== enContent.domains[id]?.intent,
+      `[${locale}] Domain ${id} copy is identical to English.`,
+    );
+    check(
+      localized.domain(id).name === content.domains[id]?.name,
+      `[${locale}] localizedContent() did not resolve domain ${id} from the ${locale} bundle.`,
+    );
+  }
+
+  for (const id of scenarioIds) {
+    check(
+      content.scenarios[id]?.description !== enContent.scenarios[id]?.description,
+      `[${locale}] Pilot scenario ${id} description is identical to English.`,
+    );
+    check(
+      localized.scenario(id).description === content.scenarios[id]?.description,
+      `[${locale}] localizedContent() did not resolve scenario ${id} from the ${locale} bundle.`,
+    );
+  }
+
+  // Answer option labels (maturity scale) must be localized and complete.
+  content.maturityLabels.forEach((label, index) => {
+    check(
+      label !== enContent.maturityLabels[index],
+      `[${locale}] Maturity label ${index} is identical to English.`,
+    );
+    check(
+      localized.maturityLabel(index) === label,
+      `[${locale}] localizedContent() did not resolve maturity label ${index}.`,
+    );
+  });
+}
+
+// The locale cookie helper backs SSR locale resolution; a regression here means
+// the server would render English regardless of the visitor's choice.
+for (const locale of LOCALES as readonly Locale[]) {
+  check(
+    readLocaleFromCookieString(`foo=bar; ${serializeLocaleCookie(locale).split(";")[0]}`) === locale,
+    `Locale cookie round-trip failed for ${locale}.`,
+  );
+}
+check(readLocaleFromCookieString("foo=bar") === null, "Unknown cookie must not resolve a locale.");
+check(readLocaleFromCookieString("asra-locale=klingon") === null, "Invalid locale must be rejected.");
+
 if (errors.length) {
+
   console.error(`i18n validation failed with ${errors.length} issue(s):`);
   for (const error of errors.slice(0, 50)) console.error(` - ${error}`);
   process.exit(1);

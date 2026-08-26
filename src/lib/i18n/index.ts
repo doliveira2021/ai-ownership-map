@@ -1,9 +1,15 @@
-import { useSyncExternalStore } from "react";
+import { createContext, createElement, useContext, useSyncExternalStore, type ReactNode } from "react";
 import type { AsraDomainId } from "@/lib/asra-config";
 import type { AsraPilotScenarioId } from "@/lib/asra-pilot-data";
 import { enContent } from "./content/en";
 import { esContent } from "./content/es";
 import { ptBrContent } from "./content/pt-BR";
+import {
+  LOCALE_STORAGE_KEY,
+  isLocale,
+  readLocaleFromCookieString,
+  serializeLocaleCookie,
+} from "./locale-cookie";
 import { enUi, type UiKey } from "./ui/en";
 import { esUi } from "./ui/es";
 import { ptBrUi } from "./ui/pt-BR";
@@ -33,25 +39,39 @@ const UI: Record<Locale, Record<UiKey, string>> = {
   es: esUi,
 };
 
-const STORAGE_KEY = "asra-locale";
+const STORAGE_KEY = LOCALE_STORAGE_KEY;
 
-function isLocale(value: unknown): value is Locale {
-  return typeof value === "string" && (LOCALES as readonly string[]).includes(value);
+/**
+ * SSR-provided locale (read from the request cookie in the root route). The
+ * client store must resolve the same value during hydration, so it reads the
+ * cookie first and only then falls back to localStorage.
+ */
+const SsrLocaleContext = createContext<Locale>("en");
+
+export function LocaleProvider({ locale: value, children }: { locale: Locale; children: ReactNode }) {
+  return createElement(SsrLocaleContext.Provider, { value }, children);
 }
 
 let locale: Locale = "en";
 let hydrated = false;
 const listeners = new Set<() => void>();
 
-function ensureHydrated() {
-  if (hydrated || typeof window === "undefined") return;
-  hydrated = true;
+function detectClientLocale(): Locale {
+  const fromCookie = readLocaleFromCookieString(document.cookie);
+  if (fromCookie) return fromCookie;
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (isLocale(stored)) locale = stored;
+    if (isLocale(stored)) return stored;
   } catch {
     /* ignore */
   }
+  return "en";
+}
+
+function ensureHydrated() {
+  if (hydrated || typeof window === "undefined") return;
+  hydrated = true;
+  locale = detectClientLocale();
   document.documentElement.lang = HTML_LANG[locale];
 }
 
@@ -66,10 +86,6 @@ function getSnapshot(): Locale {
   return locale;
 }
 
-function getServerSnapshot(): Locale {
-  return "en";
-}
-
 export function setLocale(next: Locale) {
   locale = next;
   try {
@@ -78,10 +94,12 @@ export function setLocale(next: Locale) {
     /* ignore */
   }
   if (typeof document !== "undefined") {
+    document.cookie = serializeLocaleCookie(next);
     document.documentElement.lang = HTML_LANG[next];
   }
   listeners.forEach((listener) => listener());
 }
+
 
 function interpolate(template: string, vars?: Record<string, string | number>) {
   if (!vars) return template;
@@ -176,8 +194,10 @@ export function localizedContent(current: Locale): LocalizedContent {
 }
 
 export function useLocale(): Locale {
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const ssrLocale = useContext(SsrLocaleContext);
+  return useSyncExternalStore(subscribe, getSnapshot, () => ssrLocale);
 }
+
 
 export function useI18n() {
   const current = useLocale();
