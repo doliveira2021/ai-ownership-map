@@ -1,0 +1,54 @@
+name: Methodology or framework improvement
+description: Propose a change to ASRA methodology, questions, scoring, or framework mappings
+title: "[Methodology] "
+labels:
+  - methodology
+body:
+  - type: textarea
+    id: gap
+    attributes:
+      label: Gap or concern
+      description: What is missing, inaccurate, ambiguous, or insufficiently evidenced?
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed change
+      description: Describe the specific change you recommend.
+    validations:
+      required: true
+  - type: textarea
+    id: domains
+    attributes:
+      label: Affected ASRA domain(s)
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Authoritative sources
+      description: Link to the relevant NIST, ISO, CSA, MITRE, OWASP or other authoritative source.
+    validations:
+      required: true
+  - type: dropdown
+    id: mapping
+    attributes:
+      label: Type of change
+      options:
+        - Per-question framework mapping
+        - Structural / supporting reference
+        - Assessment question
+        - Scoring / weighting
+        - Recommendation / Action Pack
+        - Threat / control coverage
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: scoring
+    attributes:
+      label: Scoring impact
+      description: Explain whether this should affect core score, framework alignment, recommendation priority, or no scoring at all.
+    validations:
+      required: true
