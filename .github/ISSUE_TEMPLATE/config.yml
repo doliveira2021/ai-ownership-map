@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: ASRA website
+    url: https://www.aisecurityresilience.org
+    about: Use the public ASRA assessment and review the project before filing an issue.
