@@ -1,0 +1,50 @@
+name: Feature request
+description: Propose an improvement to ASRA
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What user or security problem should ASRA address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement
+      description: Describe the desired behavior or capability.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Assessment methodology
+        - Questions
+        - Scoring
+        - Framework alignment
+        - Results / reporting
+        - Action Packs
+        - Local Action Tracker
+        - Industry Practice References
+        - Framework Library
+        - Translation / localization
+        - Accessibility / UI
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence or references
+      description: Add authoritative standards, frameworks, research or public sources where applicable.
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected impact
+      description: Note any expected impact on scoring, recommendations, compatibility or localization.
