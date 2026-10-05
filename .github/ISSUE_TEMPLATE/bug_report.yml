@@ -1,0 +1,66 @@
+name: Bug report
+description: Report a reproducible problem in ASRA
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve ASRA. Please do not include confidential customer data, credentials, or proprietary information.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open...
+        2. Select...
+        3. Observe...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Assessment
+        - Results
+        - Framework alignment
+        - Framework Library
+        - Action Packs
+        - Local Action Tracker
+        - Industry Practice References
+        - Translation / localization
+        - Accessibility / UI
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Language
+      options:
+        - EN
+        - PT-BR
+        - ES
+        - Not language-specific
+  - type: textarea
+    id: environment
+    attributes:
+      label: Browser / environment
+      description: Browser, OS, device, and any other relevant context.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Data safety
+      options:
+        - label: I confirm this issue contains no confidential customer data, credentials, secrets, or proprietary information.
+          required: true
