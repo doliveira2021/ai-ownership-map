@@ -115,17 +115,11 @@ The assessment should not require confidential infrastructure data, credentials,
 
 ## Contributing
 
-Feedback is especially useful on:
+Community contributions are welcome across methodology, questions, framework mappings, scoring, AI and agentic security coverage, Action Packs, translations, accessibility, UI and documentation.
 
-- assessment methodology
-- maturity levels
-- scoring logic
-- AI exposure and autonomy
-- agent security
-- AI accountability and decision rights
-- business resilience
-- framework mapping
-- recommendation quality
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. For methodology or scoring changes, open an issue first and include authoritative supporting references.
+
+ASRA is released under the [MIT License](LICENSE).
 
 ## Development
 
