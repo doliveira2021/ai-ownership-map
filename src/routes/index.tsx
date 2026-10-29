@@ -1,10 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Bot, Gavel, Radar, ShieldAlert, UserCheck } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { ArrowRight, Bot, FlaskConical, Gavel, Radar, ShieldAlert, UserCheck } from "lucide-react";
 import heroImage from "@/assets/hero-accountability.jpg";
 import { Shell } from "@/components/shell";
 import { Button } from "@/components/ui/button";
 import { domains } from "@/lib/assessment-data";
 import { useI18n } from "@/lib/i18n";
+import { assessmentActions } from "@/lib/assessment-store";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -41,6 +42,11 @@ const principleKeys = [
 function Index() {
   const { t, content } = useI18n();
   const landing = content.landing;
+  const navigate = useNavigate();
+  const openDemo = () => {
+    assessmentActions.loadPilotScenario("regulated-bank");
+    void navigate({ to: "/asra-results" });
+  };
 
   return (
     <Shell>
@@ -66,7 +72,20 @@ function Index() {
             <Button asChild size="lg" variant="secondary">
               <Link to="/results">{t("landing.ctaResults")}</Link>
             </Button>
+            <Button
+              type="button"
+              size="lg"
+              variant="outline"
+              onClick={openDemo}
+              aria-describedby="demo-cta-note"
+              className="border-dashed border-primary/50 text-primary"
+            >
+              <FlaskConical className="size-4" /> {t("landing.ctaDemo")}
+            </Button>
           </div>
+          <p id="demo-cta-note" className="mt-3 max-w-xl text-sm text-muted-foreground">
+            {t("landing.ctaDemoNote")}
+          </p>
         </div>
         <img
           src={heroImage}

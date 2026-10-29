@@ -23,6 +23,8 @@ export const ptBrUi: Record<UiKey, string> = {
     "Nenhum sistema de IA crítico deve existir sem um dono de negócio responsável. Nenhum agente de IA capaz de executar ações de negócio deve operar sem um patrocinador ou dono humano responsável.",
   "landing.ctaStart": "Iniciar avaliação",
   "landing.ctaResults": "Ver painel de resultados",
+  "landing.ctaDemo": "Explorar demonstração com dados sintéticos",
+  "landing.ctaDemoNote": "Conheça a experiência completa do ASRA usando um cenário sintético pré-preenchido — sem necessidade de dados reais da organização.",
   "landing.heroAlt": "Rede de sistemas de IA convergindo para um único nó de dono responsável",
   "landing.questionsTitle": "As perguntas que realmente importam",
   "landing.questionsLead":
