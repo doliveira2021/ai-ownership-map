@@ -123,7 +123,7 @@ ASRA is released under the [MIT License](LICENSE).
 
 ## Development
 
-This repository is connected to Lovable. Changes made in Lovable can be synchronized with GitHub, and code changes can be developed normally through branches and pull requests.
+Development is managed through GitHub using standard branches and pull requests.
 
 ```sh
 git clone https://github.com/doliveira2021/ai-ownership-map.git
