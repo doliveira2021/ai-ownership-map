@@ -14,7 +14,6 @@ import { LocaleProvider } from "../lib/i18n";
 import { readLocaleFromCookieString } from "../lib/i18n/locale-cookie";
 import { HTML_LANG, type Locale } from "../lib/i18n/types";
 import { getRequestLocale } from "../lib/locale.functions";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
@@ -42,7 +41,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    console.error("Root route error", error);
   }, [error]);
 
   return (
