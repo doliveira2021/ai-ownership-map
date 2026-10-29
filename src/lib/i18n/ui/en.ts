@@ -22,6 +22,8 @@ export const enUi = {
     "No critical AI system should exist without an accountable business owner. No AI agent capable of executing business actions should operate without an accountable human sponsor or owner.",
   "landing.ctaStart": "Start assessment",
   "landing.ctaResults": "View results dashboard",
+  "landing.ctaDemo": "Explore demo with synthetic data",
+  "landing.ctaDemoNote": "Try the full ASRA experience using a pre-filled synthetic scenario — no real organizational data required.",
   "landing.heroAlt": "Network of AI systems converging on a single accountable owner node",
   "landing.questionsTitle": "The stronger questions",
   "landing.questionsLead":

@@ -23,6 +23,8 @@ export const esUi: Record<UiKey, string> = {
     "Ningún sistema de IA crítico debería existir sin un responsable de negocio. Ningún agente de IA capaz de ejecutar acciones de negocio debería operar sin un patrocinador o responsable humano.",
   "landing.ctaStart": "Iniciar evaluación",
   "landing.ctaResults": "Ver panel de resultados",
+  "landing.ctaDemo": "Explorar demostración con datos sintéticos",
+  "landing.ctaDemoNote": "Conozca la experiencia completa de ASRA usando un escenario sintético precargado — sin necesidad de datos reales de la organización.",
   "landing.heroAlt": "Red de sistemas de IA que converge en un único nodo responsable",
   "landing.questionsTitle": "Las preguntas decisivas",
   "landing.questionsLead":
